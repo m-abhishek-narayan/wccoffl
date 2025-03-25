@@ -1,8 +1,8 @@
 import Card from "./Card";
-function Services() {
+function Awards() {
   return (
-    <div className="container services">
-        <h2 className="main-title text-center">SERVICES</h2>
+    <div className="container awards">
+        <h2 className="main-title text-center">Awards</h2>
         <div className="card-cover">
             <div className="col-md-12">
                 <div className="row">
@@ -21,4 +21,4 @@ function Services() {
     </div>
   );
 }
-export default Services;
+export default Awards;

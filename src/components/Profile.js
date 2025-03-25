@@ -1,7 +1,7 @@
-function Contact() {
+function Profile() {
   return (
-    <div className="container contact">
-      <h2 className="main-title text-center">CONTACT</h2>
+    <div className="container profile">
+      <h2 className="main-title text-center">Profile</h2>
       <div className="col-md-12">
         <div className="row">
           <div className="col-md-4 mb-1">
@@ -38,4 +38,4 @@ function Contact() {
     </div>
   );
 }
-export default Contact;
+export default Profile;

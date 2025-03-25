@@ -1,14 +1,14 @@
-import About from '../components/About';
-import Services from '../components/Services';
-import Contact from '../components/Contact';
+import Gallery from './Gallery';
+import Awards from './Awards'; 
+import Profile from './Profile';
 
 function Main() {
   return (
     <>
       <main>
-        <Services />
-        <About />
-        <Contact />
+        <Profile />
+        <Gallery />
+        <Awards />
       </main>
     </>
   );

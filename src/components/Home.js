@@ -1,4 +1,4 @@
-function Header() {
+function Home() {
   return (
     <header>
       <video src="./video.mp4" loop autoPlay muted></video>
@@ -17,4 +17,4 @@ function Header() {
     </header>
   );
 }
-export default Header;
+export default Home;
