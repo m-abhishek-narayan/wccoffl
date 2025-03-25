@@ -1,15 +1,15 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import ReactDOM from 'react-dom';
 function Home() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/message") // Call backend API
+    fetch("/api/message") 
       .then((res) => res.json())
       .then((data) => setMessage(data.message))
       .catch((err) => console.error("Error fetching data:", err));
   }, []);
+
   return (
     <header>
       <video src="public/video.mp4" loop autoPlay muted></video>
