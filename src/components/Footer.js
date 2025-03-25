@@ -10,9 +10,9 @@ function Footer() {
           <div className="side1">
             <div className="row">
               <div className="col-md-3">
-                <h1 className="logo">DarkLeas</h1>
+                <h1 className="logo">WCC</h1>
                 <p className="footer-text">
-                  Lorem ipsum Here are thriteen health benefits of apples Lorem
+                  Thank you for Visiting 
         
                 </p>
               </div>
@@ -28,13 +28,13 @@ function Footer() {
                   > Home </Link>
                   </li>
                   <li>
-                  <Link to="services" spy={true} smooth={true} duration={1000} > Services </Link>
+                  <Link to="profile" spy={true} smooth={true} duration={1000} > Profile </Link>
                   </li>
                   <li>
-                  <Link to="about-scroll" spy={true} smooth={true} duration={1000}>About Us  </Link>
+                  <Link to="gallery" spy={true} smooth={true} duration={1000}>Gallery  </Link>
                   </li>
                   <li>
-                  <Link to="contact" spy={true} smooth={true} duration={1000}> Contact  </Link>
+                  <Link to="awards" spy={true} smooth={true} duration={1000}> Awards  </Link>
                   </li>
                 </ul>
               </div>
@@ -46,13 +46,13 @@ function Footer() {
                 <p className="footer-title">Contact</p>
                 <ul>
                   <li>
-                    <Link to="#" >burhankcd@gmail.com</Link>
+                    <Link to="#" >abhisheknarayanm2001@gmail.com</Link>
                   </li>
                   <li>
-                    <Link to="#" > Burhan #3265</Link>
+                    <h1 style={{ color:"white" }} > Abhishek</h1>
                   </li>
                   <li>
-                    <Link to="#" >0212 444 44 44</Link>
+                    <h1 style={{ color:"white" }}>The Boss</h1>
                   </li>
                 </ul>
               </div>
@@ -60,13 +60,7 @@ function Footer() {
                 <p className="footer-title">Social Media</p>
                 <ul>
                   <li>
-                    <a target="_blank" rel="noreferrer" href="https://github.com/darkleas" > Github</a>
-                  </li>
-                  <li>
-                    <a target="_blank" rel="noreferrer" href="https://twitter.com/burhankocadag0" > Twitter</a>
-                  </li>
-                  <li>
-                    <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/burhan-kocada%C4%9F-49a3331a5/"> Linkedin</a>
+                    <a target="_blank" rel="noreferrer" href="https://github.com/m-abhishek-narayan" > Github</a>
                   </li>
                 </ul>
               </div>
