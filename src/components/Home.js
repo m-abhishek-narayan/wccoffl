@@ -4,7 +4,7 @@ function Home() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("https://wccbackend-production.up.railway.app//") 
+    fetch("https://wccbackend-production.up.railway.app/") 
       .then((res) => res.json())
       .then((data) => setMessage(data.message))
       .catch((err) => console.error("Error fetching data:", err));
