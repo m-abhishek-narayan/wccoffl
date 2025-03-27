@@ -159,27 +159,27 @@ const albums = [
   },
   {
     title: "WCC 2019",
-    imgSrc: "/wcc2019.jpg",
+    imgSrc: "/img/wcc2019.jpg",
     link: "https://photos.app.goo.gl/PUqR7i2wqTDaCENk7",
   },
   {
     title: "WCC 2020",
-    imgSrc: "/wcc2019.jpg",
+    imgSrc: "/img/wcc2020.jpg",
     link: "https://photos.app.goo.gl/WpFE2wXGpZY7ScmH8",
   },
   {
     title: "WCC 2021",
-    imgSrc: "/wcc2019.jpg",
+    imgSrc: "/img/wcc2021.jpg",
     link: "https://photos.app.goo.gl/4cR9MS4jb6T3e84V8",
   },
   {
     title: "WCC 2022",
-    imgSrc: "/wcc2019.jpg",
+    imgSrc: "/img/wcc2022.jpg",
     link: "https://photos.app.goo.gl/YauW5uUGGX4XU5sh6",
   },
   {
     title: "WCC 2023",
-    imgSrc: "/wcc2019.jpg",
+    imgSrc: "/img/wcc2023.jpg",
     link: "https://photos.app.goo.gl/PxygRZ8VuGkyAPtYA",
   },
   {
