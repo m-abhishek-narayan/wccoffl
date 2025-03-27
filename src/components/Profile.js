@@ -1,41 +1,39 @@
-function Profile() {
+import React, { useState } from "react";
+import PlayerSection from "./PlayerSection";
+import "./Profile.css"; // Profile Styles with Gradient
+import players from "../players"; // Player Data
+import "./Search.css"; // Search Styles
+
+const Profile = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Filter Players Based on Search Query
+  const filteredPlayers = players.filter((player) =>
+    player.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="container profile">
-      <h2 className="main-title text-center">Profile</h2>
-      <div className="col-md-12">
-        <div className="row">
-          <div className="col-md-4 mb-1">
-            <input name="name" placeholder="Name" className="contact-input" />
-          </div>
+    <div className="bg-gray-50 min-h-screen p-4">
+      {/* Page Title */}
+      <h1 className="text-3xl font-bold text-center mb-6">Player Profiles</h1>
 
-          <div className="col-md-4 mb-1">
-            <input name="email" placeholder="Email" className="contact-input" />
-          </div>
-          <div className="col-md-4 mb-1">
-            <input
-              name="subject"
-              placeholder="Subject"
-              className="contact-input"
-            />
-          </div>
-        </div>
-      </div>
-      <br />
-      <div className="col-md-12">
-      <textarea
-            name="message"
-            placeholder="Message"
-            className="contact-textarea"
-          />
+      {/* Search Bar Section */}
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="Search for a player..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
       </div>
 
-      <br></br>
-      <div className="row">
-        <div className="col-md-12">
-          <input className="form-btn" type="submit" value="Send Message" />
-        </div>
+      {/* Player Section with Filtered Players */}
+      <div className="player-section-wrapper">
+        <PlayerSection players={filteredPlayers} />
       </div>
     </div>
   );
-}
+};
+
 export default Profile;
