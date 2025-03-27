@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { getMessages, sendMessage } from "./api";
 
-const socket = io("https://wccbackend-production.up.railway.app");
+const socket = io("https://wccbackend.onrender.com");
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
