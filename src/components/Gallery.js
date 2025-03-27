@@ -183,8 +183,8 @@ const albums = [
     link: "https://photos.app.goo.gl/PxygRZ8VuGkyAPtYA",
   },
   {
-    title: "WCC 2024",
-    imgSrc: "/wcc2019.jpg",
+    title: "WCC 2024 Party",
+    imgSrc: "/img/wcc2024party.jpg",
     link: "https://photos.app.goo.gl/T9KArYTZAfNZeUCW8",
   },
 ];
@@ -223,7 +223,7 @@ function Gallery() {
     try {
       const res = await axios.post("/api/upload", formData);
       if (res.status === 200) {
-        alert("Picture of the Week updated successfully!");
+        alert("Kava of the Week updated successfully!");
         setUploadedImageUrl(`/img/picture-of-the-day.jpg?timestamp=${new Date().getTime()}`);
       }
     } catch (error) {
@@ -237,14 +237,14 @@ function Gallery() {
       <Title>Gallery</Title>
 
       {/* Picture of the Day Section */}
-      <SectionTitle>📸 Picture of the Week</SectionTitle>
+      <SectionTitle>📸 Kava of the Week</SectionTitle>
       <PictureContainer>
-        <PictureOfDay src={uploadedImageUrl} alt="Picture of the Week" />
+        <PictureOfDay src={uploadedImageUrl} alt="Kava of the Week" />
       </PictureContainer>
 
       {/* Upload Section */}
       <UploadContainer>
-        <h3>Upload New Picture of the Day</h3>
+        <h3>Upload Latest Kava of the Week</h3>
         {previewUrl && <PreviewImg src={previewUrl} alt="Preview" />}
         <div> 
         <FileInputLabel htmlFor="fileInput">Choose File</FileInputLabel>
