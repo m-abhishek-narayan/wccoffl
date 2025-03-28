@@ -13,6 +13,7 @@ const Home = () => {
     const [lastWinner, setLastWinner] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
     const [winner, setWinner] = useState(null);
+    const API_BASE_URL = "https://wccbackend.onrender.com";
 
     useEffect(() => {
         fetchTeams();
@@ -20,7 +21,7 @@ const Home = () => {
 
     const fetchTeams = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/api/teams");
+            const response = await axios.get(`${API_BASE_URL}/api/teams`);
             setTeams(response.data || {
                 team1: { teamId: "team1", teamName: "", captain: "", coreTeam: [], points: 0, score: [] },
                 team2: { teamId: "team2", teamName: "", captain: "", coreTeam: [], points: 0, score: [] }
@@ -52,7 +53,7 @@ const Home = () => {
 
     const handleSubmit = async (teamId) => {
         try {
-            await axios.post("http://localhost:3000/api/team", {
+            await axios.post(`${API_BASE_URL}/api/team`, {
                 teamId,
                 teamName: formData.teamName,
                 captain: formData.captain,
@@ -74,7 +75,7 @@ const Home = () => {
 
     const handleWin = async (winnerId) => {
         try {
-            await axios.put("http://localhost:3000/api/team/update-points", { winnerId });
+            await axios.put(`${API_BASE_URL}/api/team/update-points`, { winnerId });
             setErrorMessage("");
             setLastWinner(winnerId);
             fetchTeams();
@@ -90,7 +91,7 @@ const Home = () => {
             setErrorMessage("No action to revert");
             setTimeout(() => setErrorMessage(""), 2000);}
         try {
-            await axios.put("http://localhost:3000/api/team/revert", { lastWinnerId: lastWinner });
+            await axios.put(`${API_BASE_URL}/api/team/revert`, { lastWinnerId: lastWinner });
             setLastWinner(null);
             fetchTeams();
         } catch (error) {
@@ -102,7 +103,7 @@ const Home = () => {
 
     const handleEndSeries = async () => {
         try {
-            const response = await axios.post("http://localhost:3000/api/team/end-series");
+            const response = await axios.post(`${API_BASE_URL}/api/team/end-series`);
 
             if (response.status === 200) {
                 const { captain, team } = response.data.winner;
