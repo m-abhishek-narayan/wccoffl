@@ -3,8 +3,8 @@ import io from "socket.io-client";
 import axios from "axios";
 import "./chat.css";
 
-const API_URL = "http://localhost:3000/api/auth";
-const MESSAGE_API = "http://localhost:3000/api";
+const API_URL = "https://wccbackend.onrender.com/api/auth";
+const MESSAGE_API = "https://wccbackend.onrender.com/api";
 const socket = io(API_URL, { autoConnect: false });
 
 const Chat = () => {
@@ -94,6 +94,7 @@ const Chat = () => {
             localStorage.setItem("token", data.token);
             setUsername(data.user.username);
             setIsAuthenticated(true);
+            fetchMessages();
             socket.connect();
         } catch (err) {
             console.error("Authentication error", err);
