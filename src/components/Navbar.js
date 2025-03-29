@@ -52,7 +52,7 @@ function Navbar() {
                 spy={true}
                 smooth={true}
                 duration={1000}
-                to="headerbg"
+                to="home"
               >
                 Home
               </Link>
