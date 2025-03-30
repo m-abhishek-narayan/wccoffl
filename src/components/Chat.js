@@ -28,6 +28,7 @@ const Chat = () => {
         socket.on("receiveMessage", (newMessage) => {
             setMessages((prev) => [...prev, newMessage]);
             fetchMessages();
+            scrollToBottom();
         });
 
         return () => {
@@ -35,6 +36,12 @@ const Chat = () => {
             socket.disconnect();
         };
     }, []);
+    useEffect(() => {
+        //scrollToBottom(); // Ensure auto-scroll when messages update
+    }, [messages]);
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
     const fetchUser = async () => {
         try {
@@ -70,14 +77,14 @@ const Chat = () => {
             const token = localStorage.getItem("token");
             const newMessage = { username, message };
             setMessages((prev) => [...prev, newMessage]);
-
+            setMessage("");
             await axios.post(`${MESSAGE_API}/messages`, newMessage, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
             socket.emit("sendMessage", newMessage);
             fetchMessages();
-            setMessage("");
+            
         } catch (err) {
             console.error("Error sending message", err);
         }
@@ -122,7 +129,7 @@ const Chat = () => {
   };
   const messagesContainerStyle = {
       height: "300px",
-      overflowY: "scroll",
+      overflowY: "auto",
       border: "1px solid gray",
       padding: "10px",
       backgroundColor: "#fff"
