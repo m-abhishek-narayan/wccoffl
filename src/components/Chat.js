@@ -15,7 +15,7 @@ const Chat = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLogin, setIsLogin] = useState(true);
-    const messagesEndRef = useRef(null);
+    const messagesContainerRef = useRef(null);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -38,10 +38,12 @@ const Chat = () => {
     }, []);
     useEffect(() => {
         scrollToBottom(); 
-        fetchMessages();// Ensure auto-scroll when messages update
+        fetchMessages();
     }, [messages]);
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        if (messagesContainerRef.current) {
+            messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+        }
     };
 
     const fetchUser = async () => {
@@ -109,48 +111,6 @@ const Chat = () => {
             alert("Authentication failed");
         }
     };
-    const buttonStyle = {
-      padding: "10px 20px",
-      backgroundColor: "#007bff",
-      color: "white",
-      border: "none",
-      borderRadius: "5px",
-      cursor: "pointer"
-  };
-  
-  const logoutButtonStyle = { ...buttonStyle, backgroundColor: "red", marginBottom: "10px" };
-  const chatContainerStyle = {
-      maxWidth: "400px",
-      margin: "50px auto",
-      padding: "20px",
-      textAlign: "center",
-      border: "1px solid #ccc",
-      borderRadius: "8px",
-      backgroundColor: "#f9f9f9"
-  };
-  const messagesContainerStyle = {
-      height: "300px",
-      overflowY: "auto",
-      border: "1px solid gray",
-      padding: "10px",
-      backgroundColor: "#fff"
-  };
-  const inputContainerStyle = { display: "flex", marginTop: "10px" };
-  const inputStyle = {
-      flex: "1",
-      padding: "8px",
-      borderRadius: "4px",
-      border: "1px solid #ccc"
-  };
-  const sendButtonStyle = {
-      padding: "8px 15px",
-      marginLeft: "5px",
-      borderRadius: "4px",
-      backgroundColor: "#007bff",
-      color: "white",
-      border: "none",
-      cursor: "pointer"
-  };
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -197,36 +157,23 @@ const Chat = () => {
     }
 
     return (
-      <div style={chatContainerStyle}>
-          <h2>🟢 Group Chat</h2>
-          <p>Welcome, {username}!</p>
-          <button onClick={handleLogout} style={logoutButtonStyle}>Logout</button>
-          <div style={messagesContainerStyle}>
-              {messages.map((msg, idx) => (
-                  <p key={idx} style={{ 
-                      textAlign: msg.username === username ? "right" : "left", 
-                      backgroundColor: msg.username === username ? "#dcf8c6" : "#fff", 
-                      padding: "8px", 
-                      borderRadius: "5px", 
-                      margin: "5px 0" 
-                  }}>
-                      <strong>{msg.username}:</strong> {msg.message}
-                  </p>
-              ))}
-              <div ref={messagesEndRef}></div>
-          </div>
-          <div style={inputContainerStyle}>
-              <input
-                  type="text"
-                  placeholder="Type a message..."
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  style={inputStyle}
-              />
-              <button onClick={handleSendMessage} style={sendButtonStyle}>Send</button>
-          </div>
-      </div>
-  );
+        <div className="chat-container">
+            <h2>🟢 Group Chat</h2>
+            <p>Welcome, {username}!</p>
+            <button onClick={handleLogout} className="logout-button">Logout</button>
+            <div ref={messagesContainerRef} className="messages-container">
+                {messages.map((msg, idx) => (
+                    <p key={idx} className={`message ${msg.username === username ? "sent" : "received"}`}>
+                        <strong>{msg.username}:</strong> {msg.message}
+                    </p>
+                ))}
+            </div>
+            <div className="input-container">
+                <input type="text" placeholder="Type a message..." value={message} onChange={(e) => setMessage(e.target.value)} className="message-input" />
+                <button onClick={handleSendMessage} className="send-button">Send</button>
+            </div>
+        </div>
+    );
 };
 
 export default Chat;
