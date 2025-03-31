@@ -5,15 +5,6 @@ html, body {
   overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-.container2 {
-  padding: 20px;
-  box-sizing: border-box; /* Includes padding in width calculation */
-  display: flex;
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
-  flex-direction: column; /* Stack content vertically */
-}
-
 /* Award Section */
 .award-container {
   display: flex;
@@ -159,4 +150,23 @@ html, body {
   .table {
     display: table; /* Show table for larger screens */
   }
+}
+.toggle-table-btn {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-table-btn:hover {
+  background-color: #45a049;
+}
+
+.table-container {
+  transition: max-height 0.3s ease;
+  overflow: hidden;
 }

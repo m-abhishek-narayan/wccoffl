@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Awards.css";
 import CustomAlert from "./CustomAlert"; // Import your CustomAlert
+import kavaHistoryData from './data';
 
 const PICTURE_API = "https://wccbackend.onrender.com/api";
 
@@ -29,6 +30,7 @@ const Awards = () => {
     const [successMessage, setSuccessMessage] = useState("");
     const [history, setHistory] = useState([]);
     const [latestEntry, setLatestEntry] = useState(null);
+    const [isTableVisible, setIsTableVisible] = useState(true); // To manage visibility of the table
 
     // Fetch image and latest entry from backend
     const fetchData = async () => {
@@ -243,51 +245,23 @@ const Awards = () => {
                         </div>
                     </div>
                 )}
+            </div>
 
-                {/* Current Section */}
-                <div className="history-section">
-                    <h3>📚 Kava Awards Current Series</h3>
+            {/* Current Section */}
+            <div className="history-section">
+                <h3>📚 Kava Awards Current Series</h3>
+
+                {/* Toggle Table Button */}
+                <button
+                    className="toggle-table-btn"
+                    onClick={() => setIsTableVisible(!isTableVisible)}
+                >
+                    {isTableVisible ? "Hide Awards History" : "Show Awards History"}
+                </button>
+
+                {/* Conditionally Render Table */}
+                {isTableVisible && (
                     <div className="table-container">
-                        {/* Collapsible Table for Mobile */}
-                        {history.length > 0 ? (
-                            <div className="accordion-wrapper">
-                                {history.map((item, index) => (
-                                    <div key={index} className="accordion">
-                                        <div
-                                            className="accordion-header"
-                                            onClick={() =>
-                                                document
-                                                    .getElementById(`accordion-content-${index}`)
-                                                    .classList.toggle("show")
-                                            }
-                                        >
-                                            {item.winner} - {item.date}
-                                        </div>
-                                        <div
-                                            id={`accordion-content-${index}`}
-                                            className="accordion-content"
-                                        >
-                                            <p>
-                                                <strong>Winner:</strong> {item.winner}
-                                            </p>
-                                            <p>
-                                                <strong>Date:</strong> {item.date}
-                                            </p>
-                                            <p>
-                                                <strong>Position:</strong> {item.position}
-                                            </p>
-                                            <p>
-                                                <strong>Team:</strong> {item.team}
-                                            </p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <p>No records found</p>
-                        )}
-
-                        {/* Standard Table for Larger Screens */}
                         <table className="table">
                             <thead>
                                 <tr>
@@ -317,8 +291,9 @@ const Awards = () => {
                             </tbody>
                         </table>
                     </div>
-                </div>
+                )}
             </div>
+
 
             {/* Success/Error Messages using CustomAlert */}
             {message && (
@@ -341,9 +316,7 @@ const Awards = () => {
             <div className="kava-history-section">
                 <h3>🏅 History of Kava Awards (2017-2024)</h3>
                 <div className="history-container">
-                    {[ 
-                        // Award history data omitted for brevity
-                    ].map((item, index) => (
+                    {kavaHistoryData.map((item, index) => (
                         <div key={index} className="history-card">
                             <img src={item.img} alt={item.winner} className="player-img" />
                             <div className="history-info">
@@ -352,8 +325,7 @@ const Awards = () => {
                                 </p>
                                 <p>{item.winner}</p>
                                 <p>
-                                    Matches: {item.matches} | Kavas: {item.kavas} | Win %:{" "}
-                                    {item.percent}
+                                    Matches: {item.matches} | Kavas: {item.kavas} | Win %: {item.percent}
                                 </p>
                             </div>
                         </div>
