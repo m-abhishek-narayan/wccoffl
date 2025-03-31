@@ -294,7 +294,6 @@ const Awards = () => {
                 )}
             </div>
 
-
             {/* Success/Error Messages using CustomAlert */}
             {message && (
                 <CustomAlert
