@@ -2,17 +2,48 @@
 .homepage {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start; /* Align the content to start from the top */
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the homepage fills the entire viewport */
   background: linear-gradient(-45deg, #1e3c72, #2a5298, #102225, #0e404d, #0f0c29, #302b63, #24243e);
   background-size: 400% 400%;
   animation: gradientAnimation 12s ease infinite;
 }
+
+/* Top fixed section */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0; /* Adds space at the top */
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  z-index: 10; /* Ensure it stays on top */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
 @media (max-width: 768px) {
   .homepage {
-    padding-top: 20px; /* Add desired space at the top */
-    height: calc(100vh - 20px); /* Adjust height to compensate for the padding */
+    padding-top: 60px; /* Ensures content is pushed down on smaller screens */
   }
+
+  .header {
+    padding-top: 30px; /* Adjust top padding for smaller screens */
+  }
+}
+
+/* Container for the content */
+.content-container {
+  margin-top: 100px; /* Ensure content does not overlap the fixed header */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px; /* Space between sections */
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 5;
 }
 
 /* Dynamic Gradient Animation */
@@ -34,13 +65,14 @@
   }
 }
 
-/* Container holding both teams */
+/* Team container adjustments */
 .team-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 40px;
   transition: transform 0.3s ease-in-out;
+  flex-wrap: wrap; /* Allow the team containers to wrap if there's too much content */
 }
 
 /* Centered controls */
@@ -49,7 +81,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px; /* Better spacing between buttons */
+  gap: 12px;
 }
 
 /* Button Base Style */
@@ -345,13 +377,13 @@ button:disabled {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px; /* Space between buttons */
+    gap: 10px;
   }
-  
+
   .win-btns-container button {
-    width: 180px; /* Optional: makes buttons uniform width */
+    width: 180px;
   }
-  
+
   .cancel-cross {
     margin-top: 10px;
     padding: 10px 20px;
@@ -360,14 +392,13 @@ button:disabled {
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
-    width: 180px; /* Same width as buttons for consistency */
+    width: 180px;
     transition: background-color 0.3s;
   }
-  
+
   .cancel-cross:hover {
     background-color: #ff1a1a;
   }
-  
 
   .match-btn {
     width: 100%;
