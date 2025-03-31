@@ -131,9 +131,10 @@ const Chat = () => {
 
     if (!isAuthenticated) {
         return (
-            <div className="auth-wrapper">
-                <h1 className="text-3xl font-bold text-center mb-6">Discussion Forum</h1>
+            <><h1 className="text-3xl font-bold text-center mb-6">Discussion Forum</h1><div className="auth-wrapper">
+
                 <div className="auth-container">
+
                     <h3 className="auth-title">{isLogin ? "Login" : "Signup"}</h3>
                     {!isLogin && (
                         <input
@@ -162,14 +163,15 @@ const Chat = () => {
                         {isLogin ? "Don't have an account? Signup" : "Already have an account? Login"}
                     </p>
                 </div>
-            </div>
+            </div></>
         );
     }
 
     return (
         <div className="chat-wrapper">
+            <h2>🟢 Discussion Forum</h2>
             <div className="chat-container">
-                <h2>🟢 Discussion Forum</h2>
+            
                 <p>Welcome, {username}!</p>
                 <button onClick={handleLogout} className="logout-button">Logout</button>
                 <div
