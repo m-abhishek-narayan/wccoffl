@@ -1,0 +1,167 @@
+/* Team Card with Glow */
+.team-card {
+  border-radius: 12px;
+  padding: 20px;
+  width: 300px;
+  background: linear-gradient(145deg, #1f1f1f, #292929);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
+  transition: transform 0.3s ease-in-out;
+  margin: 20px auto;
+}
+
+.team-card:hover {
+  transform: scale(1.05);
+}
+
+/* Title and Icon */
+h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Neon Edit Icon */
+.edit-icon {
+  cursor: pointer;
+  font-size: 20px;
+  color: #00f7ff;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.edit-icon:hover {
+  color: #00ff99;
+  transform: rotate(360deg);
+}
+
+/* Results Box with Neon Glow */
+.results {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.results span {
+  transform: perspective(1000px) rotateX(20deg) rotateY(20deg);
+}
+
+.result {
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-right: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 0 12px #00f7ff;
+}
+
+/* Neon Glow Effect */
+.win {
+  background: #00ff00;
+  color: #0d0;
+  text-shadow: 0 0 12px #00ff00;
+  box-shadow: 0 0 15px #00ff00;
+}
+
+.loss {
+  background: #ff4d4d;
+  color: #ff0000;
+  text-shadow: 0 0 12px #ff4d4d;
+  box-shadow: 0 0 15px #ff4d4d;
+}
+.neutral {
+  background: #312e2e;
+  color: #ffffff;
+  text-shadow: 0 0 12px #fffcfc;
+  box-shadow: 0 0 15px #3f3a3a;
+}
+/* Core Team List */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 5px 0;
+}
+
+/* Edit Mode Wrapper */
+.edit-mode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Input Fields */
+.edit-mode input,
+.edit-mode textarea {
+  width: 90%;
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background-color: #222;
+  color: #fff;
+  text-align: center; /* Center the text inside inputs */
+}
+
+/* Edit Buttons */
+.edit-buttons {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Save Button */
+.save-btn {
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #4caf50, #2e8b57);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+  background: linear-gradient(135deg, #2e8b57, #4caf50);
+  box-shadow: 0 0 15px #4caf50;
+}
+
+/* Cancel Button */
+.cancel-btn {
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #ff4d4d, #ff0000);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background: linear-gradient(135deg, #ff0000, #ff4d4d);
+  box-shadow: 0 0 15px #ff4d4d;
+}
+/* Labels */
+label {
+  font-size: 14px;
+  color: #00f7ff;
+  margin-top: 8px;
+  display: block;
+  text-align: left;
+  width: 100%;
+}
+.error-msg {
+  color: #ff4d4d;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+}
