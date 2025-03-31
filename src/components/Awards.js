@@ -247,34 +247,76 @@ const Awards = () => {
                 {/* Current Section */}
                 <div className="history-section">
                     <h3>📚 Kava Awards Current Series</h3>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Winner</th>
-                                <th>Date</th>
-                                <th>Position</th>
-                                <th>Team</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {history.length > 0 ? (
-                                history.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{item.winner}</td>
-                                        <td>{item.date}</td>
-                                        <td>{item.position}</td>
-                                        <td>{item.team}</td>
-                                    </tr>
-                                ))
-                            ) : (
+                    <div className="table-container">
+                        {/* Collapsible Table for Mobile */}
+                        {history.length > 0 ? (
+                            <div className="accordion-wrapper">
+                                {history.map((item, index) => (
+                                    <div key={index} className="accordion">
+                                        <div
+                                            className="accordion-header"
+                                            onClick={() =>
+                                                document
+                                                    .getElementById(`accordion-content-${index}`)
+                                                    .classList.toggle("show")
+                                            }
+                                        >
+                                            {item.winner} - {item.date}
+                                        </div>
+                                        <div
+                                            id={`accordion-content-${index}`}
+                                            className="accordion-content"
+                                        >
+                                            <p>
+                                                <strong>Winner:</strong> {item.winner}
+                                            </p>
+                                            <p>
+                                                <strong>Date:</strong> {item.date}
+                                            </p>
+                                            <p>
+                                                <strong>Position:</strong> {item.position}
+                                            </p>
+                                            <p>
+                                                <strong>Team:</strong> {item.team}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <p>No records found</p>
+                        )}
+
+                        {/* Standard Table for Larger Screens */}
+                        <table className="table">
+                            <thead>
                                 <tr>
-                                    <td colSpan="4" style={{ textAlign: "center" }}>
-                                        No records found
-                                    </td>
+                                    <th>Winner</th>
+                                    <th>Date</th>
+                                    <th>Position</th>
+                                    <th>Team</th>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {history.length > 0 ? (
+                                    history.map((item, index) => (
+                                        <tr key={index}>
+                                            <td>{item.winner}</td>
+                                            <td>{item.date}</td>
+                                            <td>{item.position}</td>
+                                            <td>{item.team}</td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="4" style={{ textAlign: "center" }}>
+                                            No records found
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -295,8 +337,8 @@ const Awards = () => {
                     persistent={true}
                 />
             )}
-              {/* History of Kava Winners (2017-2024) with Images */}
-              <div className="kava-history-section">
+            {/* History of Kava Winners (2017-2024) with Images */}
+            <div className="kava-history-section">
                 <h3>🏅 History of Kava Awards (2017-2024)</h3>
                 <div className="history-container">
                     {[

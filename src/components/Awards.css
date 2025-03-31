@@ -1,336 +1,155 @@
-/* Container with side expansion */
+/* General Styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
 .container2 {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  background-size: 400% 400%;
-  padding: 40px 20px;
-}
-
-/* Background gradient */
-body {
-  background: linear-gradient(-45deg, #430858, #102225, #5d0409);
-  background-size: 400% 400%;
-  animation: gradientAnimation 12s ease infinite;
-}
-
-/* Dynamic Gradient Animation */
-@keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  25% { background-position: 50% 100%; }
-  50% { background-position: 100% 50%; }
-  75% { background-position: 50% 0%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Main Title: Kava Awards */
-.main-title {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-/* Subtitle: Kava Award of the Week */
-.sub-title {
-  font-size: 1.8rem;
-  margin-top: 10px;
-  text-align: left;
-  color: #ddd;
-  font-weight: 600;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box; /* Includes padding in width calculation */
 }
 
 /* Award Section */
-.award-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 800px;
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 16px;
-  padding: 30px 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+.award-container {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
-/* Award Image */
+.award-content {
+  margin-bottom: 20px;
+}
+
 .award-img {
   width: 100%;
-  max-width: 500px;
+  max-width: 300px;
   height: auto;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-  transition: transform 0.3s ease-in-out;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.award-img:hover {
-  transform: scale(1.05);
-}
-
-/* Award Details */
-.award-details {
-  text-align: center;
-  max-width: 100%;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-.award-details p {
-  font-size: 18px;
-  margin: 8px 0;
-}
-
-/* Update Button */
-.update-btn {
-  padding: 12px 24px;
-  font-size: 16px;
-  background: #4a00e0;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.update-btn:hover {
-  background-color: #8e2de2;
-}
-
-/* Modal Overlay */
+/* Form Modal */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
-  animation: fadeInBg 0.3s ease-in-out;
 }
 
-/* Modal Content */
 .modal-content {
-  background: #1e1e2f;
-  padding: 30px 25px;
-  border-radius: 16px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
   width: 90%;
   max-width: 500px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
   text-align: center;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-/* Modal Animation */
-@keyframes fadeInBg {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* Form Inputs */
-.update-form .form-control {
-  width: 100%;
-  max-width: 400px;
-  padding: 12px 15px;
-  margin-bottom: 10px;
-  border-radius: 12px;
-  border: 1px solid #555;
-  background-color: #282a36;
-  color: #f8f8f2;
-  font-size: 16px;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-/* Focus Effect */
-.update-form .form-control:focus {
-  border-color: #ffdd57;
-  box-shadow: 0 0 8px rgba(255, 221, 87, 0.8);
 }
 
 /* Image Preview */
 .image-preview {
   width: 100%;
-  max-height: 200px;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  border: 1px solid #555;
+  max-width: 200px;
+  height: auto;
+  margin: 10px auto;
+  display: block;
 }
 
 /* Button Styles */
 .update-btn,
 .cancel-btn {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 12px;
+  margin-top: 10px;
+  padding: 10px 15px;
   cursor: pointer;
-  width: 100%;
-  max-width: 200px;
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 8px;
-  transition: 0.3s ease-in-out;
+  border-radius: 5px;
+  border: none;
 }
 
 .update-btn {
-  background: linear-gradient(135deg, #4caf50, #81c784);
-  color: #fff;
-}
-
-.update-btn:hover {
-  background: linear-gradient(135deg, #45a049, #66bb6a);
+  background-color: #4caf50;
+  color: white;
 }
 
 .cancel-btn {
-  background: linear-gradient(135deg, #f44336, #e57373);
-  color: #fff;
-}
-
-.cancel-btn:hover {
-  background: linear-gradient(135deg, #d32f2f, #ef5350);
+  background-color: #ff4d4d;
+  color: white;
 }
 
 /* History Section */
 .history-section {
-  margin-top: 30px;
-  padding: 20px;
-  background: #1e1e2f;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
-}
-
-.history-table tr:nth-child(even) {
-  background-color: #2e2f40;
-}
-
-.history-table th,
-.history-table td {
-  padding: 12px;
-  border: 1px solid #fff;
+  margin-top: 60px;
   text-align: center;
-  font-size: 16px;
+  padding: 20px;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box; /* Includes padding in width calculation */
+  overflow: hidden; /* Prevents overflow */
+}
+
+/* Accordion (Mobile View) */
+.accordion-wrapper {
+  display: none; /* Hide accordion by default */
+}
+
+/* Table Styles (Desktop View) */
+.table-container {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; /* Center the table container */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  overflow-x: auto; /* Allow horizontal scroll within the table if content is too large */
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  color: #4caf50;
+}
+
+.table th {
+  background-color: #000000;
   color: #fff;
 }
 
-/* Header Background */
-.history-table th {
-  background: rgba(255, 255, 255, 0.2);
-}
+/* Responsive Styles */
 
-/* Hover Effect on Rows */
-.history-table tr:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .award-img {
-      width: 100%;
+/* Hide Table on Mobile and Show Accordion */
+@media screen and (max-width: 768px) {
+  .table {
+    display: none; /* Hide table on mobile */
   }
 
-  .modal-form {
-      width: 90%;
-  }
-
-  .main-title {
-      font-size: 2.2rem;
-  }
-
-  .sub-title {
-      font-size: 1.5rem;
+  .accordion-wrapper {
+    display: block; /* Show accordion for mobile */
   }
 }
 
-/* Modal Overlay on Small Devices */
-@media (max-width: 600px) {
-  .modal-content {
-      width: 95%;
-      padding: 20px;
+/* Hide Accordion on Larger Screens and Show Table */
+@media screen and (min-width: 769px) {
+  .accordion-wrapper {
+    display: none; /* Hide accordion on larger screens */
   }
 
-  .update-btn,
-  .cancel-btn {
-      width: 100%;
+  .table {
+    display: table; /* Show table for larger screens */
   }
-}
-/* Container Styling */
-.container2 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-/* Award Section Styling */
-.award-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-/* Make sections stack on mobile */
-.award-section, .history-section, .kava-history-section {
-  width: 100%;
-}
-
-/* Card and Table Styling */
-.history-section {
-  margin-top: 20px;
-  width: 100%;
-}
-
-/* Media query for mobile */
-@media (max-width: 768px) {
-  .award-container {
-      flex-direction: column;
-  }
-
-  .award-section,
-  .history-section {
-      width: 100%;
-  }
-
-  /* Stack Kava History Cards Vertically */
-  .history-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-  }
-}
-
-/* Kava History Cards */
-.history-card {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-}
-
-/* Player Image */
-.player-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-/* Card Info */
-.history-info {
-  text-align: left;
 }
