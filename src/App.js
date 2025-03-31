@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Home from "./components/Home"
+import Home from "./components/HomePage"
 import Profile from "./components/Profile";
 import Gallery from "./components/Gallery";
 import Awards from "./components/Awards";

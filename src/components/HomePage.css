@@ -1,0 +1,202 @@
+/* HomePage.css */
+.homepage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(-45deg, #1e3c72, #2a5298, #102225, #0e404d, #0f0c29, #302b63, #24243e);
+    background-size: 400% 400%;
+    animation: gradientAnimation 12s ease infinite;
+  }
+  
+  /* Dynamic Gradient Animation */
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    25% {
+      background-position: 50% 100%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    75% {
+      background-position: 50% 0%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Container holding both teams */
+  .team-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Centered controls */
+  .center-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Update Score Button */
+  .update-score-btn {
+    background-color: #ff9800;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 152, 0, 0.7);
+  }
+  
+  .update-score-btn:hover {
+    background-color: #e68900;
+    transform: scale(1.1);
+  }
+  
+  /* Win and Loss Buttons Container */
+  .win-btns-container {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Win/Loss Buttons */
+  .match-btn {
+    font-size: 16px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .win-btn {
+    background-color: #4caf50;
+    color: white;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.8);
+  }
+  
+  .loss-btn {
+    background-color: #f44336;
+    color: white;
+    box-shadow: 0 0 10px rgba(244, 67, 54, 0.8);
+  }
+  
+  .match-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Team Card Styling */
+  .team-card {
+    width: 300px;
+    background: linear-gradient(135deg, #243b55, #141e30);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease;
+    color: #fff;
+  }
+  
+  /* Team Name */
+  .team-card h2 {
+    font-family: "Poppins", sans-serif;
+    color: #ffeb3b;
+  }
+  
+  /* Match History (W/L) */
+  .results {
+    margin-top: 10px;
+  }
+  
+  .results span {
+    display: inline-flex;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    transform: perspective(1000px) rotateX(20deg) rotateY(20deg);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  /* Win Box */
+  .win {
+    background-color: #4caf50;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.8);
+    animation: glow-green 1.5s infinite alternate;
+  }
+  
+  /* Loss Box */
+  .loss {
+    background-color: #f44336;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(244, 67, 54, 0.8);
+    animation: glow-red 1.5s infinite alternate;
+  }
+  
+  /* Glowing Animations */
+  @keyframes glow-green {
+    from {
+      box-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50;
+    }
+    to {
+      box-shadow: 0 0 20px #4caf50, 0 0 40px #4caf50;
+    }
+  }
+  
+  @keyframes glow-red {
+    from {
+      box-shadow: 0 0 10px #f44336, 0 0 20px #f44336;
+    }
+    to {
+      box-shadow: 0 0 20px #f44336, 0 0 40px #f44336;
+    }
+  }
+  
+  /* Button Fade-in Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .team-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .win-btns-container {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .match-btn {
+      width: 100%;
+    }
+  }
+  
