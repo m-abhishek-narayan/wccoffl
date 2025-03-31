@@ -65,7 +65,7 @@ const HomePage = () => {
     } else {
       setPasscodeError(true);
       setTimeout(() => setPasscodeError(false), 500);
-      showAlert("❌ Incorrect Passcode", "error");
+      showAlert(" Incorrect Passcode", "error");
     }
   };
 
@@ -297,7 +297,7 @@ const HomePage = () => {
                 className="cancel-cross"
                 onClick={() => setShowWinButtons(false)}
               >
-                cancel
+                ❌
               </div>
             </div>
           )}

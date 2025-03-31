@@ -16,6 +16,7 @@ const Chat = () => {
     const [password, setPassword] = useState("");
     const [isLogin, setIsLogin] = useState(true);
     const messagesContainerRef = useRef(null);
+    const [isAtBottom, setIsAtBottom] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -28,7 +29,6 @@ const Chat = () => {
         socket.on("receiveMessage", (newMessage) => {
             setMessages((prev) => [...prev, newMessage]);
             fetchMessages();
-            scrollToBottom();
         });
 
         return () => {
@@ -36,12 +36,18 @@ const Chat = () => {
             socket.disconnect();
         };
     }, []);
+
     useEffect(() => {
-        scrollToBottom(); 
-        fetchMessages();
+        scrollToBottom();
     }, [messages]);
+
+    const handleScroll = () => {
+        const bottom = messagesContainerRef.current.scrollHeight === messagesContainerRef.current.scrollTop + messagesContainerRef.current.clientHeight;
+        setIsAtBottom(bottom);
+    };
+
     const scrollToBottom = () => {
-        if (messagesContainerRef.current) {
+        if (isAtBottom && messagesContainerRef.current) {
             messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
         }
     };
@@ -79,15 +85,13 @@ const Chat = () => {
         try {
             const token = localStorage.getItem("token");
             const newMessage = { username, message };
-            setMessages((prev) => [...prev, newMessage]);
-            setMessage("");
+            setMessage(""); // clear message input immediately
+            setMessages((prev) => [...prev, newMessage]); // optimistically add message
             await axios.post(`${MESSAGE_API}/messages`, newMessage, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
             socket.emit("sendMessage", newMessage);
-            fetchMessages();
-            
         } catch (err) {
             console.error("Error sending message", err);
         }
@@ -100,7 +104,7 @@ const Chat = () => {
             const endpoint = isLogin ? "/login" : "/register";
             const body = isLogin ? { email, password } : { username, email, password };
             const { data } = await axios.post(`${API_URL}${endpoint}`, body);
-            
+
             localStorage.setItem("token", data.token);
             setUsername(data.user.username);
             setIsAuthenticated(true);
@@ -119,55 +123,79 @@ const Chat = () => {
         socket.disconnect();
     };
 
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            handleSendMessage();
+        }
+    };
+
     if (!isAuthenticated) {
         return (
-            <><h1 className="text-3xl font-bold text-center mb-6">Kava of the Week discussion Forum</h1><div className="auth-container">
-                <h3 className="auth-title">{isLogin ? "Login" : "Signup"}</h3>
-                {!isLogin && (
+            <><h1 className="text-3xl font-bold text-center mb-6">Discussion Forum</h1><div className="auth-wrapper">
+
+                <div className="auth-container">
+
+                    <h3 className="auth-title">{isLogin ? "Login" : "Signup"}</h3>
+                    {!isLogin && (
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            className="auth-input" />
+                    )}
                     <input
-                        type="text"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="auth-input" />
-                )}
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="auth-input" />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="auth-input" />
-                <button onClick={handleAuth} className="auth-button">
-                    {isLogin ? "Login" : "Signup"}
-                </button>
-                <p onClick={() => setIsLogin(!isLogin)} className="auth-toggle">
-                    {isLogin ? "Don't have an account? Signup" : "Already have an account? Login"}
-                </p>
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="auth-input" />
+                    <button onClick={handleAuth} className="auth-button">
+                        {isLogin ? "Login" : "Signup"}
+                    </button>
+                    <p onClick={() => setIsLogin(!isLogin)} className="auth-toggle">
+                        {isLogin ? "Don't have an account? Signup" : "Already have an account? Login"}
+                    </p>
+                </div>
             </div></>
         );
     }
 
     return (
-        <div className="chat-container">
-            <h2>🟢 Kava of the Week discussion Forum</h2>
-            <p>Welcome, {username}!</p>
-            <button onClick={handleLogout} className="logout-button">Logout</button>
-            <div ref={messagesContainerRef} className="messages-container">
-                {messages.map((msg, idx) => (
-                    <p key={idx} className={`message ${msg.username === username ? "sent" : "received"}`}>
-                        <strong>{msg.username}:</strong> {msg.message}
-                    </p>
-                ))}
-            </div>
-            <div className="input-container">
-                <input type="text" placeholder="Type a message..." value={message} onChange={(e) => setMessage(e.target.value)} className="message-input" />
-                <button onClick={handleSendMessage} className="send-button">Send</button>
+        <div className="chat-wrapper">
+            <h2>🟢 Discussion Forum</h2>
+            <div className="chat-container">
+            
+                <p>Welcome, {username}!</p>
+                <button onClick={handleLogout} className="logout-button">Logout</button>
+                <div
+                    ref={messagesContainerRef}
+                    className="messages-container"
+                    onScroll={handleScroll}
+                >
+                    {messages.map((msg, idx) => (
+                        <p key={idx} className={`message ${msg.username === username ? "sent" : "received"}`}>
+                            <strong>{msg.username}:</strong> {msg.message}
+                        </p>
+                    ))}
+                </div>
+                <div className="input-container">
+                    <input
+                        type="text"
+                        placeholder="Type a message..."
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        onKeyDown={handleKeyPress}
+                        className="message-input"
+                    />
+                    <button onClick={handleSendMessage} className="send-button">Send</button>
+                </div>
             </div>
         </div>
     );

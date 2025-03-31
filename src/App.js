@@ -16,8 +16,7 @@ const App = () => {
             <div id="profile"><Profile /></div>
             <div id="gallery"><Gallery /></div>
             <div id="awards"><Awards /></div>
-            <Chat />
-            <div id="kavaHistory"><KavaHistory /></div>
+            <div id="chats"><Chat /></div>
             <Footer />
         </>
     );

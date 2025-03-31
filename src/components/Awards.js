@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Awards.css";
-import CustomAlert from "./CustomAlert"; // Import your CustomAlert
+import CustomAlert from "./CustomAlert";
+import kavaHistoryData from "./data";
 
 const PICTURE_API = "https://wccbackend.onrender.com/api";
 
@@ -29,6 +30,7 @@ const Awards = () => {
     const [successMessage, setSuccessMessage] = useState("");
     const [history, setHistory] = useState([]);
     const [latestEntry, setLatestEntry] = useState(null);
+    const [isTableVisible, setIsTableVisible] = useState(true); // To manage visibility of the table
 
     // Fetch image and latest entry from backend
     const fetchData = async () => {
@@ -56,6 +58,7 @@ const Awards = () => {
     const toggleForm = () => {
         setShowForm(!showForm);
     };
+
 
     // Handle form input change
     const handleChange = (e) => {
@@ -135,7 +138,7 @@ const Awards = () => {
             </div>
 
             {/* Award Section */}
-            <div className="container2 award-container">
+            <div className="award-container">
                 <div className="award-section">
                     {/* Award Image */}
                     <div className="award-content">
@@ -243,39 +246,57 @@ const Awards = () => {
                         </div>
                     </div>
                 )}
+            </div>
 
-                {/* History Section */}
-                <div className="history-section">
-                    <h3>📚 Kava Awards Current Series</h3>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Winner</th>
-                                <th>Date</th>
-                                <th>Position</th>
-                                <th>Team</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {history.length > 0 ? (
-                                history.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{item.winner}</td>
-                                        <td>{item.date}</td>
-                                        <td>{item.position}</td>
-                                        <td>{item.team}</td>
-                                    </tr>
-                                ))
-                            ) : (
+            {/* Current Section */}
+            <div className="history-section">
+                <h3>📚 Kava Awards Current Series</h3>
+
+                {/* Toggle Table Button */}
+                <button
+                    className="toggle-table-btn"
+                    onClick={() => {
+                        setIsTableVisible(!isTableVisible);
+                        console.log("Is Table Visible:", !isTableVisible); // 👈 Add this line here
+                    }}
+                >
+                    {isTableVisible ? "Hide Awards History" : "Show Awards History"}
+                </button>
+
+
+                {/* Conditionally Render Table */}
+                {isTableVisible && (
+                    <div className={`table-container ${!isTableVisible ? "hidden" : ""}`}>
+                        <table className="table">
+                            <thead>
                                 <tr>
-                                    <td colSpan="4" style={{ textAlign: "center" }}>
-                                        No records found
-                                    </td>
+                                    <th>Winner</th>
+                                    <th>Date</th>
+                                    <th>Position</th>
+                                    <th>Team</th>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                {history.length > 0 ? (
+                                    history.map((item, index) => (
+                                        <tr key={index}>
+                                            <td>{item.winner}</td>
+                                            <td>{item.date}</td>
+                                            <td>{item.position}</td>
+                                            <td>{item.team}</td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="4" style={{ textAlign: "center" }}>
+                                            No records found
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
 
             {/* Success/Error Messages using CustomAlert */}
@@ -295,6 +316,26 @@ const Awards = () => {
                     persistent={true}
                 />
             )}
+            {/* History of Kava Winners (2017-2024) with Images */}
+            <div className="kava-history-section">
+                <h3>🏅 History of Kava Awards (2017-2024)</h3>
+                <div className="history-container">
+                    {kavaHistoryData.map((item, index) => (
+                        <div key={index} className="history-card">
+                            <img src={item.img} alt={item.winner} className="player-img" />
+                            <div className="history-info">
+                                <p>
+                                    <strong>{item.year}</strong>
+                                </p>
+                                <p>{item.winner}</p>
+                                <p>
+                                    Matches: {item.matches} | Kavas: {item.kavas} | Win %: {item.percent}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </>
     );
 };

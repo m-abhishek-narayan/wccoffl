@@ -8,6 +8,7 @@ body {
   .container {
     text-align: center;
     margin-top: 5rem;
+    margin-bottom: 50px;
   }
   
   .title {
@@ -94,6 +95,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     margin-top: 2rem;
+    margin-bottom: 20px;
   }
   
   .album-card {
