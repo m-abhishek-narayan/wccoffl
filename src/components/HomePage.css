@@ -8,6 +8,12 @@
   background-size: 400% 400%;
   animation: gradientAnimation 12s ease infinite;
 }
+@media (max-width: 768px) {
+  .homepage {
+    padding-top: 20px; /* Add desired space at the top */
+    height: calc(100vh - 20px); /* Adjust height to compensate for the padding */
+  }
+}
 
 /* Dynamic Gradient Animation */
 @keyframes gradientAnimation {
@@ -336,9 +342,32 @@ button:disabled {
   }
 
   .win-btns-container {
+    display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 10px; /* Space between buttons */
   }
+  
+  .win-btns-container button {
+    width: 180px; /* Optional: makes buttons uniform width */
+  }
+  
+  .cancel-cross {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    width: 180px; /* Same width as buttons for consistency */
+    transition: background-color 0.3s;
+  }
+  
+  .cancel-cross:hover {
+    background-color: #ff1a1a;
+  }
+  
 
   .match-btn {
     width: 100%;

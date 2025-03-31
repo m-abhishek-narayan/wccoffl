@@ -17,6 +17,8 @@ const fadeIn = keyframes`
 export const Container = styled.div`
   text-align: center;
   background: linear-gradient(135deg, #0c0f13, #183857);
+   padding: 20px;
+  margin-bottom: 50px;
 `;
 
 export const GalleryContainer = styled.div`
@@ -24,6 +26,7 @@ export const GalleryContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   margin-top: 2rem;
+  margin-bottom: 50px;
 `;
 
 export const AlbumCard = styled.a`
