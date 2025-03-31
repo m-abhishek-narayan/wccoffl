@@ -93,6 +93,18 @@ function Navbar() {
                 Kava Awards
               </Link>
             </li>
+            <li>
+              <Link
+                onClick={openBar}
+                to="chats"
+                spy={true}
+                smooth={true}
+                duration={1000}
+                activeClass="active"
+              >
+                Discussions
+              </Link>
+            </li>
           </ul>
           <div className="button" onClick={openBar}>
             <div className="burger"></div>
