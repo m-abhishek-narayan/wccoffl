@@ -39,6 +39,8 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: opacity 0.3s ease-in-out; /* Smooth transition for overlay */
+  cursor: pointer; /* Allow closing the modal by clicking outside */
 }
 
 .modal-content {
@@ -48,6 +50,7 @@ html, body {
   width: 90%;
   max-width: 500px;
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for modal */
 }
 
 /* Image Preview */
@@ -77,6 +80,17 @@ html, body {
 .cancel-btn {
   background-color: #ff4d4d;
   color: white;
+}
+
+/* Hover Effects for Buttons */
+.update-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px); /* Button hover effect */
+}
+
+.cancel-btn:hover {
+  background-color: #ff3333;
+  transform: translateY(-2px); /* Button hover effect */
 }
 
 /* History Section */
@@ -151,6 +165,7 @@ html, body {
     display: table; /* Show table for larger screens */
   }
 }
+
 .toggle-table-btn {
   margin-bottom: 20px;
   padding: 10px 15px;
@@ -169,4 +184,45 @@ html, body {
 .table-container {
   transition: max-height 0.3s ease;
   overflow: hidden;
+}
+
+/* Make table responsive */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scroll if needed */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Table styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Ensure the table doesn't shrink */
+}
+
+/* Table responsiveness */
+.table th,
+.table td {
+  padding: 12px 8px;
+  text-align: left;
+  font-size: 14px;
+  white-space: nowrap; /* Prevent wrapping of text */
+}
+
+/* Ensure scroll on mobile */
+@media (max-width: 768px) {
+  .table-container {
+    overflow-x: auto;
+    display: block;
+  }
+
+  .table {
+    width: 100%;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px 5px;
+    font-size: 12px;
+  }
 }
