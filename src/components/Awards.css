@@ -257,3 +257,10 @@ html, body {
 .accordion.active + .accordion-content {
   display: block;
 }
+.table-container {
+  display: block; /* Default visible */
+}
+
+.table-container.hidden {
+  display: none; /* Hide when class added */
+}

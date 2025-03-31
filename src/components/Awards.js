@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Awards.css";
-import CustomAlert from "./CustomAlert"; // Import your CustomAlert
-import kavaHistoryData from './data';
+import CustomAlert from "./CustomAlert";
+import kavaHistoryData from "./data";
 
 const PICTURE_API = "https://wccbackend.onrender.com/api";
 
@@ -58,6 +58,7 @@ const Awards = () => {
     const toggleForm = () => {
         setShowForm(!showForm);
     };
+
 
     // Handle form input change
     const handleChange = (e) => {
@@ -254,14 +255,18 @@ const Awards = () => {
                 {/* Toggle Table Button */}
                 <button
                     className="toggle-table-btn"
-                    onClick={() => setIsTableVisible(!isTableVisible)}
+                    onClick={() => {
+                        setIsTableVisible(!isTableVisible);
+                        console.log("Is Table Visible:", !isTableVisible); // 👈 Add this line here
+                    }}
                 >
                     {isTableVisible ? "Hide Awards History" : "Show Awards History"}
                 </button>
 
+
                 {/* Conditionally Render Table */}
                 {isTableVisible && (
-                    <div className="table-container">
+                    <div className={`table-container ${!isTableVisible ? "hidden" : ""}`}>
                         <table className="table">
                             <thead>
                                 <tr>
