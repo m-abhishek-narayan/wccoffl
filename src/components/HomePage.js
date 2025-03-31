@@ -48,6 +48,21 @@ const HomePage = () => {
     setShowWinButtons(false);
   };
 
+  // Reset latest score
+  const handleResetLatestScore = () => {
+    setTeamA({
+      ...teamA,
+      results: teamA.results.slice(1),
+      points: teamA.results[0] === "W" ? teamA.points - 1 : teamA.points,
+    });
+
+    setTeamB({
+      ...teamB,
+      results: teamB.results.slice(1),
+      points: teamB.results[0] === "W" ? teamB.points - 1 : teamB.points,
+    });
+  };
+
   return (
     <div className="homepage">
       <div className="team-container">
@@ -56,33 +71,37 @@ const HomePage = () => {
           {...teamA}
           onUpdate={(updatedTeam) => setTeamA(updatedTeam)}
         />
+{/* Centered Match Controls */}
+<div className="center-controls">
+  {!showWinButtons ? (
+    <button
+      className="update-score-btn"
+      onClick={() => setShowWinButtons(true)}
+    >
+      Update Score
+    </button>
+  ) : (
+    <div className="win-btns-container">
+      <button
+        className="match-btn win-btn"
+        onClick={() => handleWin("A")}
+      >
+        Team A Wins
+      </button>
+      <button
+        className="match-btn loss-btn"
+        onClick={() => handleWin("B")}
+      >
+        Team B Wins
+      </button>
+      {/* Cross Icon to Cancel */}
+      <div className="cancel-cross" onClick={() => setShowWinButtons(false)}>
+        cancel
+      </div>
+    </div>
+  )}
+</div>
 
-        {/* Centered Match Controls */}
-        <div className="center-controls">
-          {!showWinButtons ? (
-            <button
-              className="update-score-btn"
-              onClick={() => setShowWinButtons(true)}
-            >
-              Update Score
-            </button>
-          ) : (
-            <div className="win-btns-container">
-              <button
-                className="match-btn win-btn slide-left"
-                onClick={() => handleWin("A")}
-              >
-                Team A Wins
-              </button>
-              <button
-                className="match-btn loss-btn slide-right"
-                onClick={() => handleWin("B")}
-              >
-                Team B Wins
-              </button>
-            </div>
-          )}
-        </div>
 
         {/* Team B Card */}
         <TeamCard

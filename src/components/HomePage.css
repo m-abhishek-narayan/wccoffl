@@ -199,4 +199,81 @@
       width: 100%;
     }
   }
-  
+/* Update Score Button */
+.update-score-btn {
+  background-color: #ff9800;
+  color: #fff;
+  font-size: 18px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px; /* Sharper corners */
+  margin-bottom: 15px; /* Increased gap between buttons */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 152, 0, 0.7);
+}
+
+.update-score-btn:hover {
+  background-color: #e68900;
+  transform: scale(1.05);
+}
+
+/* Reset Button */
+.reset-btn {
+  background-color: #d32f2f; /* Darker reddish shade */
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px; /* Sharper corners */
+  margin-top: 15px; /* Increased gap between buttons */
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(211, 47, 47, 0.8);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reset-btn:hover {
+  background-color: #b71c1c; /* Darker red on hover */
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(183, 28, 28, 0.9);
+}
+
+/* Centered controls */
+.center-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px; /* Increased spacing between buttons */
+}
+.win-btns-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+  justify-content: center; /* Keep buttons centered */
+  align-items: center;
+}
+/* Cross Icon for Cancel */
+.cancel-cross {
+  font-size: 24px;
+  color: #8d8787; /* Red to indicate cancel */
+  margin-top: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, color 0.2s ease;
+}
+
+.cancel-cross:hover {
+  transform: scale(1.2);
+  color: #8e5252;
+}
+
+/* Win and Loss Buttons Container */
+.win-btns-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+  flex-direction: column; /* Stack buttons and cross vertically */
+  align-items: center;
+}

@@ -153,44 +153,41 @@ const Chat = () => {
 
     if (!isAuthenticated) {
         return (
-            <div className="auth-container">
+            <><h1 className="text-3xl font-bold text-center mb-6">Kava of the Week discussion Forum</h1><div className="auth-container">
                 <h3 className="auth-title">{isLogin ? "Login" : "Signup"}</h3>
                 {!isLogin && (
-                    <input 
-                        type="text" 
-                        placeholder="Username" 
-                        value={username} 
-                        onChange={(e) => setUsername(e.target.value)} 
-                        className="auth-input"
-                    />
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        className="auth-input" />
                 )}
-                <input 
-                    type="email" 
-                    placeholder="Email" 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
-                    className="auth-input"
-                />
-                <input 
-                    type="password" 
-                    placeholder="Password" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    className="auth-input"
-                />
+                <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="auth-input" />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="auth-input" />
                 <button onClick={handleAuth} className="auth-button">
                     {isLogin ? "Login" : "Signup"}
                 </button>
                 <p onClick={() => setIsLogin(!isLogin)} className="auth-toggle">
                     {isLogin ? "Don't have an account? Signup" : "Already have an account? Login"}
                 </p>
-            </div>
+            </div></>
         );
     }
 
     return (
       <div style={chatContainerStyle}>
-          <h2>🟢 Group Chat</h2>
+          <h2>🟢 Kava of the Week discussion Forum</h2>
           <p>Welcome, {username}!</p>
           <button onClick={handleLogout} style={logoutButtonStyle}>Logout</button>
           <div style={messagesContainerStyle}>

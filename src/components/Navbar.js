@@ -90,7 +90,7 @@ function Navbar() {
                 duration={1000}
                 activeClass="active"
               >
-                Awards
+                Kava Awards
               </Link>
             </li>
           </ul>
