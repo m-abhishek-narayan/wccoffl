@@ -6,6 +6,7 @@ import Awards from "./components/Awards";
 import Chat from "./components/Chat";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer"
+import KavaHistory from "./components/KavaHistory";
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
             <div id="gallery"><Gallery /></div>
             <div id="awards"><Awards /></div>
             <Chat />
+            <div id="kavaHistory"><KavaHistory /></div>
             <Footer />
         </>
     );

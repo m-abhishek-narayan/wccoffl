@@ -528,14 +528,17 @@
     color: #2c3e50;
   }
   
-  /* Kava History Section */
-  .kava-history-section {
-    margin-top: 50px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
+/* Kava History Section */
+.kava-history-section {
+  margin-top: 50px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
   
   /* History Container (Flex for Cards) */
   .history-container {
@@ -553,6 +556,7 @@
     text-align: center;
     transition: transform 0.2s ease-in-out;
     border: 1px solid #ddd;
+    
   }
   
   .history-card:hover {
@@ -572,6 +576,7 @@
   .history-info p {
     margin: 5px 0;
     font-size: 0.95rem;
+    color:#121210
   }
   
   /* Table History Styles */

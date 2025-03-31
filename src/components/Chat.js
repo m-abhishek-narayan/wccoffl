@@ -155,7 +155,7 @@ const Chat = () => {
 
     return (
         <div className="chat-container">
-            <h2>🟢 Group Chat</h2>
+            <h2>🟢 Kava of the Week discussion Forum</h2>
             <p>Welcome, {username}!</p>
             <button onClick={handleLogout} className="logout-button">Logout</button>
             <div ref={messagesContainerRef} className="messages-container">

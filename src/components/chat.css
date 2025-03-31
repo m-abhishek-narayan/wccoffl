@@ -1,90 +1,197 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #0f0f0f;
+    color: #fff;
+}
+
+/* Main Chat Container */
+.chat-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    position: relative;
+}
+
+/* Chat Header */
+h2 {
+    font-size: 24px;
+    text-align: center;
+    color: #00ffcc;
+    margin-bottom: 10px;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* Logout Button */
+.logout-button {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logout-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 65, 108, 0.8);
+}
+
+/* Messages Container */
+.messages-container {
+    height: 400px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 5px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Message Styling */
+.message {
+    padding: 12px 15px;
+    margin: 8px 0;
+    border-radius: 20px;
+    max-width: 70%;
+    word-wrap: break-word;
+    font-size: 14px;
+    line-height: 1.5;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Sent Messages */
+.sent {
+    background: linear-gradient(135deg, #00f260, #0575e6);
+    align-self: flex-end;
+    color: #fff;
+    margin-left: auto;
+    box-shadow: 0 5px 15px rgba(0, 255, 128, 0.5);
+}
+
+/* Received Messages */
+.received {
+    background: #333;
+    align-self: flex-start;
+    color: #fff;
+    margin-right: auto;
+}
+
+/* Input Container */
+.input-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Message Input */
+.message-input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 25px;
+    border: none;
+    background: #222;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+/* Send Button */
+.send-button {
+    background: linear-gradient(135deg, #8e44ad, #3498db);
+    border: none;
+    border-radius: 25px;
+    padding: 12px 18px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(142, 68, 173, 0.7);
+    transition: all 0.3s ease-in-out;
+}
+
+.send-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(142, 68, 173, 1);
+}
+
 /* Auth Container */
 .auth-container {
-    width: 340px;
-    padding: 25px 30px; /* Increased padding on sides */
-    margin: 50px auto;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    animation: fadeIn 0.5s ease-in-out;
+    width: 100%;
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
 }
 
-/* Auth Title */
 .auth-title {
     font-size: 24px;
-    font-weight: 600;
-    color: #333;
+    text-align: center;
+    color: #00ffcc;
     margin-bottom: 20px;
-    letter-spacing: 0.5px;
 }
 
-/* Auth Input */
+/* Auth Input Fields */
 .auth-input {
-    width: 90%; /* Reduced width for centering */
-    padding: 12px;
-    margin: 10px auto; /* Auto to center the inputs */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    display: block;
-    transition: all 0.3s ease;
-}
-
-/* Input Focus */
-.auth-input:focus {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 25px;
+    border: none;
+    background: #222;
+    color: #fff;
+    margin-bottom: 15px;
     outline: none;
-    border-color: #6e8efb;
-    box-shadow: 0 0 8px rgba(110, 142, 251, 0.5);
 }
 
 /* Auth Button */
 .auth-button {
-    width: 90%;
+    width: 100%;
     padding: 12px;
-    margin-top: 12px;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
-    color: white;
+    background: linear-gradient(135deg, #00f260, #0575e6);
+    color: #fff;
     border: none;
-    border-radius: 8px;
-    font-size: 18px;
+    border-radius: 25px;
+    font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-/* Button Hover */
 .auth-button:hover {
-    background: linear-gradient(135deg, #5a7be4, #8f5de3);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(110, 142, 251, 0.25);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 242, 96, 0.7);
 }
 
 /* Auth Toggle */
 .auth-toggle {
-    margin-top: 18px;
-    color: #6e8efb;
+    margin-top: 10px;
+    text-align: center;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-/* Toggle Hover */
-.auth-toggle:hover {
+    color: #00ffcc;
     text-decoration: underline;
-    color: #5a7be4;
 }
 
-/* Fade In Animation */
+/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(10px);
     }
     to {
         opacity: 1;
@@ -92,93 +199,93 @@
     }
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 480px) {
+/* Media Query for Mobile */
+@media (max-width: 600px) {
+    .chat-container {
+        width: 95%;
+        padding: 10px;
+    }
+
     .auth-container {
         width: 90%;
-        padding: 20px;
-    }
-
-    .auth-title {
-        font-size: 20px;
-    }
-
-    .auth-input,
-    .auth-button {
-        width: 100%; /* Full width for smaller screens */
     }
 }
-
+/* Main Chat Container */
 .chat-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    width: 90%;
+    max-width: 600px; /* Reduced max width */
+    margin: 30px auto; /* Reduced top margin */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 15px; /* Slightly smaller radius */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7); /* Slightly reduced shadow */
+    padding: 15px; /* Less padding */
 }
 
-.logout-button {
-    padding: 10px 20px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
+/* Messages Container */
 .messages-container {
-    height: 300px; /* Chat box scrolls, page doesn't */
-    overflow-y: auto; /* Enables scrolling inside chat box */
-    border: 1px solid gray;
-    padding: 10px;
-    background-color: #fff;
+    height: 300px; /* Reduced height */
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 15px; /* Reduced margin */
 }
 
-/* Make sure the body does NOT force scroll */
-body {
-    overflow-y: auto !important;
-    height: auto;
-    display: block;
-}
-
+/* Message Input & Button */
 .input-container {
     display: flex;
-    margin-top: 10px;
+    gap: 8px;
+    margin-top: 8px;
 }
 
+/* Message Input */
 .message-input {
-    flex: 1;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    padding: 10px 12px; /* Reduced padding */
+    font-size: 13px; /* Slightly smaller font size */
 }
 
+/* Send Button */
 .send-button {
-    padding: 8px 15px;
-    margin-left: 5px;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 13px;
 }
 
-/* Chat messages styling */
-.message {
-    padding: 8px;
-    border-radius: 5px;
-    margin: 5px 0;
+/* Auth Container */
+.auth-container {
+    width: 90%;
+    max-width: 350px; /* Reduced width for login/signup */
+    margin: 80px auto;
+    padding: 15px;
+    border-radius: 12px;
 }
 
-.sent {
-    text-align: right;
-    background-color: #dcf8c6;
+/* Auth Title */
+.auth-title {
+    font-size: 22px;
+    margin-bottom: 15px;
 }
 
-.received {
-    text-align: left;
-    background-color: #f1f1f1;
+/* Auth Input Fields */
+.auth-input {
+    padding: 10px 12px;
+    font-size: 13px;
+}
+
+/* Auth Button */
+.auth-button {
+    padding: 10px;
+    font-size: 13px;
+}
+
+/* Media Query for Mobile */
+@media (max-width: 600px) {
+    .chat-container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .auth-container {
+        width: 95%;
+    }
 }

@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Awards.css";
+import CustomAlert from "./CustomAlert"; // Import your CustomAlert
 
-function Awards() {
+const PICTURE_API = "https://wccbackend.onrender.com/api";
+
+const Awards = () => {
     const [showForm, setShowForm] = useState(false);
     const [awardData, setAwardData] = useState({
         img: "/img/kava-award.png",
@@ -10,15 +14,6 @@ function Awards() {
         position: "1st",
         team: "Team Alpha",
     });
-
-    const [history, setHistory] = useState([
-        {
-            winner: "John Doe",
-            date: "2025-03-30",
-            position: "1st",
-            team: "Team Alpha",
-        },
-    ]);
 
     const [newData, setNewData] = useState({
         img: "",
@@ -29,6 +24,33 @@ function Awards() {
     });
 
     const [imagePreview, setImagePreview] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
+    const [message, setMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const [history, setHistory] = useState([]);
+    const [latestEntry, setLatestEntry] = useState(null);
+
+    // Fetch image and latest entry from backend
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`${PICTURE_API}/image/get-image`);
+            if (response.data.image) {
+                setAwardData({
+                    img: response.data.image,
+                    ...response.data.history?.[0],
+                });
+                setHistory(response.data.history || []);
+                setLatestEntry(response.data.history?.[0] || null);
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            setMessage("Error fetching data. Try again later.");
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     // Show/Hide the form
     const toggleForm = () => {
@@ -48,36 +70,40 @@ function Awards() {
             const imageUrl = URL.createObjectURL(file);
             setImagePreview(imageUrl);
             setNewData({ ...newData, img: imageUrl });
+            setImageFile(file);
         }
     };
 
-    // Update award and add to history
-    const updateAward = (e) => {
+    // Upload and update award with backend API
+    const updateAward = async (e) => {
         e.preventDefault();
 
-        // Check if all fields are filled
         if (
             !newData.winner ||
             !newData.date ||
             !newData.position ||
             !newData.team ||
-            !newData.img
+            !imageFile
         ) {
-            alert("Please fill all fields before updating!");
+            setMessage("Please fill all fields before updating!");
             return;
         }
 
-        const updatedData = {
-            img: newData.img || awardData.img,
-            winner: newData.winner || awardData.winner,
-            date: newData.date || awardData.date,
-            position: newData.position || awardData.position,
-            team: newData.team || awardData.team,
-        };
+        const formData = new FormData();
+        formData.append("image", imageFile);
+        formData.append("winner", newData.winner);
+        formData.append("date", newData.date);
+        formData.append("position", newData.position);
+        formData.append("team", newData.team);
 
-        setAwardData(updatedData);
-        setHistory([updatedData, ...history]);
-        setShowForm(false);
+        try {
+            await axios.post(`${PICTURE_API}/image/upload`, formData);
+            setSuccessMessage("Award updated successfully!");
+            setShowForm(false);
+            fetchData(); // Fetch latest data after upload
+        } catch (error) {
+            setMessage("Error uploading data. Please try again.");
+        }
 
         // Clear form after update
         setNewData({
@@ -90,11 +116,22 @@ function Awards() {
         setImagePreview(null);
     };
 
+    // Clear messages after a timeout
+    useEffect(() => {
+        if (message || successMessage) {
+            const timer = setTimeout(() => {
+                setMessage("");
+                setSuccessMessage("");
+            }, 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [message, successMessage]);
+
     return (
         <>
             {/* Main Title */}
             <div className="title-container">
-            <h1 className="text-3xl font-bold text-center mb-6">🏆 Kava Awards</h1>
+                <h1 className="text-3xl font-bold text-center mb-6">🏆 Kava Awards</h1>
             </div>
 
             {/* Award Section */}
@@ -102,24 +139,34 @@ function Awards() {
                 <div className="award-section">
                     {/* Award Image */}
                     <div className="award-content">
-                        <img src={awardData.img} alt="Kava Award" className="award-img" />
+                        <img
+                            src={awardData.img || "/img/kava-award.png"}
+                            alt="Kava Award"
+                            className="award-img"
+                        />
                         <h2 className="sub-title">🎉 Kava Award of the Week</h2>
                     </div>
 
                     {/* Award Details */}
                     <div className="award-details">
-                        <p>
-                            <strong>Winner:</strong> {awardData.winner}
-                        </p>
-                        <p>
-                            <strong>Date:</strong> {awardData.date}
-                        </p>
-                        <p>
-                            <strong>Position:</strong> {awardData.position}
-                        </p>
-                        <p>
-                            <strong>Team:</strong> {awardData.team}
-                        </p>
+                        {latestEntry ? (
+                            <>
+                                <p>
+                                    <strong>Winner:</strong> {latestEntry.winner}
+                                </p>
+                                <p>
+                                    <strong>Date:</strong> {latestEntry.date}
+                                </p>
+                                <p>
+                                    <strong>Position:</strong> {latestEntry.position}
+                                </p>
+                                <p>
+                                    <strong>Team:</strong> {latestEntry.team}
+                                </p>
+                            </>
+                        ) : (
+                            <p>No recent award data available.</p>
+                        )}
                         <button className="update-btn" onClick={toggleForm}>
                             Update Kava of the Week
                         </button>
@@ -141,7 +188,11 @@ function Awards() {
                                     required
                                 />
                                 {imagePreview && (
-                                    <img src={imagePreview} alt="Preview" className="image-preview" />
+                                    <img
+                                        src={imagePreview}
+                                        alt="Preview"
+                                        className="image-preview"
+                                    />
                                 )}
                                 <input
                                     type="text"
@@ -181,7 +232,11 @@ function Awards() {
                                 <button type="submit" className="update-btn">
                                     Update Award
                                 </button>
-                                <button type="button" className="cancel-btn" onClick={toggleForm}>
+                                <button
+                                    type="button"
+                                    className="cancel-btn"
+                                    onClick={toggleForm}
+                                >
                                     Cancel Update
                                 </button>
                             </form>
@@ -189,7 +244,7 @@ function Awards() {
                     </div>
                 )}
 
-                {/* History of Kava Awards */}
+                {/* History Section */}
                 <div className="history-section">
                     <h3>📚 Kava Awards Current Series</h3>
                     <table className="table">
@@ -202,106 +257,46 @@ function Awards() {
                             </tr>
                         </thead>
                         <tbody>
-                            {history.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.winner}</td>
-                                    <td>{item.date}</td>
-                                    <td>{item.position}</td>
-                                    <td>{item.team}</td>
+                            {history.length > 0 ? (
+                                history.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.winner}</td>
+                                        <td>{item.date}</td>
+                                        <td>{item.position}</td>
+                                        <td>{item.team}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="4" style={{ textAlign: "center" }}>
+                                        No records found
+                                    </td>
                                 </tr>
-                            ))}
+                            )}
                         </tbody>
                     </table>
                 </div>
             </div>
-            {/* History of Kava Winners (2017-2024) with Images */}
-            <div className="kava-history-section">
-                <h3>🏅 History of Kava Awards (2017-2024)</h3>
-                <div className="history-container">
-                    {[
-                        {
-                            year: 2017,
-                            winner: "Amit Sharma",
-                            matches: 50,
-                            kavas: 30,
-                            percent: "60%",
-                            img: "/img/amit-sharma.png",
-                        },
-                        {
-                            year: 2018,
-                            winner: "Rohan Verma",
-                            matches: 48,
-                            kavas: 28,
-                            percent: "58%",
-                            img: "/img/rohan-verma.png",
-                        },
-                        {
-                            year: 2019,
-                            winner: "Siddharth Rao",
-                            matches: 52,
-                            kavas: 32,
-                            percent: "61.5%",
-                            img: "/img/siddharth-rao.png",
-                        },
-                        {
-                            year: 2020,
-                            winner: "Priya Kumar",
-                            matches: 45,
-                            kavas: 27,
-                            percent: "60%",
-                            img: "/img/priya-kumar.png",
-                        },
-                        {
-                            year: 2021,
-                            winner: "Aryan Kapoor",
-                            matches: 50,
-                            kavas: 31,
-                            percent: "62%",
-                            img: "/img/aryan-kapoor.png",
-                        },
-                        {
-                            year: 2022,
-                            winner: "Neha Patil",
-                            matches: 49,
-                            kavas: 29,
-                            percent: "59%",
-                            img: "/img/neha-patil.png",
-                        },
-                        {
-                            year: 2023,
-                            winner: "Rajesh Iyer",
-                            matches: 51,
-                            kavas: 33,
-                            percent: "64.7%",
-                            img: "/img/rajesh-iyer.png",
-                        },
-                        {
-                            year: 2024,
-                            winner: "John Doe",
-                            matches: 53,
-                            kavas: 34,
-                            percent: "64.1%",
-                            img: "/img/john-doe.png",
-                        },
-                    ].map((item, index) => (
-                        <div key={index} className="history-card">
-                            <img src={item.img} alt={item.winner} className="player-img" />
-                            <div className="history-info">
-                                <p>
-                                    <strong>{item.year}</strong>
-                                </p>
-                                <p>{item.winner}</p>
-                                <p>
-                                    Matches: {item.matches} | Kavas: {item.kavas} | Win %:{" "}
-                                    {item.percent}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
+
+            {/* Success/Error Messages using CustomAlert */}
+            {message && (
+                <CustomAlert
+                    message={message}
+                    type="error"
+                    onClose={() => setMessage("")}
+                    persistent={true}
+                />
+            )}
+            {successMessage && (
+                <CustomAlert
+                    message={successMessage}
+                    type="success"
+                    onClose={() => setSuccessMessage("")}
+                    persistent={true}
+                />
+            )}
         </>
     );
-}
+};
 
 export default Awards;

@@ -32,7 +32,7 @@ function Footer() {
               </li>
               <li>
                 <Link to="awards" spy={true} smooth={true} duration={1000}>
-                  Awards
+                 Kava Awards
                 </Link>
               </li>
             </ul>

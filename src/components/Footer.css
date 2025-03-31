@@ -1,116 +1,122 @@
-/* Footer Styles */
+/* Footer.css */
 .footer {
-    background: #1a1a1a;
-    color: #fff;
-    padding: 30px 20px;
-    position: relative;
-    font-size: 14px;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  /* Footer Row */
-  .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-  
-  /* Left Side (Logo + Text) */
-  .side1 {
-    flex: 1;
-    max-width: 50%;
-  }
-  
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .footer-text {
-    color: #ccc;
-    line-height: 1.5;
-  }
-  
-  /* Right Side (Links) */
-  .side2 {
-    flex: 1;
-    max-width: 50%;
-    text-align: right;
-  }
-  
-  .footer-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .footer-links {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .footer-links li {
-    margin-bottom: 8px;
-  }
-  
-  .footer-links a {
-    color: #6dd5ed;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  .footer-links a:hover {
-    color: #2193b0;
-  }
-  
-  /* Go to Top Button */
-  .gotop {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #6dd5ed;
-    color: #fff;
-    border: none;
-    padding: 10px 12px;
-    border-radius: 50%;
-    font-size: 18px;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  
-  .gotop:hover {
-    background: #2193b0;
-  }
-  
-  /* Show button on scroll */
-  .gotop.display {
-    opacity: 1;
+  width: 100%;
+  background: linear-gradient(135deg, #000000 0%, #03031f 100%);
+  color: #fff;
+  padding: 40px 20px;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  border-top: 3px solid #4f4fff;
+  box-shadow: 0 -5px 20px rgba(79, 79, 255, 0.3);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.side1,
+.side2 {
+  flex: 1;
+  margin: 10px 20px;
+}
+
+.logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #4f4fff;
+  text-shadow: 0 0 10px #4f4fff, 0 0 20px rgba(79, 79, 255, 0.8);
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+.footer-text {
+  font-size: 1rem;
+  margin-top: 5px;
+  color: #b3b3cc;
+}
+
+.footer-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #4f4fff;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #b3b3cc;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.footer-links a:hover {
+  color: #4f4fff;
+  text-shadow: 0 0 5px #4f4fff, 0 0 10px rgba(79, 79, 255, 0.8);
+}
+
+.gotop {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: rgba(79, 79, 255, 0.8);
+  color: #fff;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 20px rgba(79, 79, 255, 0.6);
+  animation: bounce 2s infinite;
+}
+
+.gotop:hover {
+  background: #4f4fff;
+  box-shadow: 0 0 25px rgba(79, 79, 255, 0.9);
+  transform: translateY(-5px);
+}
+
+/* Glorious Bounce Animation */
+@keyframes bounce {
+  0%,
+  100% {
     transform: translateY(0);
   }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .row {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .side1,
-    .side2 {
-      max-width: 100%;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-  
-    .side2 {
-      text-align: center;
-    }
+  50% {
+    transform: translateY(-8px);
   }
-  
+}
+
+/* Glassmorphic effect */
+.footer,
+.gotop {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
