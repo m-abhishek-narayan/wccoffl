@@ -2,12 +2,13 @@
 .homepage {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align the content to start from the top */
+  align-items: center; /* Center the content vertically */
   flex-direction: column;
   min-height: 100vh; /* Ensures the homepage fills the entire viewport */
   background: linear-gradient(-45deg, #1e3c72, #2a5298, #102225, #0e404d, #0f0c29, #302b63, #24243e);
   background-size: 400% 400%;
   animation: gradientAnimation 12s ease infinite;
+  padding-top: 100px; /* Creates space for the fixed header */
 }
 
 /* Top fixed section */
@@ -34,10 +35,9 @@
 
 /* Container for the content */
 .content-container {
-  margin-top: 100px; /* Ensure content does not overlap the fixed header */
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
   flex-direction: column;
   gap: 20px; /* Space between sections */
   padding: 20px;
