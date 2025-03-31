@@ -6,21 +6,28 @@ html, body {
 }
 
 .container2 {
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
   padding: 20px;
   box-sizing: border-box; /* Includes padding in width calculation */
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  flex-direction: column; /* Stack content vertically */
 }
 
 /* Award Section */
 .award-container {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
   text-align: center;
   margin-bottom: 40px;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
 }
 
 .award-content {
   margin-bottom: 20px;
+  display: block;
+  text-align: center;
 }
 
 .award-img {
