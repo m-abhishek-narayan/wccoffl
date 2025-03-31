@@ -92,7 +92,7 @@ const Awards = () => {
     };
 
     return (
-        <div>
+        <div className="awards-container">
             <h2>Awards</h2>
             <button onClick={() => setShowForm(!showForm)}>
                 {showForm ? <div onClick={handleCancelUpload}>Cancel</div> : "Upload Image"}
@@ -103,14 +103,13 @@ const Awards = () => {
 
             {showForm && (
                 <div>
+                    <button onClick={handleUpload}>Upload</button>
                     <h3>Upload Image</h3>
                     <input type="file" accept="image/*" onChange={handleFileChange} />
                     <input type="text" name="winner" placeholder="Winner" value={formData.winner} onChange={handleInputChange} />
                     <input type="date" name="date" value={formData.date} onChange={handleInputChange} />
                     <input type="text" name="position" placeholder="Position" value={formData.position} onChange={handleInputChange} />
                     <input type="text" name="team" placeholder="Team" value={formData.team} onChange={handleInputChange} />
-                    <button onClick={handleUpload}>Upload</button>
-                    <button onClick={handleCancelUpload}>Cancel</button>
                 </div>
             )}
 
@@ -118,7 +117,7 @@ const Awards = () => {
             {preview && <img src={preview} alt="Uploaded" style={{ width: "300px", height: "auto" }} />}
 
             {latestEntry && (
-                <div>
+                <div className="table-container">
                     <h3>Latest Entry</h3>
                     <p><strong>Winner:</strong> {latestEntry.winner}</p>
                     <p><strong>Date:</strong> {latestEntry.date}</p>

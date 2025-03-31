@@ -1,21 +1,35 @@
 /* Awards Component Styles */
 
-.container {
-    max-width: 600px;
-    margin: auto;
-    text-align: center;
+body {
     font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-h3 {
+.awards-container {
+    width: 100%; /* Updated to take the full width of the screen */
+    max-width: none; /* Removed max-width constraint */
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+h2, h3 {
     color: #333;
 }
 
 input {
     display: block;
-    width: 100%;
-    margin: 10px 0;
+    width: calc(100% - 20px);
     padding: 8px;
+    margin: 8px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -27,7 +41,9 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    font-size: 16px;
+    display: block;
+    margin: 10px auto;
 }
 
 button:hover {
@@ -35,10 +51,11 @@ button:hover {
 }
 
 img {
-    margin-top: 10px;
+    display: block;
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
+    margin: 10px auto;
+    border-radius: 5px;
     border: 2px solid #ddd;
 }
 
