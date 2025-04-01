@@ -7,6 +7,7 @@ import Chat from "./components/Chat";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer"
 import KavaHistory from "./components/KavaHistory";
+import Home2 from "./components/Home2";
 
 const App = () => {
     return (
