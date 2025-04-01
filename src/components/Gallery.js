@@ -23,7 +23,7 @@ const albums = [
 ];
 
 function Gallery() {
-  const [activeYear, setActiveYear] = useState("2023");
+  const [activeYear, setActiveYear] = useState("2017");
 
   const handleYearChange = (year) => {
     setActiveYear(year);

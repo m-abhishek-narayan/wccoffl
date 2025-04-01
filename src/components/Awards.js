@@ -8,6 +8,7 @@ const PICTURE_API = "https://wccbackend.onrender.com/api";
 
 const Awards = () => {
     const [showForm, setShowForm] = useState(false);
+    const [showTable, setShowTable] = useState(false); // State to toggle table visibility
     const [awardData, setAwardData] = useState({
         img: "/img/kava-award.png",
         winner: "John Doe",
@@ -30,9 +31,7 @@ const Awards = () => {
     const [successMessage, setSuccessMessage] = useState("");
     const [history, setHistory] = useState([]);
     const [latestEntry, setLatestEntry] = useState(null);
-    const [isTableVisible, setIsTableVisible] = useState(true); // To manage visibility of the table
 
-    // Fetch image and latest entry from backend
     const fetchData = async () => {
         try {
             const response = await axios.get(`${PICTURE_API}/image/get-image`);
@@ -54,19 +53,19 @@ const Awards = () => {
         fetchData();
     }, []);
 
-    // Show/Hide the form
     const toggleForm = () => {
         setShowForm(!showForm);
     };
 
+    const toggleTable = () => {
+        setShowTable(!showTable);
+    };
 
-    // Handle form input change
     const handleChange = (e) => {
         const { name, value } = e.target;
         setNewData({ ...newData, [name]: value });
     };
 
-    // Handle file upload and preview
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -77,17 +76,10 @@ const Awards = () => {
         }
     };
 
-    // Upload and update award with backend API
     const updateAward = async (e) => {
         e.preventDefault();
 
-        if (
-            !newData.winner ||
-            !newData.date ||
-            !newData.position ||
-            !newData.team ||
-            !imageFile
-        ) {
+        if (!newData.winner || !newData.date || !newData.position || !newData.team || !imageFile) {
             setMessage("Please fill all fields before updating!");
             return;
         }
@@ -103,12 +95,11 @@ const Awards = () => {
             await axios.post(`${PICTURE_API}/image/upload`, formData);
             setSuccessMessage("Award updated successfully!");
             setShowForm(false);
-            fetchData(); // Fetch latest data after upload
+            fetchData();
         } catch (error) {
             setMessage("Error uploading data. Please try again.");
         }
 
-        // Clear form after update
         setNewData({
             img: "",
             winner: "",
@@ -119,7 +110,6 @@ const Awards = () => {
         setImagePreview(null);
     };
 
-    // Clear messages after a timeout
     useEffect(() => {
         if (message || successMessage) {
             const timer = setTimeout(() => {
@@ -134,38 +124,28 @@ const Awards = () => {
         <>
             {/* Main Title */}
             <div className="title-container">
-                <h1 className="text-3xl font-bold text-center mb-6">🏆 Kava Awards</h1>
+                <h2>🏆 Kava Awards</h2>
             </div>
 
             {/* Award Section */}
             <div className="award-container">
                 <div className="award-section">
-                    {/* Award Image */}
                     <div className="award-content">
                         <img
                             src={awardData.img || "/img/kava-award.png"}
                             alt="Kava Award"
                             className="award-img"
                         />
-                        <h2 className="sub-title">🎉 Kava Award of the Week</h2>
+                        <h3 className="sub-title"> Kava Award of the Week</h3>
                     </div>
 
-                    {/* Award Details */}
                     <div className="award-details">
                         {latestEntry ? (
                             <>
-                                <p>
-                                    <strong>Winner:</strong> {latestEntry.winner}
-                                </p>
-                                <p>
-                                    <strong>Date:</strong> {latestEntry.date}
-                                </p>
-                                <p>
-                                    <strong>Position:</strong> {latestEntry.position}
-                                </p>
-                                <p>
-                                    <strong>Team:</strong> {latestEntry.team}
-                                </p>
+                                <p><strong>Winner:</strong> {latestEntry.winner}</p>
+                                <p><strong>Date:</strong> {latestEntry.date}</p>
+                                <p><strong>Position:</strong> {latestEntry.position}</p>
+                                <p><strong>Team:</strong> {latestEntry.team}</p>
                             </>
                         ) : (
                             <p>No recent award data available.</p>
@@ -175,98 +155,15 @@ const Awards = () => {
                         </button>
                     </div>
                 </div>
-
-                {/* Form as a Pop-up Modal */}
-                {showForm && (
-                    <div className="modal-overlay">
-                        <div className="modal-content">
-                            <h3 className="form-title">📝 Update Kava Award</h3>
-                            <form onSubmit={updateAward} className="update-form">
-                                <input
-                                    type="file"
-                                    name="img"
-                                    accept="image/*"
-                                    onChange={handleFileChange}
-                                    className="form-control mb-3"
-                                    required
-                                />
-                                {imagePreview && (
-                                    <img
-                                        src={imagePreview}
-                                        alt="Preview"
-                                        className="image-preview"
-                                    />
-                                )}
-                                <input
-                                    type="text"
-                                    name="winner"
-                                    placeholder="Enter winner name"
-                                    value={newData.winner}
-                                    onChange={handleChange}
-                                    className="form-control mb-3"
-                                    required
-                                />
-                                <input
-                                    type="date"
-                                    name="date"
-                                    value={newData.date}
-                                    onChange={handleChange}
-                                    className="form-control mb-3"
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    name="position"
-                                    placeholder="Enter position"
-                                    value={newData.position}
-                                    onChange={handleChange}
-                                    className="form-control mb-3"
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    name="team"
-                                    placeholder="Enter team name"
-                                    value={newData.team}
-                                    onChange={handleChange}
-                                    className="form-control mb-3"
-                                    required
-                                />
-                                <button type="submit" className="update-btn">
-                                    Update Award
-                                </button>
-                                <button
-                                    type="button"
-                                    className="cancel-btn"
-                                    onClick={toggleForm}
-                                >
-                                    Cancel Update
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                )}
             </div>
-
-            {/* Current Section */}
+            {/* Collapsible Awards Table */}
             <div className="history-section">
-                <h3>📚 Kava Awards Current Series</h3>
+                <h3 onClick={toggleTable} className="collapsible-header">
+                    📚 Kava Awards Current Series {showTable ? "▼" : "▶"}
+                </h3>
 
-                {/* Toggle Table Button */}
-                <button
-                    className="toggle-table-btn"
-                    onClick={() => {
-                        setIsTableVisible(!isTableVisible);
-                        console.log("Is Table Visible:", !isTableVisible); // 👈 Add this line here
-                    }}
-                >
-                    {isTableVisible ? "Hide Awards History" : "Show Awards History"}
-                </button>
-
-
-                {/* Conditionally Render Table */}
-                {isTableVisible && (
-                    <div className={`table-container ${!isTableVisible ? "hidden" : ""}`}>
+                {showTable && (
+                    <div className="table-container">
                         <table className="table">
                             <thead>
                                 <tr>
@@ -299,24 +196,10 @@ const Awards = () => {
                 )}
             </div>
 
-            {/* Success/Error Messages using CustomAlert */}
-            {message && (
-                <CustomAlert
-                    message={message}
-                    type="error"
-                    onClose={() => setMessage("")}
-                    persistent={true}
-                />
-            )}
-            {successMessage && (
-                <CustomAlert
-                    message={successMessage}
-                    type="success"
-                    onClose={() => setSuccessMessage("")}
-                    persistent={true}
-                />
-            )}
-            {/* History of Kava Winners (2017-2024) with Images */}
+            {/* Stylish Separator */}
+            <div className="separator-line"></div>
+
+            {/* History Section */}
             <div className="kava-history-section">
                 <h3>🏅 History of Kava Awards (2017-2024)</h3>
                 <div className="history-container">
@@ -324,18 +207,15 @@ const Awards = () => {
                         <div key={index} className="history-card">
                             <img src={item.img} alt={item.winner} className="player-img" />
                             <div className="history-info">
-                                <p>
-                                    <strong>{item.year}</strong>
-                                </p>
+                                <p><strong>{item.year}</strong></p>
                                 <p>{item.winner}</p>
-                                <p>
-                                    Matches: {item.matches} | Kavas: {item.kavas} | Win %: {item.percent}
-                                </p>
+                                <p>Matches: {item.matches} | Kavas: {item.kavas} | Win %: {item.percent}</p>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
+
         </>
     );
 };
