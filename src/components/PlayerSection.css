@@ -1,151 +1,206 @@
-/* Global Styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* Body Settings */
-body {
-  background: #0f0c29;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  overflow-x: hidden;
-}
-
-/* Main Container */
+/* Player Section Styling */
 .player-section {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  background: linear-gradient(to bottom right, #0f0c29, #302b63, #24243e);
   padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-  width: 90%;
+  width: 100%;
   max-width: 1200px;
-  margin: 40px auto;
+  margin: 0 auto;
+  position: relative;
 }
 
-/* Player Container - Flex Layout */
+/* Blur Background Effect */
+.player-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
+  backdrop-filter: blur(10px); /* Blurring effect */
+  z-index: -1; /* Behind the content */
+}
+
+/* Player Container */
 .player-container {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
+}
+
+.player-list {
+  margin-top: 20px;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-/* Player List - Left Side */
-.player-list {
-  width: 30%;
-  max-height: 400px;
-  overflow-y: auto;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  scroll-behavior: smooth;
-}
-
-/* Hide Scrollbar */
-.player-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.player-list::-webkit-scrollbar-thumb {
-  background: #ff7eb3;
-  border-radius: 10px;
-}
-
-/* Individual Player Item */
 .player-item {
-  padding: 12px 16px;
-  background: linear-gradient(135deg, #ff7eb3, #ff512f);
-  border-radius: 8px;
+  padding: 10px;
+  background-color: #333;
+  margin: 5px;
   color: white;
-  font-weight: bold;
-  text-align: center;
+  border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 8px;
-  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
-}
-
-/* Hover and Active State */
-.player-item:hover {
-  background: linear-gradient(135deg, #42e695, #3bb2b8);
-  transform: scale(1.05) rotate(2deg);
-}
-
-.player-item.active {
-  background: linear-gradient(to right, #ff512f, #dd2476);
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(255, 118, 118, 0.5);
-}
-
-/* Player Details Section - Right Side */
-.player-details {
-  width: 65%;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 12px;
+  transition: background-color 0.3s;
+  width: 200px;
   text-align: center;
-  color: #fff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Player Image */
-.player-image {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 12px;
-  border: 3px solid #ff7eb3;
+.player-item:hover,
+.player-item.active {
+  background-color: #007bff;
 }
 
-/* Smooth Fade-in Animation */
-.fade-in {
-  animation: fadeIn 0.8s ease-in-out;
+/* Player Details */
+.player-details {
+  margin-top: 20px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 900px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  animation: fadeIn 0.5s ease-out;
 }
 
-/* Keyframe Animation */
+/* Smooth Fade-in Effect for Player Details */
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: translateY(-20px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
-/* Responsive Design for Mobile */
-@media (max-width: 768px) {
+.player-details-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.player-details h2 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.player-details p {
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Auto-Rotating Image Section */
+.player-images {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.player-carousel-image {
+  max-width: 100%;
+  height: auto;
+  transition: transform 1s ease-in-out;
+  object-fit: cover;
+}
+
+/* Add a simple animation for the carousel effect */
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Responsiveness for different screen sizes */
+@media screen and (min-width: 768px) {
+  .player-section {
+    padding: 30px;
+  }
+
   .player-container {
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row;
   }
 
   .player-list {
-    width: 100%;
-    max-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 0;
   }
 
   .player-details {
-    width: 100%;
-    margin-top: 20px;
+    width: 60%;
   }
 
-  .player-image {
-    width: 120px;
-    height: 120px;
+  .player-item {
+    width: 180px;
+    margin: 5px 10px;
   }
 }
 
-/* Prevent Horizontal Scrolling */
-html, body {
-  width: 100%;
-  overflow-x: hidden;
+@media screen and (min-width: 1024px) {
+  .player-section {
+    max-width: 1200px;
+    padding: 40px;
+  }
+
+  .player-container {
+    justify-content: flex-start;
+  }
+
+  .player-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .player-item {
+    width: 220px;
+    margin: 10px;
+  }
+
+  .player-details {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .player-section {
+    padding: 50px;
+  }
+
+  .player-container {
+    max-width: 1400px;
+  }
+
+  .player-list {
+    justify-content: flex-start;
+  }
+
+  .player-item {
+    width: 240px;
+    margin: 15px;
+  }
+
+  .player-details {
+    width: 45%;
+  }
 }
