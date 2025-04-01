@@ -48,13 +48,25 @@ const Profile = () => {
 
   // Detect manual scrolling and pause auto-scroll
   const handleScroll = () => {
+    const scrollElement = scrollRef.current;
     isScrollingRef.current = true;
     stopAutoScroll();
-    setTimeout(() => {
-      isScrollingRef.current = false;
-      if (!selectedPlayer) startAutoScroll(); // Resume only if no player is selected
-    }, 5000); // Resume auto-scroll after 5 sec of inactivity
+  
+    // Check if the user has reached the ends
+    if (scrollElement) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollElement;
+      const atStart = scrollLeft === 0;
+      const atEnd = scrollLeft + clientWidth >= scrollWidth;
+  
+      if (!atStart && !atEnd) {
+        setTimeout(() => {
+          isScrollingRef.current = false;
+          if (!selectedPlayer) startAutoScroll(); // Resume only if no player is selected
+        }, 5000); // Resume auto-scroll after 5 sec
+      }
+    }
   };
+  
 
   return (
     <div className="profile-container">
