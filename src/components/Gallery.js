@@ -1,8 +1,9 @@
-// src/components/Gallery.js
 import React, { useState } from "react";
 import axios from "axios";
 import {
   Container,
+  TabContainer,
+  TabButton,
   GalleryContainer,
   AlbumCard,
   AlbumImg,
@@ -10,100 +11,43 @@ import {
 } from "./GalleryStyles";
 import "./gallery.css";
 
-// Album data
 const albums = [
-  {
-    title: "WCC 2017",
-    imgSrc: "/img/wcc2017.jpg",
-    link: "https://photos.app.goo.gl/NYrHfun6TWP3v8nW7",
-  },
-  {
-    title: "WCC 2018",
-    imgSrc: "/img/wcc2018.jpg",
-    link: "https://photos.app.goo.gl/1GDgfP7EWv8NDAPj7",
-  },
-  {
-    title: "WCC 2019",
-    imgSrc: "/img/wcc2019.jpg",
-    link: "https://photos.app.goo.gl/PUqR7i2wqTDaCENk7",
-  },
-  {
-    title: "WCC 2020",
-    imgSrc: "/img/wcc2020.jpg",
-    link: "https://photos.app.goo.gl/WpFE2wXGpZY7ScmH8",
-  },
-  {
-    title: "WCC 2021",
-    imgSrc: "/img/wcc2021.jpg",
-    link: "https://photos.app.goo.gl/4cR9MS4jb6T3e84V8",
-  },
-  {
-    title: "WCC 2022",
-    imgSrc: "/img/wcc2022.jpg",
-    link: "https://photos.app.goo.gl/YauW5uUGGX4XU5sh6",
-  },
-  {
-    title: "WCC 2023",
-    imgSrc: "/img/wcc2023.jpg",
-    link: "https://photos.app.goo.gl/PxygRZ8VuGkyAPtYA",
-  },
-  {
-    title: "WCC 2024 Party",
-    imgSrc: "/img/wcc2024party.jpg",
-    link: "https://photos.app.goo.gl/T9KArYTZAfNZeUCW8",
-  },
+  { year: "2017", albums: [{ title: "WCC 2017", imgSrc: "/img/wcc2017.jpg", link: "https://photos.app.goo.gl/NYrHfun6TWP3v8nW7" }] },
+  { year: "2018", albums: [{ title: "WCC 2018", imgSrc: "/img/wcc2018.jpg", link: "https://photos.app.goo.gl/1GDgfP7EWv8NDAPj7" }] },
+  { year: "2019", albums: [{ title: "WCC 2019", imgSrc: "/img/wcc2019.jpg", link: "https://photos.app.goo.gl/PUqR7i2wqTDaCENk7" }] },
+  { year: "2020", albums: [{ title: "WCC 2020", imgSrc: "/img/wcc2020.jpg", link: "https://photos.app.goo.gl/WpFE2wXGpZY7ScmH8" }] },
+  { year: "2021", albums: [{ title: "WCC 2021", imgSrc: "/img/wcc2021.jpg", link: "https://photos.app.goo.gl/4cR9MS4jb6T3e84V8" }] },
+  { year: "2022", albums: [{ title: "WCC 2022", imgSrc: "/img/wcc2022.jpg", link: "https://photos.app.goo.gl/YauW5uUGGX4XU5sh6" }] },
+  { year: "2023", albums: [{ title: "WCC 2023", imgSrc: "/img/wcc2023.jpg", link: "https://photos.app.goo.gl/PxygRZ8VuGkyAPtYA" }] },
+  { year: "2024", albums: [{ title: "WCC 2024 Party", imgSrc: "/img/wcc2024party.jpg", link: "https://photos.app.goo.gl/T9KArYTZAfNZeUCW8" }] },
 ];
 
 function Gallery() {
-  const [image, setImage] = useState(null);
-  const [fileName, setFileName] = useState("");
-  const [previewUrl, setPreviewUrl] = useState("");
+  const [activeYear, setActiveYear] = useState("2023");
 
-  // Handle file change
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-      setFileName(file.name);
-      setPreviewUrl(URL.createObjectURL(file)); // Preview before uploading
-    }
+  const handleYearChange = (year) => {
+    setActiveYear(year);
   };
 
-  // Upload the image
-  const handleUpload = async () => {
-    if (!image) {
-      alert("Please select an image first!");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("image", image);
-
-    try {
-      const res = await axios.post("/api/upload", formData);
-      if (res.status === 200) {
-        alert("Image uploaded successfully!");
-        setImage(null);
-        setFileName("");
-        setPreviewUrl("");
-      }
-    } catch (error) {
-      console.error("Error uploading the image:", error);
-      alert("Failed to upload the image.");
-    }
-  };
+  const selectedYearAlbums = albums.find((album) => album.year === activeYear)?.albums || [];
 
   return (
     <Container>
-      <h1 className="text-3xl font-bold text-center mb-6">📚 Gallery Albums</h1>
+      <h2>📚 Gallery Albums</h2>
+
+      {/* Horizontal Tabs for Year Selection */}
+      <TabContainer>
+        {albums.map((album) => (
+          <TabButton key={album.year} onClick={() => handleYearChange(album.year)} isActive={activeYear === album.year}>
+            {album.year}
+          </TabButton>
+        ))}
+      </TabContainer>
+
+      {/* Display the selected year's albums */}
       <GalleryContainer>
-        {albums.map((album, index) => (
-          <AlbumCard
-            key={index}
-            href={album.link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+        {selectedYearAlbums.map((album, index) => (
+          <AlbumCard key={index} href={album.link} target="_blank" rel="noopener noreferrer">
             <AlbumImg src={album.imgSrc} alt={album.title} />
             <AlbumOverlay>{album.title}</AlbumOverlay>
           </AlbumCard>

@@ -1,63 +1,43 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./Home2.css"; // Import CSS
 
 const Home2 = () => {
     const [teams, setTeams] = useState({
-        team1: { teamId: "team1", teamName: "" ,points: 0, score: [] },
-        team2: { teamId: "team2", teamName: "",points: 0, score: [] }
+        team1: { teamName: "CSK", points: 20, score: ["W", "L", "-", "W", "W"] },
+        team2: { teamName: "MI", points: 15, score: ["L", "W", "-", "L", "L"] }
     });
-    const [activeForm, setActiveForm] = useState(null);
-    const [formData, setFormData] = useState({});
-    const [successMessage, setSuccessMessage] = useState("");
-    const [showWinButtons, setShowWinButtons] = useState(false);
-    const [lastWinner, setLastWinner] = useState(null);
-    const [errorMessage, setErrorMessage] = useState("");
-    const [winner, setWinner] = useState(null);
+
     const [awardData, setAwardData] = useState({
-            img: "/img/kava-award.png",
-            winner: "John Doe",
-            date: "2025-03-30",
-            position: "1st",
-            team: "Team Alpha",
-        });
+        img: "/img/kava-award.png",
+        winner: "MS Dhoni",
+        date: "2025-04-01",
+        team: "CSK"
+    });
+
     const API_BASE_URL = "https://wccbackend.onrender.com";
     const PICTURE_API = "https://wccbackend.onrender.com/api";
-    const [latestEntry, setLatestEntry] = useState(null);
 
     useEffect(() => {
         fetchTeams();
-        fetchData();
+        fetchAwardData();
     }, []);
-
+    useEffect(() => {
+        const navbarHeight = document.getElementById('navbar').offsetHeight;
+        const homeWrapper = document.querySelector('.home2-wrapper');
+        homeWrapper.style.marginTop = `${navbarHeight}px`;
+      }, []);
+      
     const fetchTeams = async () => {
         try {
             const response = await axios.get(`${API_BASE_URL}/api/teams`);
-            setTeams(response.data || {
-                team1: { teamId: "team1", teamName: "", points: 0, score: [] },
-                team2: { teamId: "team2", teamName: "", points: 0, score: [] }
-            });
-            setErrorMessage("");
+            setTeams(response.data || { team1: { teamName: "CSK", points: 20, score: [] }, team2: { teamName: "MI", points: 15, score: [] } });
         } catch (error) {
-            const errorMsg = error.response?.data?.error.errorMessage || "An unexpected error occurred";
-            setErrorMessage(errorMsg);
-            setTimeout(() => setErrorMessage(""), 2000);
+            console.error("Error fetching teams:", error);
         }
     };
 
-    if (!teams) return <h1 style={{ color: 'black' }}>Loading teams...</h1>;
-
-    const handleShowForm = (teamId) => {
-        setFormData({
-            ...teams[teamId],
-            coreTeam: teams[teamId].coreTeam.join(", ")
-        });
-        setActiveForm(teamId);
-    };
-
-
-
-
-    const fetchData = async () => {
+    const fetchAwardData = async () => {
         try {
             const response = await axios.get(`${PICTURE_API}/image/get-image`);
             if (response.data.image) {
@@ -65,73 +45,67 @@ const Home2 = () => {
                     img: response.data.image,
                     ...response.data.history?.[0],
                 });
-                setLatestEntry(response.data.history?.[0] || null);
             }
         } catch (error) {
-            console.error("Error fetching data:", error);
+            console.error("Error fetching award data:", error);
         }
     };
 
-    return (
-        <div className="flex flex-col items-center p-5" style={{ color: 'black' }}>
-            <h1 className="text-2xl font-bold">Cricket Team Management</h1>
-            {successMessage && (
-                <div style={{ backgroundColor: "#4CAF50", color: "white", padding: "10px", borderRadius: "5px", marginBottom: "10px" }}>
-                    {successMessage}
-                </div>
-            )}
-            {errorMessage && (
-                <div style={{ backgroundColor: "red", color: "white", padding: "10px", borderRadius: "5px", marginBottom: "10px" }}>
-                {errorMessage}
-            </div>
-            )}
+    // Trim score array to last 4 results
+    const trimScores = (scores) => {
+        return scores.slice(-4);
+    };
 
-             {/* Display Data */}
-             <div style={{ display: "flex", gap: "20px" }}>
-                {["team1", "team2"].map(teamId => (
-                    <div key={teamId} style={{ border: "1px solid black", padding: "20px", width: "300px" }}>
-                        <h2>{teamId.toUpperCase()}</h2>
-                        <p><strong>Team Name:</strong> {teams[teamId].teamName || "--"}</p>
-                        <p><strong>Points:</strong> {teams[teamId]?.points || 0}</p>
-                        <h3 className="mt-3 font-semibold">Last Scores</h3>
-                        <div className="flex gap-2">
-                            {teams[teamId]?.score?.slice(-3).map((score, index) => (
-                                <span key={index} className="border p-2">{score}</span>
+    return (
+        <div className="home2-wrapper">
+            <h1 className="home2-title">Cricket Scoreboard</h1>
+
+            {/* Scorecard */}
+            <div className="home2-scorecard">
+                {/* Left Section - Teams */}
+                <div className="home2-teams">
+                    {/* Team 1 */}
+                    <div className="home2-team">
+                        <div className="home2-team-header">
+                            <span className="home2-team-name">{teams.team1.teamName}</span>
+                            <span className="home2-team-points">{teams.team1.points}</span>
+                        </div>
+                        <div className="home2-score-history">
+                            {trimScores(teams.team1.score).map((result, index) => (
+                                <span key={index} className={result === "W" ? "win" : result === "L" ? "loss" : "neutral"}>
+                                    {result}
+                                </span>
                             ))}
                         </div>
                     </div>
-                ))}
-            </div>
-            <div className="award-section">
-                    {/* Award Image */}
-                    <div className="award-content">
-                        <img
-                            src={awardData.img || "/img/kava-award.png"}
-                            alt="Kava Award"
-                            className="award-img"
-                        />
-                        <h2 className="sub-title">🎉 Kava Award of the Week</h2>
-                    </div>
 
-                    {/* Award Details */}
-                    <div className="award-details">
-                        {latestEntry ? (
-                            <>
-                                <p>
-                                    <strong>Winner:</strong> {latestEntry.winner}
-                                </p>
-                                <p>
-                                    <strong>Date:</strong> {latestEntry.date}
-                                </p>
-                                <p>
-                                    <strong>Team:</strong> {latestEntry.team}
-                                </p>
-                            </>
-                        ) : (
-                            <p>No recent award data available.</p>
-                        )}
+                    {/* Team 2 */}
+                    <div className="home2-team">
+                        <div className="home2-team-header">
+                            <span className="home2-team-name">{teams.team2.teamName}</span>
+                            <span className="home2-team-points">{teams.team2.points}</span>
+                        </div>
+                        <div className="home2-score-history">
+                            {trimScores(teams.team2.score).map((result, index) => (
+                                <span key={index} className={result === "W" ? "win" : result === "L" ? "loss" : "neutral"}>
+                                    {result}
+                                </span>
+                            ))}
+                        </div>
                     </div>
                 </div>
+
+                {/* Right Section - Award */}
+                <div className="home2-award">
+                    <p className="home2-award-title">🏆 Kava of the Week</p>
+                    <img src={awardData.img} alt="Award" className="home2-award-img" />
+                    <div className="home2-award-details">
+                        <p><span className="home2-detail-header">Winner:</span> {awardData.winner}</p>
+                        <p><span className="home2-detail-header">Date:</span> {awardData.date}</p>
+                        <p><span className="home2-detail-header">Team:</span> {awardData.team}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

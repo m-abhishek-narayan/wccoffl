@@ -1,32 +1,45 @@
-// src/components/GalleryStyles.js
-import styled, { keyframes } from "styled-components";
-
-// Keyframe for fade-in animation
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+import styled from "styled-components";
 
 // Main container
 export const Container = styled.div`
   text-align: center;
-  background: linear-gradient(135deg, #0c0f13, #183857);
-   padding: 20px;
   margin-bottom: 50px;
+  padding-top: 40px; /* Add space above the gallery */
 `;
 
+// Horizontal Tabs Container
+export const TabContainer = styled.div`
+  display: flex;
+  overflow-x: auto;
+  padding: 10px;
+  margin-bottom: 20px;
+`;
+
+export const TabButton = styled.button`
+  background: ${props => (props.isActive ? "#1e3d58" : "transparent")};
+  color: ${props => (props.isActive ? "#fff" : "#b0b0b0")};
+  border: 2px solid ${props => (props.isActive ? "#fff" : "#1e3d58")}; /* White border on active */
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, border 0.3s;
+
+  &:hover {
+    background: #1e3d58;
+    color: #fff;
+    border: 2px solid #fff; /* White border on hover */
+  }
+`;
+
+
+// Albums grid container
 export const GalleryContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
-  margin-top: 2rem;
-  margin-bottom: 50px;
 `;
 
 export const AlbumCard = styled.a`

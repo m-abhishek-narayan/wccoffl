@@ -1,52 +1,80 @@
 import React, { useState, useEffect } from "react";
-import "./PlayerSection.css";
+import "./PlayerSection.css"; // Assuming this file contains the relevant styles
+import { MdNoMeals } from "react-icons/md";
 
 function PlayerSection({ players }) {
-  const [selectedPlayer, setSelectedPlayer] = useState(players[0]);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [isLocked, setIsLocked] = useState(false); // Prevent hover change after click
+  const [isModalActive, setIsModalActive] = useState(false); // Track modal visibility
 
   useEffect(() => {
-    if (players.length > 0) {
-      setSelectedPlayer(players[0]); // Auto-select first player on load
+    if (!selectedPlayer && players.length > 0) {
+      setSelectedPlayer(players[0]);
     }
-  }, [players]);
+  }, [players, selectedPlayer]);
 
-  // Handle Player Hover
+  // Hover changes selection only if not locked
   const handlePlayerHover = (player) => {
+    if (!isLocked) {
+      setSelectedPlayer(player);
+    }
+  };
+
+  // Clicking locks selection and activates modal
+  const handlePlayerClick = (player) => {
     setSelectedPlayer(player);
+    setIsLocked(true);
+    setIsModalActive(true);  // Activate modal and background blur
+    document.body.classList.add("blur"); // Add blur to background
+  };
+
+  const closeModal = () => {
+    setIsModalActive(false);
+    document.body.classList.remove("blur"); // Remove blur from background
   };
 
   return (
     <div className="player-section">
       <div className="player-container">
-        {/* Left Side - Player Names with Hover Effect */}
+        {/* Player List */}
         <div className="player-list">
-          {players.map((player) => (
-            <div
-              key={player.id}
-              className={`player-item ${
-                selectedPlayer?.id === player.id ? "active" : ""
-              }`}
-              onMouseEnter={() => handlePlayerHover(player)}
-            >
-              {player.name}
-            </div>
-          ))}
+          {players.length > 0 ? (
+            players.map((player) => (
+              <div
+                key={player.id}
+                className={`player-item ${
+                  selectedPlayer?.id === player.id ? "active" : ""
+                }`}
+                onMouseEnter={() => handlePlayerHover(player)}
+                onClick={() => handlePlayerClick(player)}
+              >
+                {player.name}
+              </div>
+            ))
+          ) : (
+            <p className="no-players">No players available.</p>
+          )}
         </div>
 
-        {/* Right Side - Player Details with Smooth Animation */}
-        <div className="player-details fade-in">
+        {/* Player Details with Image */}
+        <div className={`player-details ${isModalActive ? "active" : ""}`}>
           {selectedPlayer ? (
             <>
-              <img
-                src={selectedPlayer.image}
-                alt={selectedPlayer.name}
-                className="player-image"
-              />
+              {selectedPlayer.image && (
+                <img
+                  src={selectedPlayer.image}
+                  alt={selectedPlayer.name}
+                  className="player-details-image"
+                />
+              )}
               <h2>{selectedPlayer.name}</h2>
               <p>{selectedPlayer.details}</p>
+              <button className="close-btn" onClick={closeModal}>
+                Close
+              </button>
             </>
           ) : (
-            <p className="text-white">No player selected.</p>
+            <p className="no-selection">Hover over a player to see details.</p>
           )}
         </div>
       </div>
