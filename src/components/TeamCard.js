@@ -9,7 +9,7 @@ const TeamCard = ({
   name,
   captain,
   points,
-  results,
+  score,
   coreTeam,
   prevSeries,
   onUpdate,
@@ -121,14 +121,13 @@ const TeamCard = ({
           <p>
             <strong>Points:</strong> {points || 0}
           </p>
-          <div className="results">
-            {results.slice(-4).map((result, index) => (
+          <div className="score">
+            {(score || []).slice(-4).map((result, index) => (
               <span
                 key={index}
                 className={`result ${
                   result === "W" ? "win" : result === "L" ? "loss" : "neutral"
                 }`}
-                
               >
                 {result}
               </span>

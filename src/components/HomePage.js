@@ -9,8 +9,8 @@ const API_BASE_URL = "https://wccbackend.onrender.com";
 const HomePage = () => {
   const [teamA, setTeamA] = useState({
     teamId: "team1",
-    name: "",
-    captain: "",
+    name: "Team A",
+    captain: "Unknown",
     points: 0,
     results: [],
     coreTeam: [],
@@ -19,8 +19,8 @@ const HomePage = () => {
 
   const [teamB, setTeamB] = useState({
     teamId: "team2",
-    name: "",
-    captain: "",
+    name: "Team B",
+    captain: "Unknown",
     points: 0,
     results: [],
     coreTeam: [],
@@ -31,6 +31,7 @@ const HomePage = () => {
   const [lastWinner, setLastWinner] = useState(null);
   const [winner, setWinner] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [seriesHistory, setSeriesHistory] = useState([]);
 
   // Alert and Modal States
   const [alert, setAlert] = useState({
@@ -91,38 +92,42 @@ const HomePage = () => {
   };
 
   useEffect(() => {
+    fetchAllSeriesHistory();
     fetchTeams();
   }, []);
+
+  const fetchAllSeriesHistory = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${API_BASE_URL}/api/team/series-history`);
+      const fetchedHistory = response.data.seriesHistory || [];
+
+      // Make sure the series data has teamA and teamB properly assigned
+      const formattedHistory = fetchedHistory.map((series) => ({
+        ...series,
+        teamA: series.teams?.teamA || "Unknown Team A",
+        teamB: series.teams?.teamB || "Unknown Team B",
+      }));
+
+      setSeriesHistory(formattedHistory);
+    } catch (error) {
+      console.error("Error fetching series history:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchTeams = async () => {
     try {
       setLoading(true);
       const response = await axios.get(`${API_BASE_URL}/api/teams`);
-      if (response.data) {
-        const { team1, team2 } = response.data;
-        setTeamA({
-          ...teamA,
-          name: team1.teamName,
-          captain: team1.captain,
-          points: team1.points || 0,
-          results: team1.score || [],
-          coreTeam: team1.coreTeam || [],
-          prevSeries: team1.prevSeries || [],
-        });
-
-        setTeamB({
-          ...teamB,
-          name: team2.teamName,
-          captain: team2.captain,
-          points: team2.points || 0,
-          results: team2.score || [],
-          coreTeam: team2.coreTeam || [],
-          prevSeries: team2.prevSeries || [],
-        });
-
-        showAlert("Teams updated!");
-      }
+      const { team1, team2 } = response.data || {};
+      
+      setTeamA({ ...teamA, ...team1 });
+      setTeamB({ ...teamB, ...team2 });
+      showAlert("Teams updated!");
     } catch (error) {
+      console.error("Error fetching teams:", error);
       showAlert("Error fetching teams.", "error");
     } finally {
       setLoading(false);
@@ -130,15 +135,14 @@ const HomePage = () => {
   };
 
   const handleWin = async (team) => {
-    const winnerId = team === "A" ? "team1" : "team2";
     try {
       setLoading(true);
-      await axios.put(`${API_BASE_URL}/api/team/update-points`, { winnerId });
-      setLastWinner(winnerId);
+      await axios.put(`${API_BASE_URL}/api/team/update-points`, { winnerId: team === "A" ? "team1" : "team2" });
+      setLastWinner(team === "A" ? "team1" : "team2");
       fetchTeams();
-      setShowWinButtons(false);
-      showAlert(`Team ${team === "A" ? "A" : "B"} wins!`);
+      showAlert(`Team ${team} wins!`);
     } catch (error) {
+      console.error("Error updating points:", error);
       showAlert("Error updating points.", "error");
     } finally {
       setLoading(false);
@@ -147,40 +151,58 @@ const HomePage = () => {
 
   const handleResetLatestScore = async () => {
     if (!lastWinner) return;
-
+  
     try {
       setLoading(true);
-      await axios.put(`${API_BASE_URL}/api/team/revert`, {
+      const response = await axios.put(`${API_BASE_URL}/api/team/revert`, {
         lastWinnerId: lastWinner,
       });
-      setLastWinner(null);
-      fetchTeams();
-      showAlert("Last result reverted successfully!");
+  
+      if (response.status === 200) {
+        setLastWinner(null);
+        fetchTeams();
+        showAlert("Last result reverted successfully!");
+      } else {
+        showAlert("Error reverting latest result.", "error");
+      }
     } catch (error) {
+      console.error("Error reverting score:", error);
       showAlert("Error reverting latest result.", "error");
     } finally {
       setLoading(false);
     }
   };
-
+  
   const handleEndSeries = async () => {
     try {
       setLoading(true);
       const response = await axios.post(`${API_BASE_URL}/api/team/end-series`);
+  
       if (response.status === 200) {
-        const { captain } = response.data.winner;
-        setWinner({ captain });
-        showAlert(`Series Ended! Winning Captain: ${captain}`);
+        const { winningTeam } = response.data; // Get winning team details
+  
+        setWinner({
+          captain: winningTeam?.captain || "No winner",
+          team: winningTeam?.teamName || "Draw",
+        });
+  
+        showAlert(
+          `Series Ended! Winning Team: ${winningTeam?.teamName || "Draw"}, Captain: ${winningTeam?.captain || "None"}`
+        );
+  
         fetchTeams();
+        fetchAllSeriesHistory();
       } else {
         showAlert("Error ending series.", "error");
       }
     } catch (error) {
+      console.error("Error ending series:", error);
       showAlert("Error ending series.", "error");
     } finally {
       setLoading(false);
     }
   };
+  
 
   // Open Confirmation Modal
   const openConfirmModal = (action) => {
@@ -322,6 +344,35 @@ const HomePage = () => {
           )}
         </div>
         <TeamCard {...teamB} onUpdate={fetchTeams} />
+      </div>
+      {loading && <p>Loading series history...</p>}
+
+      <div className="match-coverage">
+        {seriesHistory.length === 0 ? (
+          <p>No series history found.</p>
+        ) : (
+          seriesHistory.map((series, index) => (
+            <div key={index} className="match-entry">
+              <h3>
+                {series.teamA} 🆚 {series.teamB}
+              </h3>
+              <p>Captain: {series?.captain?.teamA || "Unknown"} 🆚 {series?.captain?.teamB || "Unknown"}</p>
+              <p>Points: {series?.points?.teamA || 0} 🆚 {series?.points?.teamB || 0}</p>
+              <p>
+                <strong>🏆 Winner:</strong>{" "}
+                {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}
+              </p>
+              <p>
+                <strong>📅 Period:</strong>{" "}
+                {new Date(series.startDate).toLocaleDateString()} -{" "}
+                {new Date(series.endDate).toLocaleDateString()}
+              </p>
+              <p>
+              <strong>📊 Score:</strong> {series?.score?.teamA?.slice(-4).join(", ") || "No Data"} 🆚 {series?.score?.teamB?.slice(-4).join(", ") || "No Data"}
+              </p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
