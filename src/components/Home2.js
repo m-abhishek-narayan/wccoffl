@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import axios from "axios";
 import "./Home2.css"; // Import CSS
 
@@ -14,6 +15,8 @@ const Home2 = () => {
         date: "2025-04-01",
         team: "--"
     });
+
+    const navigate = useNavigate(); // Hook for navigation
 
     const API_BASE_URL = "https://wccbackend.onrender.com";
     const PICTURE_API = "https://wccbackend.onrender.com/api";
@@ -64,11 +67,20 @@ const Home2 = () => {
 
     const trimScores = (scores) => scores?.slice(-4) || [];
 
+    // Navigation handlers
+    const handleTeamClick = () => {
+        navigate("/teams"); // Redirect to /teams when clicking anywhere inside home2-teams
+    };
+
+    const handleAwardClick = () => {
+        navigate("/awards"); // Redirect to /awards when clicking anywhere inside home2-award
+    };
+
     return (
         <div className="home2-wrapper">
-
             <div className="home2-scorecard">
-                <div className="home2-teams">
+                {/* Make home2-teams clickable */}
+                <div className="home2-teams" onClick={handleTeamClick} style={{ cursor: "pointer" }}>
                     <div className="home2-team">
                         <div className="home2-team-header">
                             <span className="home2-team-name">{teams?.team1?.teamName || "N/A"}</span>
@@ -98,7 +110,8 @@ const Home2 = () => {
                     </div>
                 </div>
 
-                <div className="home2-award">
+                {/* Make home2-award clickable */}
+                <div className="home2-award" onClick={handleAwardClick} style={{ cursor: "pointer" }}>
                     <p className="home2-award-title">🏆 Kava of the Week</p>
                     <img src={awardData.img} alt="Award" className="home2-award-img" />
                     <div className="home2-award-details">
