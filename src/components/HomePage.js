@@ -4,7 +4,7 @@ import TeamCard from "./TeamCard";
 import CustomAlert from "./CustomAlert";
 import "./HomePage.css"; // Ensure your HomePage.css has the updated CSS
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = "https://wccbackend.onrender.com";
 
 const HomePage = () => {
   const [teamA, setTeamA] = useState({
