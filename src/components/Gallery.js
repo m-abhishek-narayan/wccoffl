@@ -33,7 +33,7 @@ function Gallery() {
 
   return (
     <Container>
-      <h1 className="text-3xl font-bold text-center mb-6">📚 Gallery Albums</h1>
+      <h2>📚 Gallery Albums</h2>
 
       {/* Horizontal Tabs for Year Selection */}
       <TabContainer>

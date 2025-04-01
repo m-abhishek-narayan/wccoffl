@@ -8,16 +8,17 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer"
 import KavaHistory from "./components/KavaHistory";
 import Home2 from "./components/Home2";
+import PlayerSection from "./components/PlayerSection";
 
 const App = () => {
     return (
         <>
-            <Navbar />
-            <div id="home"><Home /></div>
+            <div id="navbar"><Navbar /></div>
+            <div id="home"><Home2 /></div>
             <div id="profile"><Profile /></div>
             <div id="gallery"><Gallery /></div>
             <div id="awards"><Awards /></div>
-            <div id="chats"><Chat /></div>
+            {/* <div id="chats"><Chat /></div> */}
             <Footer />
         </>
     );

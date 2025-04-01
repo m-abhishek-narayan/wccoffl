@@ -577,3 +577,45 @@ ul li a {
 .mb-1 {
   margin-bottom: 1rem!important;
 }
+/* Global Styles (e.g., App.css or index.css) */
+
+/* Set the background color for the entire website */
+body {
+  background-color: #fdfeff; /* Dark background color */
+  color: rgb(4, 0, 0); /* White text color for better contrast */
+  font-family: 'Arial', sans-serif; /* Ensure consistent font across the site */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure that the container (for example, the wrapper) has a consistent background and styling */
+* {
+  box-sizing: border-box; /* Make sure everything follows the box model */
+}
+
+.home2-wrapper {
+  font-family: 'Arial', sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #2C3E50; /* Apply the same background to the container */
+  border-radius: 10px;
+  color: white;
+}
+
+/* Example Navbar styling */
+.navbar {
+  position: fixed;
+  background-color: #000000;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 10px;
+}
+
+
+
+
+

@@ -9,7 +9,6 @@
     padding: 40px 20px;
   }
   body{
-    background: linear-gradient(-45deg, #430858, #102225, #5d0409);
     background-size: 400% 400%;
     animation: gradientAnimation 12s ease infinite;
   }

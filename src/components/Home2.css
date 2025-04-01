@@ -1,0 +1,218 @@
+/* Home2.css */
+.home2-wrapper {
+    font-family: 'Arial', sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #2C3E50; /* Dark background */
+    border-radius: 10px;
+    color: white;
+}
+
+.home2-title {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ecf0f1;
+}
+
+.home2-scorecard {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.home2-teams {
+    display: flex;
+    flex-direction: column; /* Stack teams vertically */
+    gap: 20px;
+    width: 60%; /* Take up more space for teams */
+}
+
+.home2-team {
+    background-color: #34495E; /* Darker background for each team box */
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.home2-team-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #ecf0f1;
+}
+
+.home2-team-name {
+    font-size: 1rem;
+    color: #1ABC9C; /* Greenish color for team name */
+}
+
+.home2-team-points {
+    font-size: 0.9rem;
+    color: #F39C12; /* Yellowish for points */
+}
+
+.home2-score-history {
+    display: flex;
+    gap: 8px;
+}
+
+.home2-score-history span {
+    font-size: 0.9rem;
+    padding: 5px 8px;
+    border-radius: 5px;
+    width: 30px;
+    text-align: center;
+}
+
+.win {
+    background-color: #27AE60;
+    color: white;
+}
+
+.loss {
+    background-color: #E74C3C;
+    color: white;
+}
+
+.neutral {
+    background-color: #F39C12;
+    color: white;
+}
+
+.home2-award {
+    width: 35%; /* Award section remains next to the teams */
+    background-color: #34495E;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px; /* Added top margin for separation */
+}
+
+.home2-award-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ecf0f1;
+}
+
+.home2-award-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.home2-award-details p {
+    font-size: 0.8rem;
+    margin: 5px 0;
+}
+
+.home2-detail-header {
+    font-weight: bold;
+    color: #ecf0f1;
+}
+
+/* Mobile Responsiveness - Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .home2-title {
+        font-size: 1.4rem;
+    }
+
+    .home2-scorecard {
+        flex-wrap: nowrap; /* Ensure no wrapping */
+        flex-direction: row; /* Align horizontally */
+        align-items: center; /* Center align vertically */
+    }
+
+    .home2-teams {
+        width: 50%; /* Adjust the width for better layout */
+    }
+
+    .home2-award {
+        width: 45%; /* Make award section smaller */
+    }
+
+    .home2-team {
+        width: 100%; /* Make teams full width on mobile */
+        padding: 8px 12px; /* Reduced padding */
+    }
+
+    .home2-team-header {
+        font-size: 0.8rem; /* Smaller text */
+    }
+
+    .home2-score-history {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .home2-award-title {
+        font-size: 0.9rem;
+    }
+
+    .home2-award-details p {
+        font-size: 0.7rem;
+    }
+
+    .home2-award-img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .home2-wrapper {
+        padding: 10px;
+    }
+
+    .home2-title {
+        font-size: 1.2rem;
+    }
+
+    .home2-team-header {
+        font-size: 0.75rem;
+    }
+
+    .home2-team-name {
+        font-size: 0.9rem;
+    }
+
+    .home2-team-points {
+        font-size: 0.8rem;
+    }
+
+    .home2-score-history span {
+        font-size: 0.8rem;
+        padding: 4px 6px;
+    }
+
+    .home2-award-title {
+        font-size: 0.8rem;
+    }
+
+    .home2-award-details p {
+        font-size: 0.6rem;
+    }
+}
+/* Add this to your Home2.css or global stylesheet */
+
+.home2-wrapper {
+    font-family: 'Arial', sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #2C3E50;
+    border-radius: 10px;
+    color: white;
+    margin-top: 60px; /* Add this to create space between the navbar and the content */
+}
+
+/* Optional: If the navbar height is dynamic, you can use a fixed value, or dynamically set it with JavaScript */

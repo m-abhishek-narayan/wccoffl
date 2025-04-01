@@ -20,30 +20,15 @@ html, body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background: linear-gradient(135deg, #0f1114, #1a1f23, #2d3338);
   background-size: 300% 300%;
-  animation: gradientAnimation 12s ease infinite;
   color: #f7f7f7; /* Light font color for contrast */
-}
-
-/* Gradient Animation */
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 /* Page Title */
 h1 {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #ffffff;
+  color: #fbf8f8;
   margin-bottom: 20px;
   text-align: center;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
@@ -95,7 +80,7 @@ h1 {
 /* Active Player */
 .player-photo.active {
   transform: scale(1.1);
-  border: 3px solid #ff7eb3;
+  border: 3px solid #b27606;
 }
 
 /* Player Details Section (Initially Hidden) */
@@ -142,7 +127,7 @@ h1 {
 .player-details h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  color: #ff7eb3; /* Accent color */
+  color: #c49d02; /* Accent color */
 }
 
 .player-details p {
@@ -154,7 +139,7 @@ h1 {
 
 /* Close Button */
 .close-btn {
-  background: #ff7eb3;
+  background: #c68f06;
   color: #fff;
   border: none;
   padding: 5px 10px;
@@ -165,7 +150,7 @@ h1 {
 }
 
 .close-btn:hover {
-  background: #ff4f7b;
+  background: #735203;
 }
 
 /* Background Blur */
@@ -200,4 +185,21 @@ h1 {
     width: 100px;
     height: 100px;
   }
+}
+/* Profile Container - Add space at the top */
+.profile-container {
+  padding-top: 40px; /* Adjust as needed */
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Heading Styles for Player Profiles */
+h2 {
+  font-size: 1.8rem; /* Adjust to make it distinct but not too big */
+  font-weight: bold;
+  color: #061c59; /* Accent color */
+  text-align: center;
+  margin-bottom: 20px; /* Space below the heading */
+  text-transform: uppercase; /* Adds emphasis */
+  letter-spacing: 2px; /* Small letter spacing for a clean look */
 }

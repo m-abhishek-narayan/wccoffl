@@ -70,7 +70,7 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
-      <h1>Player Profiles</h1>
+      <h2>Player Profiles</h2>
 
       {/* Player Scrolling List */}
       <div className="player-scroll-wrapper" onScroll={handleScroll}>

@@ -1,36 +1,37 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 
 function Navbar() {
-  document.addEventListener("scroll", function (e) {
-    if (window.screen.width < 768 && window.scrollY > 690) {
-      const gotop = document.querySelector(".gotop");
-      gotop.classList.add("display");
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [showGoTop, setShowGoTop] = useState(false);
 
-      const nav = document.querySelector(".navbar");
+  // Handle scroll events for showing the "Go to Top" button and navbar animation
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerWidth < 768 && window.scrollY > 690) {
+        setShowGoTop(true);
+      } else if (window.innerWidth > 768 && window.scrollY > 220) {
+        setShowGoTop(true);
+      } else {
+        setShowGoTop(false);
+      }
+    };
 
-      nav.classList.add("navopened");
-    } else if (window.screen.width > 768 && window.scrollY > 220) {
-      const gotop = document.querySelector(".gotop");
-      gotop.classList.add("display");
+    // Event listener for scrolling
+    window.addEventListener("scroll", handleScroll);
 
-      const nav = document.querySelector(".navbar");
+    // Cleanup listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-      nav.classList.add("navopened");
-    } else {
-      const nav = document.querySelector(".navbar");
-      const gotop = document.querySelector(".gotop");
-      gotop.classList.remove("display");
-      nav.classList.remove("navopened");
-    }
-  });
-  function openBar() {
-    const bar = document.querySelector(".bar");
-
-    bar.classList.toggle("opened");
-  }
+  const toggleNav = () => {
+    setIsNavOpen((prev) => !prev);
+  };
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isNavOpen ? "navopened" : ""}`}>
       <div className="container">
         <div className="row">
           <h1 className="logo">
@@ -44,76 +45,55 @@ function Navbar() {
               WCC
             </Link>
           </h1>
-          <ul className="bar">
+
+          {/* Navigation Bar */}
+          <ul className={`bar ${isNavOpen ? "opened" : ""}`}>
             <li>
-              <Link
-                onClick={openBar}
-                activeClass="active"
-                spy={true}
-                smooth={true}
-                duration={1000}
-                to="home"
-              >
+              <Link onClick={toggleNav} activeClass="active" spy={true} smooth={true} duration={1000} to="home">
                 Home
               </Link>
             </li>
             <li>
-              <Link
-                onClick={openBar}
-                activeClass="active"
-                to="profile"
-                spy={true}
-                smooth={true}
-                duration={1000}
-              >
+              <Link onClick={toggleNav} activeClass="active" spy={true} smooth={true} duration={1000} to="profile">
                 Profile
               </Link>
             </li>
             <li>
-              <Link
-                onClick={openBar}
-                to="gallery"
-                spy={true}
-                smooth={true}
-                duration={1000}
-                activeClass="active"
-              >
+              <Link onClick={toggleNav} activeClass="active" spy={true} smooth={true} duration={1000} to="gallery">
                 Gallery
               </Link>
             </li>
             <li>
-              <Link
-                onClick={openBar}
-                to="awards"
-                spy={true}
-                smooth={true}
-                duration={1000}
-                activeClass="active"
-              >
+              <Link onClick={toggleNav} activeClass="active" spy={true} smooth={true} duration={1000} to="awards">
                 Kava Awards
               </Link>
             </li>
             <li>
-              <Link
-                onClick={openBar}
-                to="chats"
-                spy={true}
-                smooth={true}
-                duration={1000}
-                activeClass="active"
-              >
+              <Link onClick={toggleNav} activeClass="active" spy={true} smooth={true} duration={1000} to="chats">
                 Discussions
               </Link>
             </li>
           </ul>
-          <div className="button" onClick={openBar}>
+
+          {/* Burger Icon */}
+          <div className="button" onClick={toggleNav}>
             <div className="burger"></div>
             <div className="burger"></div>
             <div className="burger"></div>
           </div>
         </div>
       </div>
+
+      {/* "Go to Top" Button */}
+      {showGoTop && (
+        <div className="gotop">
+          <a href="#headerbg">
+            <span>↑</span>
+          </a>
+        </div>
+      )}
     </nav>
   );
 }
+
 export default Navbar;
