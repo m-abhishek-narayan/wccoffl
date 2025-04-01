@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./TeamCard.css";
 
-const API_BASE_URL = "https://wccbackend.onrender.com";
+const API_BASE_URL = "http://localhost:3000";
 
 const TeamCard = ({
   teamId,
   name,
   captain,
   points,
-  results,
+  score,
   coreTeam,
   prevSeries,
   onUpdate,
@@ -121,14 +121,13 @@ const TeamCard = ({
           <p>
             <strong>Points:</strong> {points || 0}
           </p>
-          <div className="results">
-            {results.slice(-4).map((result, index) => (
+          <div className="score">
+            {(score || []).slice(-4).map((result, index) => (
               <span
                 key={index}
                 className={`result ${
                   result === "W" ? "win" : result === "L" ? "loss" : "neutral"
                 }`}
-                
               >
                 {result}
               </span>
