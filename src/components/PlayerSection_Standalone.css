@@ -147,3 +147,10 @@
     width: 100%;
     overflow-x: hidden;
   }
+  .player-details {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: opacity 0.3s ease-in-out;
+  }
+  

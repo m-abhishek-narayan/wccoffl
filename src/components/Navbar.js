@@ -20,6 +20,7 @@ function Navbar() {
           <ul className={`bar ${isNavOpen ? "opened" : ""}`}>
             <li><Link onClick={toggleNav} to="/">Home</Link></li>
             <li><Link onClick={toggleNav} to="/teams">Series</Link></li>
+            <li><Link onClick={toggleNav} to="/profile_page">Profile Search</Link></li>
             <li><Link onClick={toggleNav} to="/awards">Kava Awards</Link></li>
             <li><Link onClick={toggleNav} to="/chat">Discussions</Link></li>
           </ul>

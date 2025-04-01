@@ -4,7 +4,7 @@ import "./Profile_Page.css"; // Profile Styles with Gradient
 import players from "../players"; // Player Data
 import "./Search.css"; // Search Styles
 
-const Profile = () => {
+const Profile_Page = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   // Filter Players Based on Search Query
