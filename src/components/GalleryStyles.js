@@ -3,7 +3,6 @@ import styled from "styled-components";
 // Main container
 export const Container = styled.div`
   text-align: center;
-  padding: 20px;
   margin-bottom: 50px;
   padding-top: 40px; /* Add space above the gallery */
 `;
