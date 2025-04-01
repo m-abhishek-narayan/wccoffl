@@ -1,15 +1,13 @@
+import Home2 from "./Home2"; // Use Home2 instead of HomePage
 import Profile from "./Profile";
 import Gallery from "./Gallery";
-import Awards from "./Awards";
-import HomePage from "./HomePage";
 
 function Main() {
   return (
     <main>
-      <HomePage />
+      <Home2 /> {/* Replacing HomePage with Home2 */}
       <Profile />
       <Gallery />
-      <Awards />
     </main>
   );
 }

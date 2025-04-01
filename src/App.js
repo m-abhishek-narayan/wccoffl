@@ -1,27 +1,25 @@
-import React, { useEffect, useState } from "react";
-import Home from "./components/HomePage"
-import Profile from "./components/Profile";
-import Gallery from "./components/Gallery";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Main from "./components/Main"; // Now contains Home2, Profile, and Gallery
 import Awards from "./components/Awards";
 import Chat from "./components/Chat";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer"
-import KavaHistory from "./components/KavaHistory";
-import Home2 from "./components/Home2";
-import PlayerSection from "./components/PlayerSection";
+import Teams from "./components/HomePage"
 
 const App = () => {
-    return (
-        <>
-            <div id="navbar"><Navbar /></div>
-            <div id="home"><Home2 /></div>
-            <div id="profile"><Profile /></div>
-            <div id="gallery"><Gallery /></div>
-            <div id="awards"><Awards /></div>
-            {/* <div id="chats"><Chat /></div> */}
-            <Footer />
-        </>
-    );
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Main />} /> {/* Home2, Profile, Gallery */}
+        <Route path="/teams" element={<Teams />} />
+        <Route path="/awards" element={<Awards />} />
+        <Route path="/chat" element={<Chat />} />
+      </Routes>
+      <Footer />
+    </Router>
+  );
 };
 
 export default App;

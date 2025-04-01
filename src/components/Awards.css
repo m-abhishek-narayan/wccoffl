@@ -1,7 +1,7 @@
 /* General Styles */
 html, body {
   margin: 0;
-  padding: 0;
+  padding-top: 0;;
   overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
@@ -13,6 +13,7 @@ html, body {
   margin-bottom: 40px;
   justify-content: center; /* Center content vertically */
   align-items: center; /* Center content horizontally */
+
 }
 
 .award-content {
@@ -44,7 +45,7 @@ html, body {
 }
 
 .modal-content {
-  background: #fff;
+  background: #545252;
   padding: 20px;
   border-radius: 8px;
   width: 90%;
@@ -129,42 +130,11 @@ html, body {
   overflow-x: auto; /* Allow horizontal scroll within the table if content is too large */
 }
 
-.table th,
-.table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
-  color: #4caf50;
-}
 
-.table th {
-  background-color: #000000;
-  color: #fff;
-}
+
 
 /* Responsive Styles */
 
-/* Hide Table on Mobile and Show Accordion */
-@media screen and (max-width: 768px) {
-  .table {
-    display: none; /* Hide table on mobile */
-  }
-
-  .accordion-wrapper {
-    display: block; /* Show accordion for mobile */
-  }
-}
-
-/* Hide Accordion on Larger Screens and Show Table */
-@media screen and (min-width: 769px) {
-  .accordion-wrapper {
-    display: none; /* Hide accordion on larger screens */
-  }
-
-  .table {
-    display: table; /* Show table for larger screens */
-  }
-}
 
 .toggle-table-btn {
   margin-bottom: 20px;
@@ -230,7 +200,7 @@ html, body {
 /* Collapsible Table Styles */
 .accordion {
   background-color: #f1f1f1;
-  color: #444;
+  color: #cf0e0e;
   cursor: pointer;
   padding: 10px;
   width: 100%;
@@ -249,7 +219,6 @@ html, body {
 
 .accordion-content {
   padding: 10px;
-  display: none;
   background-color: #f9f9f9;
   border-left: 3px solid #4caf50;
 }
@@ -263,4 +232,97 @@ html, body {
 
 .table-container.hidden {
   display: none; /* Hide when class added */
+}
+/* Ensure Table Fits in Mobile Screens */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling inside container if necessary */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  color: #082109;
+  white-space: nowrap; /* Prevent wrapping in larger screens */
+}
+.table th {
+  background-color: #000000;
+  color: #fff;
+}
+/* Responsive Table for Mobile */
+@media (max-width: 768px) {
+  .table-container {
+    overflow-x: auto; /* Enable scrolling only inside table container */
+  }
+
+  .table {
+    width: 100%;
+    min-width: 100%; /* Ensure it does not shrink below screen width */
+  }
+
+  .table th,
+  .table td {
+    padding: 8px 5px;
+    font-size: 12px;
+    white-space: normal; /* Allow text to wrap when necessary */
+  }
+}
+
+.h2{
+  text-align: center;
+}
+
+/* Centering the Kava Awards Title */
+.title-container {
+  text-align: center; /* Ensures text is centered */
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically if needed */
+  width: 100%;
+  margin-bottom: 20px; /* Adds space below the title */
+  padding-top: 45px;
+}
+
+.title-container h2 {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase; /* Optional: Makes text uppercase */
+}
+.kava-history-section h3 {
+  text-align: center;
+  margin-bottom: 20px; /* Optional: Adds spacing between title and content */
+  padding-top: 50px;
+}
+.history-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centers the content horizontally */
+  gap: 20px; /* Optional: Adds space between items */
+}
+
+.history-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px; /* Adjust based on your design */
+  margin: 10px; /* Optional: Adds space between cards */
+}
+
+.player-img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover; /* Keeps the aspect ratio intact */
+}
+.separator-line {
+  margin: 20px 0;
+  border-top: 2px solid #ccc; /* Adjust the color and thickness as needed */
+  width: 100%;
 }
