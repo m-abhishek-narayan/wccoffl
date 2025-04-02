@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Awards.css";
 import CustomAlert from "./CustomAlert";
 import kavaHistoryData from "./data";
+import { Link, useNavigate } from "react-router-dom";
 
 const PICTURE_API = "https://wccbackend.onrender.com/api";
 
@@ -31,6 +32,9 @@ const Awards = () => {
     const [successMessage, setSuccessMessage] = useState("");
     const [history, setHistory] = useState([]);
     const [latestEntry, setLatestEntry] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
 
     const fetchData = async () => {
         try {
@@ -51,6 +55,10 @@ const Awards = () => {
 
     useEffect(() => {
         fetchData();
+        const adminStatus = sessionStorage.getItem("admin") === "Y";
+        const userLoggedIn = sessionStorage.getItem("username") !== null;
+        setIsAdmin(adminStatus);
+        setIsLoggedIn(userLoggedIn);
     }, []);
 
     const toggleForm = () => {
@@ -77,9 +85,16 @@ const Awards = () => {
     };
 
     const updateAward = async (e) => {
+        if (!isAdmin) return;
         e.preventDefault();
 
-        if (!newData.winner || !newData.date || !newData.position || !newData.team || !imageFile) {
+        if (
+            !newData.winner ||
+            !newData.date ||
+            !newData.position ||
+            !newData.team ||
+            !imageFile
+        ) {
             setMessage("Please fill all fields before updating!");
             return;
         }
@@ -150,11 +165,87 @@ const Awards = () => {
                         ) : (
                             <p>No recent award data available.</p>
                         )}
+                        {isAdmin ? (
                         <button className="update-btn" onClick={toggleForm}>
                             Update Kava of the Week
-                        </button>
+                        </button>) 
+                        : isLoggedIn ? 
+                        (
+                        <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
+                        ) 
+                        : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Kava Of the Week</button>)}
                     </div>
                 </div>
+                {/* Form as a Pop-up Modal */}
+                {showForm && (
+                    <div className="modal-overlay">
+                        <div className="modal-content">
+                            <h3 className="form-title">📝 Update Kava Award</h3>
+                            <form onSubmit={updateAward} className="update-form">
+                                <input
+                                    type="file"
+                                    name="img"
+                                    accept="image/*"
+                                    onChange={handleFileChange}
+                                    className="form-control mb-3"
+                                    required
+                                />
+                                {imagePreview && (
+                                    <img
+                                        src={imagePreview}
+                                        alt="Preview"
+                                        className="image-preview"
+                                    />
+                                )}
+                                <input
+                                    type="text"
+                                    name="winner"
+                                    placeholder="Enter winner name"
+                                    value={newData.winner}
+                                    onChange={handleChange}
+                                    className="form-control mb-3"
+                                    required
+                                />
+                                <input
+                                    type="date"
+                                    name="date"
+                                    value={newData.date}
+                                    onChange={handleChange}
+                                    className="form-control mb-3"
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    name="position"
+                                    placeholder="Enter position"
+                                    value={newData.position}
+                                    onChange={handleChange}
+                                    className="form-control mb-3"
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    name="team"
+                                    placeholder="Enter team name"
+                                    value={newData.team}
+                                    onChange={handleChange}
+                                    className="form-control mb-3"
+                                    required
+                                />
+                                <button type="submit" className="update-btn">
+                                    Update Award
+                                </button>
+                                <button
+                                    type="button"
+                                    className="cancel-btn"
+                                    onClick={toggleForm}
+                                >
+                                    Cancel Update
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                )}
             </div>
             {/* Collapsible Awards Table */}
             <div className="history-section">
