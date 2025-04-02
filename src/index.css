@@ -122,14 +122,10 @@ code {
 }
 .navbar .logo {
   transition: all 0.2s;
-
-  align-items: center;
-  align-content: center;
   color: rgb(243, 243, 243);
   letter-spacing: 2px;
   font-weight: 400;
   margin: 0;
-  font-size: 28px;
   padding-top: 10px;
 }
 .navbar ul { 
@@ -258,8 +254,8 @@ footer .col-md-3 {
 footer .logo {
   transition: all 0.2s;
   margin-bottom: 0;
-  align-items: center;
-  align-content: center;
+  align-items: left;
+  align-content: left;
   color: rgb(243, 243, 243);
   letter-spacing: 2px;
   font-weight: 400;
@@ -499,6 +495,7 @@ ul li a {
   }
   .navopened .burger {
     background-color: #fafafa!important;
+    font-size: 12px !important;
   }
   .container {
     width: auto;
@@ -529,6 +526,7 @@ ul li a {
 
   .burger {
     background-color: #fafafa;
+    font-size: 12 !important;
   }
   .navbar {
     backdrop-filter: none;
@@ -581,7 +579,7 @@ ul li a {
 
 /* Set the background color for the entire website */
 body {
-  background-color: #fdfeff; /* Dark background color */
+  background-color: #070a0d; /* Dark background color */
   color: rgb(4, 0, 0); /* White text color for better contrast */
   font-family: 'Arial', sans-serif; /* Ensure consistent font across the site */
   margin: 0;
@@ -636,5 +634,8 @@ body {
   text-shadow: 2px 2px 4px rgba(194, 185, 185, 0.5); /* Adds a soft black shadow */
 }
 
-
-
+.logo {
+  font-size: 12px /* Reduce the font size */ !important;
+  text-align: left;
+  margin-left: 0; /* Align to the left */
+}

@@ -1,17 +1,44 @@
+/* Container for Team Cards */
+.team-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 15px;
+  flex-wrap: nowrap; /* Prevents wrapping */
+  overflow-x: auto; /* Enables horizontal scrolling if needed */
+  white-space: nowrap; /* Prevents text wrapping */
+  padding: 10px;
+}
+
 /* Team Card with Glow */
 .team-card {
   border-radius: 12px;
   padding: 20px;
-  width: 300px;
+  width: 280px; /* Fixed width to fit multiple cards side by side */
   background: linear-gradient(145deg, #1f1f1f, #292929);
   color: #fff;
   box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
   transition: transform 0.3s ease-in-out;
-  margin: 20px auto;
+  flex-shrink: 0; /* Prevents shrinking */
+  display: inline-block; /* Keeps them inline */
 }
 
 .team-card:hover {
   transform: scale(1.05);
+}
+
+/* Ensure Side-by-Side Even on Mobile */
+@media (max-width: 768px) {
+  .team-container {
+    flex-wrap: nowrap; /* Ensures no wrapping */
+    overflow-x: auto; /* Allows scrolling on small screens */
+    padding: 10px 5px;
+  }
+
+  .team-card {
+    width: 260px; /* Slightly smaller on mobile for better fit */
+    min-width: 250px;
+  }
 }
 
 /* Title and Icon */
@@ -20,7 +47,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 15px; /* More spacing */
 }
 
 /* Neon Edit Icon */
@@ -36,12 +63,21 @@ h2 {
   transform: rotate(360deg);
 }
 
+/* Score Section */
+.score {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px; /* Increased spacing */
+  text-align: center;
+}
+
 /* Results Box with Neon Glow */
 .results {
-  margin-top: 12px;
+  margin-top: 20px; /* More spacing */
+  margin-bottom: 20px; /* More spacing */
   display: flex;
   justify-content: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .results span {
@@ -49,9 +85,8 @@ h2 {
 }
 
 .result {
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 6px;
-  margin-right: 4px;
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
@@ -72,20 +107,23 @@ h2 {
   text-shadow: 0 0 12px #ff4d4d;
   box-shadow: 0 0 15px #ff4d4d;
 }
+
 .neutral {
   background: #312e2e;
   color: #ffffff;
   text-shadow: 0 0 12px #fffcfc;
   box-shadow: 0 0 15px #3f3a3a;
 }
+
 /* Core Team List */
 ul {
   list-style: none;
   padding: 0;
+  margin-top: 20px; /* More spacing before core team */
 }
 
 li {
-  padding: 5px 0;
+  padding: 8px 0; /* Increased padding for better spacing */
 }
 
 /* Edit Mode Wrapper */
@@ -94,7 +132,7 @@ li {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  margin-top: 12px;
+  margin-top: 20px; /* More spacing */
 }
 
 /* Input Fields */
@@ -150,6 +188,7 @@ li {
   background: linear-gradient(135deg, #ff0000, #ff4d4d);
   box-shadow: 0 0 15px #ff4d4d;
 }
+
 /* Labels */
 label {
   font-size: 14px;
@@ -159,6 +198,7 @@ label {
   text-align: left;
   width: 100%;
 }
+
 .error-msg {
   color: #ff4d4d;
   margin-top: 10px;

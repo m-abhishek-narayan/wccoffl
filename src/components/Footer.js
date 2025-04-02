@@ -7,17 +7,8 @@ function Footer() {
     <footer className="footer">
       <div className="container">
         <div className="row">
-          {/* Left Side Content */}
-          <div className="side1">
-          <h1 className="logo">
-            <Link to="/" style={{ cursor: "pointer" }}>WCC</Link>
-          </h1>
-            <p className="footer-text">Thank you for Visiting</p>
-          </div>
-
           {/* Right Side Content */}
           <div className="side2">
-            <p className="footer-title">Important Links</p>
             <ul className="footer-links">
               <li>
                 <Link spy={true} smooth={true} duration={1000} to="/">

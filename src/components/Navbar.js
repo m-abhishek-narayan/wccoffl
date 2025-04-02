@@ -31,7 +31,7 @@ function Navbar() {
       <div className="container">
         <div className="row">
           <h1 className="logo">
-            <Link to="/" style={{ cursor: "pointer" }}>WCC</Link>
+            <Link to="/" style={{ cursor: "pointer" }}>WCC-The Kavaliers Den</Link>
           </h1>
 
           <ul className={`bar ${isNavOpen ? "opened" : ""}`}>
@@ -43,7 +43,7 @@ function Navbar() {
               <>
                 <li><Link onClick={() => setIsNavOpen(false)} to="/chat">Discussions</Link></li>
                 <li><button onClick={handleLogout} className="logout-button">Logout ({username})</button></li>
-              </>
+              </> 
             ) : (
               <li><Link onClick={() => setIsNavOpen(false)} to="/login">Login</Link></li>
             )}
