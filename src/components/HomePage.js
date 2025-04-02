@@ -10,7 +10,7 @@ const API_BASE_URL = "https://wccbackend.onrender.com";
 const HomePage = () => {
   const [teamA, setTeamA] = useState({
     teamId: "team1",
-    name: "Team A",
+    teamName: "Team A",
     captain: "Unknown",
     points: 0,
     results: [],
@@ -20,7 +20,7 @@ const HomePage = () => {
 
   const [teamB, setTeamB] = useState({
     teamId: "team2",
-    name: "Team B",
+    teamName: "Team B",
     captain: "Unknown",
     points: 0,
     results: [],
@@ -182,7 +182,7 @@ const HomePage = () => {
       )}
       <div className="team-container">
         <TeamCard {...teamA} onUpdate={fetchTeams} />
-        {isAdmin ? (
+        {isAdmin && (
         <div className="center-controls">
           {!showWinButtons ? (
             <button
@@ -203,9 +203,11 @@ const HomePage = () => {
             </>
           )}
         </div>
-        ): isLoggedIn ? (
-          <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
-        ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)}
+        )
+        // : isLoggedIn ? (
+        //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
+        // ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)
+        }
         <TeamCard {...teamB} onUpdate={fetchTeams} />
       </div>
       {loading && <p>Loading series history...</p>}
@@ -220,6 +222,7 @@ const HomePage = () => {
               <p>Points: {series?.points?.teamA || 0} 🆚 {series?.points?.teamB || 0}</p>
               <p><strong>🏆 Winner:</strong> {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}</p>
               <p><strong>📅 Period:</strong> {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}</p>
+              <p><strong>📊 Score:</strong> {series?.score?.teamA?.slice(-4).join(", ") || "No Data"} 🆚 {series?.score?.teamB?.slice(-4).join(", ") || "No Data"}</p>
             </div>
           ))
         )}

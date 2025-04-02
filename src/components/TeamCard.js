@@ -6,7 +6,7 @@ const API_BASE_URL = "https://wccbackend.onrender.com";
 
 const TeamCard = ({
   teamId,
-  name,
+  teamName,
   captain,
   points,
   score,
@@ -15,20 +15,30 @@ const TeamCard = ({
   onUpdate,
 }) => {
   const [editMode, setEditMode] = useState(false);
-  const [editedName, setEditedName] = useState(name);
+  const [editedName, setEditedName] = useState(teamName);
   const [editedCaptain, setEditedCaptain] = useState(captain);
   const [editedCoreTeam, setEditedCoreTeam] = useState(coreTeam.join(", "));
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
 
   // Reset form values when entering edit mode
   useEffect(() => {
     if (editMode) {
-      setEditedName(name);
+      setEditedName(teamName);
       setEditedCaptain(captain);
       setEditedCoreTeam(coreTeam.join(", "));
     }
-  }, [editMode, name, captain, coreTeam]);
+  }, [editMode, teamName, captain, coreTeam]);
+
+  useEffect(() => {
+      const adminStatus = sessionStorage.getItem("admin") === "Y";
+      const userLoggedIn = sessionStorage.getItem("username") !== null;
+      setIsAdmin(adminStatus);
+      setIsLoggedIn(userLoggedIn);
+    }, []);
+  
 
   const validateInputs = () => {
     if (!editedName.trim()) {
@@ -106,14 +116,14 @@ const TeamCard = ({
       ) : (
         <>
           <h2>
-            {name || "N/A"}{" "}
-            <span
+            {teamName || "N/A"}{" "}
+            {isAdmin && (<span
               className="edit-icon"
               onClick={() => setEditMode(true)}
               title="Edit Team Info"
             >
               ⚡️
-            </span>
+            </span>)}
           </h2>
           <p>
             <strong>Captain:</strong> {captain || "N/A"}
