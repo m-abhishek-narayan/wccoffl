@@ -81,6 +81,7 @@ const Home2 = () => {
             <div className="home2-scorecard">
                 {/* Make home2-teams clickable */}
                 <div className="home2-teams" onClick={handleTeamClick} style={{ cursor: "pointer" }}>
+                    <div>CURRENT SERIES SCORE</div>
                     <div className="home2-team">
                         <div className="home2-team-header">
                             <span className="home2-team-name">{teams?.team1?.teamName || "N/A"}</span>

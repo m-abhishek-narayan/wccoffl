@@ -11,7 +11,7 @@
 
 .home2-title {
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.5rem; /* Reduced from 1.6rem */
     font-weight: bold;
     margin-bottom: 20px;
     color: #ecf0f1;
@@ -34,7 +34,7 @@
 .home2-team {
     background-color: #34495E; /* Darker background for each team box */
     border-radius: 8px;
-    padding: 10px 15px;
+    padding: 9px 14px; /* Slightly reduced padding */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
@@ -44,18 +44,18 @@
 .home2-team-header {
     display: flex;
     justify-content: space-between;
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Reduced from 0.9rem */
     font-weight: bold;
     color: #ecf0f1;
 }
 
 .home2-team-name {
-    font-size: 1rem;
+    font-size: 0.95rem; /* Reduced from 1rem */
     color: #1ABC9C; /* Greenish color for team name */
 }
 
 .home2-team-points {
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Reduced from 0.9rem */
     color: #F39C12; /* Yellowish for points */
 }
 
@@ -65,10 +65,10 @@
 }
 
 .home2-score-history span {
-    font-size: 0.9rem;
-    padding: 5px 8px;
+    font-size: 0.85rem; /* Reduced from 0.9rem */
+    padding: 5px 7px; /* Slightly reduced padding */
     border-radius: 5px;
-    width: 30px;
+    width: 28px; /* Slightly reduced width */
     text-align: center;
 }
 
@@ -83,23 +83,25 @@
 }
 
 .neutral {
-    background-color: #F39C12;
+    background: linear-gradient(135deg, #F39C12, #D68910); /* Warm golden gradient */
     color: white;
+    border: 1px solid #B9770E;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .home2-award {
     width: 35%; /* Award section remains next to the teams */
     background-color: #34495E;
     border-radius: 8px;
-    padding: 15px;
+    padding: 14px; /* Slightly reduced padding */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin-top: 10px; /* Added top margin for separation */
 }
 
 .home2-award-title {
-    font-size: 1rem;
+    font-size: 0.95rem; /* Reduced from 1rem */
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     color: #ecf0f1;
 }
 
@@ -111,7 +113,7 @@
 }
 
 .home2-award-details p {
-    font-size: 0.8rem;
+    font-size: 0.75rem; /* Reduced from 0.8rem */
     margin: 5px 0;
 }
 
@@ -123,7 +125,7 @@
 /* Mobile Responsiveness - Adjustments for smaller screens */
 @media (max-width: 768px) {
     .home2-title {
-        font-size: 1.4rem;
+        font-size: 1.35rem; /* Reduced from 1.4rem */
     }
 
     .home2-scorecard {
@@ -142,11 +144,11 @@
 
     .home2-team {
         width: 100%; /* Make teams full width on mobile */
-        padding: 8px 12px; /* Reduced padding */
+        padding: 7px 11px; /* Reduced padding */
     }
 
     .home2-team-header {
-        font-size: 0.8rem; /* Smaller text */
+        font-size: 0.75rem; /* Reduced from 0.8rem */
     }
 
     .home2-score-history {
@@ -155,11 +157,11 @@
     }
 
     .home2-award-title {
-        font-size: 0.9rem;
+        font-size: 0.85rem; /* Reduced from 0.9rem */
     }
 
     .home2-award-details p {
-        font-size: 0.7rem;
+        font-size: 0.65rem; /* Reduced from 0.7rem */
     }
 
     .home2-award-img {
@@ -174,34 +176,35 @@
     }
 
     .home2-title {
-        font-size: 1.2rem;
+        font-size: 1.15rem; /* Reduced from 1.2rem */
     }
 
     .home2-team-header {
-        font-size: 0.75rem;
+        font-size: 0.7rem; /* Reduced from 0.75rem */
     }
 
     .home2-team-name {
-        font-size: 0.9rem;
+        font-size: 0.85rem; /* Reduced from 0.9rem */
     }
 
     .home2-team-points {
-        font-size: 0.8rem;
+        font-size: 0.75rem; /* Reduced from 0.8rem */
     }
 
     .home2-score-history span {
-        font-size: 0.8rem;
-        padding: 4px 6px;
+        font-size: 0.75rem; /* Reduced from 0.8rem */
+        padding: 4px 5px; /* Slightly reduced padding */
     }
 
     .home2-award-title {
-        font-size: 0.8rem;
+        font-size: 0.75rem; /* Reduced from 0.8rem */
     }
 
     .home2-award-details p {
-        font-size: 0.6rem;
+        font-size: 0.55rem; /* Reduced from 0.6rem */
     }
 }
+
 /* Add this to your Home2.css or global stylesheet */
 
 .home2-wrapper {
