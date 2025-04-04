@@ -1,0 +1,143 @@
+/* loginregister.css */
+
+.auth-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(30, 29, 29, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.auth-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(143, 142, 142, 0.25);
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    animation: fadeInScale 0.3s ease-in-out;
+    box-sizing: border-box;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.auth-title {
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.auth-button {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-button:hover {
+    background-color: #0056b3;
+}
+
+.auth-toggle {
+    text-align: center;
+    margin-top: 1rem;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.9rem;
+}
+
+.close-button {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+}
+
+.close-button:hover {
+    color: red;
+}
+
+/* ✅ Small screens (mobile) */
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 1.25rem;
+        border-radius: 0.75rem;
+    }
+
+    .auth-title {
+        font-size: 1.5rem;
+    }
+
+    .auth-input,
+    .auth-button {
+        font-size: 0.95rem;
+        padding: 0.65rem;
+    }
+
+    .auth-toggle {
+        font-size: 0.85rem;
+    }
+
+    .close-button {
+        font-size: 1.3rem;
+    }
+}
+
+/* ✅ Large screens (laptops/desktops) */
+@media (min-width: 1024px) {
+    .auth-container {
+        padding: 2.5rem;
+        max-width: 450px;
+    }
+
+    .auth-title {
+        font-size: 2rem;
+    }
+
+    .auth-button {
+        font-size: 1.1rem;
+    }
+}
