@@ -44,10 +44,16 @@
 /* Title and Icon */
 h2 {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* Stack team name on multiple lines */
+  align-items: center; /* Center align */
+  justify-content: center;
+  text-align: center;
   font-size: 24px;
-  margin-bottom: 15px; /* More spacing */
+  margin-bottom: 15px;
+  position: relative;
+  word-break: break-word; /* Ensure long words break properly */
+  white-space: pre-line; /* Allow natural line breaks */
+  max-width: 100%;
 }
 
 /* Neon Edit Icon */
@@ -56,6 +62,10 @@ h2 {
   font-size: 20px;
   color: #00f7ff;
   transition: color 0.3s ease, transform 0.3s ease;
+  position: absolute;
+  right: 10px; /* Adjust position */
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .edit-icon:hover {

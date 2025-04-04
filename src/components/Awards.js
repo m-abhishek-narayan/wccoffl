@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Awards.css";
+import "./award.css";
 import CustomAlert from "./CustomAlert";
 import kavaHistoryData from "./data";
 import { Link, useNavigate } from "react-router-dom";
@@ -63,6 +63,14 @@ const Awards = () => {
 
     const toggleForm = () => {
         setShowForm(!showForm);
+        setNewData({
+            img: "",
+            winner: "",
+            date: "",
+            position: "",
+            team: "",
+        });
+        setImagePreview(null);
     };
 
     const toggleTable = () => {
@@ -138,48 +146,45 @@ const Awards = () => {
     return (
         <>
             {/* Main Title */}
-            <div className="title-container">
+            <div className="awards-container">
                 <h2>🏆 Kava Awards</h2>
-            </div>
-
-            {/* Award Section */}
-            <div className="award-container">
-                <div className="award-section">
-                    <div className="award-content">
-                        <img
-                            src={awardData.img || "/img/kava-award.png"}
-                            alt="Kava Award"
-                            className="award-img"
-                        />
-                        <h3 className="sub-title"> Kava Award of the Week</h3>
-                    </div>
-
-                    <div className="award-details">
-                        {latestEntry ? (
-                            <>
-                                <p><strong>Winner:</strong> {latestEntry.winner}</p>
-                                <p><strong>Date:</strong> {latestEntry.date}</p>
-                                <p><strong>Position:</strong> {latestEntry.position}</p>
-                                <p><strong>Team:</strong> {latestEntry.team}</p>
-                            </>
-                        ) : (
-                            <p>No recent award data available.</p>
-                        )}
-                        {isAdmin ? (
-                        <button className="update-btn" onClick={toggleForm}>
-                            Update Kava of the Week
-                        </button>) 
-                        : isLoggedIn ? 
-                        (
-                        <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
-                        ) 
-                        : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Kava Of the Week</button>)}
+            
+                {/* Award Section */}
+                <div className="award-container">
+                    <div className="award-section">
+                        <div className="award-content">
+                            <img
+                                src={awardData.img || "/img/kava-award.png"}
+                                alt="Kava Award"
+                                className="award-img responsive-img"
+                            />
+                            <h3 className="sub-title">Kava Award of the Week</h3>
+                        </div>
+    
+                        <div className="award-details">
+                            {latestEntry ? (
+                                <>
+                                    <p><strong>Winner:</strong> {latestEntry.winner}</p>
+                                    <p><strong>Date:</strong> {latestEntry.date}</p>
+                                    <p><strong>Position:</strong> {latestEntry.position}</p>
+                                    <p><strong>Team:</strong> {latestEntry.team}</p>
+                                </>
+                            ) : (
+                                <p>No recent award data available.</p>
+                            )}
+                            {isAdmin && (
+                                <button className="update-btn" onClick={toggleForm}>
+                                    Update Kava of the Week
+                                </button>
+                            )}
+                        </div>
                     </div>
                 </div>
+    
                 {/* Form as a Pop-up Modal */}
                 {showForm && (
                     <div className="modal-overlay">
-                        <div className="modal-content">
+                        <div className="modal-content responsive-modal">
                             <h3 className="form-title">📝 Update Kava Award</h3>
                             <form onSubmit={updateAward} className="update-form">
                                 <input
@@ -187,14 +192,14 @@ const Awards = () => {
                                     name="img"
                                     accept="image/*"
                                     onChange={handleFileChange}
-                                    className="form-control mb-3"
+                                    className="form-control"
                                     required
                                 />
                                 {imagePreview && (
                                     <img
                                         src={imagePreview}
                                         alt="Preview"
-                                        className="image-preview"
+                                        className="image-preview responsive-img"
                                     />
                                 )}
                                 <input
@@ -203,7 +208,7 @@ const Awards = () => {
                                     placeholder="Enter winner name"
                                     value={newData.winner}
                                     onChange={handleChange}
-                                    className="form-control mb-3"
+                                    className="form-control"
                                     required
                                 />
                                 <input
@@ -211,7 +216,7 @@ const Awards = () => {
                                     name="date"
                                     value={newData.date}
                                     onChange={handleChange}
-                                    className="form-control mb-3"
+                                    className="form-control"
                                     required
                                 />
                                 <input
@@ -220,7 +225,7 @@ const Awards = () => {
                                     placeholder="Enter position"
                                     value={newData.position}
                                     onChange={handleChange}
-                                    className="form-control mb-3"
+                                    className="form-control"
                                     required
                                 />
                                 <input
@@ -229,7 +234,7 @@ const Awards = () => {
                                     placeholder="Enter team name"
                                     value={newData.team}
                                     onChange={handleChange}
-                                    className="form-control mb-3"
+                                    className="form-control"
                                     required
                                 />
                                 <button type="submit" className="update-btn">
@@ -246,67 +251,66 @@ const Awards = () => {
                         </div>
                     </div>
                 )}
-            </div>
-            {/* Collapsible Awards Table */}
-            <div className="history-section">
-                <h3 onClick={toggleTable} className="collapsible-header">
-                    📚 Kava Awards Current Series {showTable ? "▼" : "▶"}
-                </h3>
-
-                {showTable && (
-                    <div className="table-container">
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th>Winner</th>
-                                    <th>Date</th>
-                                    <th>Position</th>
-                                    <th>Team</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {history.length > 0 ? (
-                                    history.map((item, index) => (
-                                        <tr key={index}>
-                                            <td>{item.winner}</td>
-                                            <td>{item.date}</td>
-                                            <td>{item.position}</td>
-                                            <td>{item.team}</td>
-                                        </tr>
-                                    ))
-                                ) : (
+    
+                {/* Collapsible Awards Table */}
+                <div className="history-section">
+                    <h3 onClick={toggleTable} className="collapsible-header">
+                        📚 Kava Awards Current Series {showTable ? "▼" : "▶"}
+                    </h3>
+                    {showTable && (
+                        <div className="table-container responsive-table">
+                            <table className="table">
+                                <thead>
                                     <tr>
-                                        <td colSpan="4" style={{ textAlign: "center" }}>
-                                            No records found
-                                        </td>
+                                        <th>Winner</th>
+                                        <th>Date</th>
+                                        <th>Position</th>
+                                        <th>Team</th>
                                     </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
-            </div>
-
-            {/* Stylish Separator */}
-            <div className="separator-line"></div>
-
-            {/* History Section */}
-            <div className="kava-history-section">
-                <h3>🏅 History of Kava Awards (2017-2024)</h3>
-                <div className="history-container">
-                    {kavaHistoryData.map((item, index) => (
-                        <div key={index} className="history-card">
-                            <img src={item.img} alt={item.winner} className="player-img" />
-                            <div className="history-info">
-                                <p><strong>{item.year}</strong></p>
-                                <p>{item.winner}</p>
-                                <p>Matches: {item.matches} | Kavas: {item.kavas} | Win %: {item.percent}</p>
-                            </div>
+                                </thead>
+                                <tbody>
+                                    {history.length > 0 ? (
+                                        history.map((item, index) => (
+                                            <tr key={index}>
+                                                <td>{item.winner}</td>
+                                                <td>{item.date}</td>
+                                                <td>{item.position}</td>
+                                                <td>{item.team}</td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="4" style={{ textAlign: "center" }}>
+                                                No records found
+                                            </td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
                         </div>
-                    ))}
+                    )}
+                </div>
+    
+                {/* Stylish Separator */}
+                <div className="separator-line"></div>
+    
+                {/* History Section */}
+                <div className="kava-history-section">
+                    <h3>🏅 History of Kava Awards (2017-2024)</h3>
+                    <div className="history-container responsive-grid">
+                        {kavaHistoryData.map((item, index) => (
+                            <div key={index} className="history-card">
+                                <img src={item.img} alt={item.winner} className="player-img responsive-img" />
+                                <div className="history-info">
+                                    <p><strong>{item.year}</strong></p>
+                                    <p>{item.winner}</p>
+                                    <p>Matches: {item.matches} | Kavas: {item.kavas} | Win %: {item.percent}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
-
         </>
     );
 };

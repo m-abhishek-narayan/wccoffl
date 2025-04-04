@@ -116,7 +116,13 @@ const TeamCard = ({
       ) : (
         <>
           <h2>
-            {teamName || "N/A"}{" "}
+          {teamName.split(" ").length > 1 ? (
+            <>
+              {teamName.split(" ")[0]} <br /> {teamName.split(" ").slice(1).join(" ")}
+            </>
+            ) : (
+            teamName
+            )}
             {isAdmin && (<span
               className="edit-icon"
               onClick={() => setEditMode(true)}

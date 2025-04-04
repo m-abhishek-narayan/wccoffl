@@ -210,21 +210,35 @@ const HomePage = () => {
         }
         <TeamCard {...teamB} onUpdate={fetchTeams} />
       </div>
-      {loading && <p>Loading series history...</p>}
-      <div className="match-coverage">
+      <div className="match-coverage-container">
+        {loading && <p>Loading series history...</p>}
         {seriesHistory.length === 0 ? (
           <p>No series history found.</p>
         ) : (
-          seriesHistory.map((series, index) => (
-            <div key={index} className="match-entry">
-              <h3>{series.teamA} 🆚 {series.teamB}</h3>
-              <p>Captain: {series?.captain?.teamA || "Unknown"} 🆚 {series?.captain?.teamB || "Unknown"}</p>
-              <p>Points: {series?.points?.teamA || 0} 🆚 {series?.points?.teamB || 0}</p>
-              <p><strong>🏆 Winner:</strong> {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}</p>
-              <p><strong>📅 Period:</strong> {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}</p>
-              <p><strong>📊 Score:</strong> {series?.score?.teamA?.slice(-4).join(", ") || "No Data"} 🆚 {series?.score?.teamB?.slice(-4).join(", ") || "No Data"}</p>
+          <>
+            <div className="match-coverage-top10">
+              {seriesHistory.slice(0, 10).map((series, index) => (
+                <div key={index} className="match-entry">
+                  <h3>{series.teamA} 🆚 {series.teamB}</h3>
+                  <p><strong>Captain:</strong> {series?.captain?.teamA || "Unknown"} 🆚 {series?.captain?.teamB || "Unknown"}</p>
+                  <p><strong>🏆 Winner:</strong> {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}</p>
+                  <p><strong>📅 Period:</strong> {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}</p>
+                  <p><strong>📊 Score:</strong> {series?.score?.teamA?.slice(-4).join(", ") || "No Data"} 🆚 {series?.score?.teamB?.slice(-4).join(", ") || "No Data"}</p>
+                </div>
+              ))}
             </div>
-          ))
+            <div className="match-coverage-scroll">
+              {seriesHistory.slice(10).map((series, index) => (
+                <div key={index} className="match-entry">
+                  <h3>{series.teamA} 🆚 {series.teamB}</h3>
+                  <p><strong>Captain:</strong> {series?.captain?.teamA || "Unknown"} 🆚 {series?.captain?.teamB || "Unknown"}</p>
+                  <p><strong>🏆 Winner:</strong> {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}</p>
+                  <p><strong>📅 Period:</strong> {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}</p>
+            <p><strong>📊 Score:</strong> {series?.score?.teamA?.slice(-4).join(", ") || "No Data"} 🆚 {series?.score?.teamB?.slice(-4).join(", ") || "No Data"}</p>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </div>
     </div>
