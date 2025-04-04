@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./loginregister.css"
 
-const API_URL = "http://localhost:3000/api/auth";
+const API_URL = "https://wccbackend.onrender.com/api/auth";
 
 const LoginRegister = ({ onClose }) => {
     const [email, setEmail] = useState("");
