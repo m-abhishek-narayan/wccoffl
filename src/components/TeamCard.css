@@ -53,7 +53,7 @@
     transform: scale(1.10);
   }
   .team-card h2{
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 
@@ -73,8 +73,8 @@ h2 {
 
 .edit-icon {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 01px;
+  right: 01px;
   cursor: pointer;
   font-size: 20px;
   color: #00f7ff;

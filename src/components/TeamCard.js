@@ -42,8 +42,9 @@ const TeamCard = ({
   
 
   const validateInputs = () => {
-    if (!editedName.trim()) {
-      setErrorMessage("Team Name cannot be empty!");
+    const teamWords = editedName.trim().split(/\s+/);
+    if (teamWords.length !== 2 || teamWords.some(word => word.length > 9)) {
+      setErrorMessage("Team Name must have exactly two words, each max 9 characters!");
       return false;
     }
     if (!editedCaptain.trim()) {
