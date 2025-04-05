@@ -49,10 +49,90 @@
 
 .team-container {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 40px;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 10px;
+  flex-wrap: nowrap;
+  padding: 10px;
+  width: 100%;
+}
+
+.team-card {
+  flex: 1 1 45%;
+  min-width: 0;
+  background: linear-gradient(135deg, #243b55, #141e30);
+  border-radius: 20px;
+  padding: 16px;
+  text-align: center;
+  color: #fff;
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+  transform: scale(1.10);
+}
+
+@keyframes glow-green {
+  from {
+    box-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50;
+  }
+  to {
+    box-shadow: 0 0 20px #4caf50, 0 0 40px #4caf50;
+  }
+}
+
+@keyframes glow-red {
+  from {
+    box-shadow: 0 0 10px #f44336, 0 0 20px #f44336;
+  }
+  to {
+    box-shadow: 0 0 20px #f44336, 0 0 40px #f44336;
+  }
+}
+
+/* Button Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Alert Styles */
+.alert-box {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4caf50;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.alert-box.error {
+  background-color: #f44336;
+}
+
+.alert-box button {
+  background-color: #fff;
+  color: #4caf50;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.alert-box button:hover {
+  background-color: #f1f1f1;
 }
 
 .center-controls {
@@ -89,7 +169,7 @@ button:disabled { background-color: #b0b0b0; cursor: not-allowed; opacity: 0.6; 
   padding: 8px 16px;
   border-radius: 20px;
 }
-.cancel-cross{
+.cancel-cross {
   cursor: pointer;
 }
 
@@ -101,15 +181,7 @@ button:disabled { background-color: #b0b0b0; cursor: not-allowed; opacity: 0.6; 
   gap: 15px;
   justify-content: center;
   align-items: center;
-}
-
-.team-card {
-  width: 300px;
-  background: linear-gradient(135deg, #243b55, #141e30);
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-  color: #fff;
+  flex-wrap: wrap;
 }
 
 .results span {
@@ -184,10 +256,61 @@ button:disabled { background-color: #b0b0b0; cursor: not-allowed; opacity: 0.6; 
   flex: 0 0 auto;
 }
 
+.admin-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  gap: 16px;
+  z-index: 5;
+}
+
+.post-match-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
-  .team-container { flex-direction: column; gap: 20px; }
-  .win-btns-container { flex-direction: column; }
-  .match-coverage { padding: 10px; }
+  .team-container {
+    padding: 10px;
+  }
+    .team-card {
+      flex: 1 1 50%;
+      padding: 13px;
+    }
+    .team-card:hover {
+      transform: scale(1.10);
+    }
+
+  .win-btns-container {
+    flex-direction: column;
+  }
+
+  .admin-controls,
+  .post-match-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-container {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .team-card {
+    flex: 1 1 48%;
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .team-card:hover {
+    transform: scale(1.10);
+  }
 }
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 

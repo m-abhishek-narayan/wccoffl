@@ -186,34 +186,34 @@ const HomePage = () => {
       )}
       <div className="team-container">
         <TeamCard {...teamA} onUpdate={fetchTeams} />
-        {isAdmin && (
-          <div className="center-controls">
-            {!showWinButtons ? (
-              <button
-                className="update-score-btn"
-                onClick={() => setShowWinButtons(true)}
-                disabled={loading}
-              >
-                Update Score
-              </button>
-            ) : (<div className="win-btns-container">
-              <button className="match-btn win-btn" onClick={() => handleWin("A")} disabled={loading}>Team A Wins</button>
-              <button className="match-btn loss-btn" onClick={() => handleWin("B")} disabled={loading}>Team B Wins</button>
-              <div className="cancel-cross" onClick={() => setShowWinButtons(false)}>❌</div></div>)}
-            {!showWinButtons && (
-              <>
-                <button className="reset-btn" onClick={handleResetLatestScore} disabled={!lastWinner || loading}>Revert Last Result</button>
-                <button className="end-btn" onClick={handleEndSeries} disabled={loading}>End-Series</button>
-              </>
-            )}
-          </div>
+        <TeamCard {...teamB} onUpdate={fetchTeams} />
+      </div>
+      {isAdmin && (
+        <div className="admin-controls">
+          {!showWinButtons ? (
+            <button
+              className="update-score-btn"
+              onClick={() => setShowWinButtons(true)}
+              disabled={loading}
+            >
+              Update Score
+            </button>
+          ) :(<div className="win-btns-container">
+          <button className="match-btn win-btn" onClick={() => handleWin("A")} disabled={loading}>Team A Wins</button>
+          <button className="match-btn loss-btn" onClick={() => handleWin("B")} disabled={loading}>Team B Wins</button>
+          <div className="cancel-cross" onClick={() => setShowWinButtons(false)}>❌</div></div>)}
+          {!showWinButtons && (
+            <>
+              <button className="reset-btn" onClick={handleResetLatestScore} disabled={!lastWinner || loading}>Revert Last Result</button>
+              <button className="end-btn" onClick={handleEndSeries} disabled={loading}>End-Series</button>
+            </>
+          )}
+        </div>
         )
           // : isLoggedIn ? (
           //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
           // ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)
         }
-        <TeamCard {...teamB} onUpdate={fetchTeams} />
-      </div>
       <div className="match-coverage-container">
         {loading && <p>Loading series history...</p>}
         {seriesHistory.length === 0 ? (
