@@ -73,6 +73,68 @@
   transform: scale(1.10);
 }
 
+@keyframes glow-green {
+  from {
+    box-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50;
+  }
+  to {
+    box-shadow: 0 0 20px #4caf50, 0 0 40px #4caf50;
+  }
+}
+
+@keyframes glow-red {
+  from {
+    box-shadow: 0 0 10px #f44336, 0 0 20px #f44336;
+  }
+  to {
+    box-shadow: 0 0 20px #f44336, 0 0 40px #f44336;
+  }
+}
+
+/* Button Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Alert Styles */
+.alert-box {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4caf50;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.alert-box.error {
+  background-color: #f44336;
+}
+
+.alert-box button {
+  background-color: #fff;
+  color: #4caf50;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.alert-box button:hover {
+  background-color: #f1f1f1;
+}
+
 .center-controls {
   display: flex;
   flex-direction: column;
