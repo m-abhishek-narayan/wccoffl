@@ -5,22 +5,21 @@
   align-items: flex-start;
   gap: 15px;
   flex-wrap: nowrap; /* Prevents wrapping */
-  overflow-x: auto; /* Enables horizontal scrolling if needed */
+  overflow: hidden; /* Enables horizontal scrolling if needed */
   white-space: nowrap; /* Prevents text wrapping */
   padding: 10px;
 }
 
 /* Team Card with Glow */
 .team-card {
-  border-radius: 12px;
+  flex: 1 1 300px;
+  background: linear-gradient(135deg, #243b55, #141e30);
+  border-radius: 20px;
   padding: 20px;
-  width: 280px; /* Fixed width to fit multiple cards side by side */
-  background: linear-gradient(145deg, #1f1f1f, #292929);
+  text-align: center;
   color: #fff;
-  box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
-  transition: transform 0.3s ease-in-out;
-  flex-shrink: 0; /* Prevents shrinking */
-  display: inline-block; /* Keeps them inline */
+  min-width: 280px;
+  box-sizing: border-box;
 }
 
 .team-card:hover {
@@ -31,8 +30,9 @@
 @media (max-width: 768px) {
   .team-container {
     flex-wrap: nowrap; /* Ensures no wrapping */
-    overflow-x: auto; /* Allows scrolling on small screens */
+    overflow: hidden; /* Allows scrolling on small screens */
     padding: 10px 5px;
+    margin-top: 60px;
   }
 
   .team-card {
@@ -129,7 +129,7 @@ h2 {
 ul {
   list-style: none;
   padding: 0;
-  margin-top: 20px; /* More spacing before core team */
+  margin-top: 10px; /* More spacing before core team */
 }
 
 li {
@@ -184,7 +184,7 @@ li {
 }
 
 /* Cancel Button */
-.cancel-btn {
+.cancel-btn-team {
   padding: 10px 15px;
   background: linear-gradient(135deg, #ff4d4d, #ff0000);
   color: #fff;

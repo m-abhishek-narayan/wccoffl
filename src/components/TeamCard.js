@@ -20,6 +20,7 @@ const TeamCard = ({
   const [editedCoreTeam, setEditedCoreTeam] = useState(coreTeam.join(", "));
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -63,6 +64,7 @@ const TeamCard = ({
     }
 
     try {
+      setLoading(true);
       await axios.post(`${API_BASE_URL}/api/team`, {
         teamId,
         teamName: editedName,
@@ -78,6 +80,8 @@ const TeamCard = ({
     } catch (error) {
       console.error("Error updating team:", error);
       setErrorMessage("Failed to update team. Please try again.");
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -105,10 +109,10 @@ const TeamCard = ({
           {/* Error Message Display */}
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
           <div className="edit-buttons">
-            <button className="save-btn" onClick={handleSave}>
+            <button className="save-btn" onClick={handleSave} disabled={loading}>
               💾 Save
             </button>
-            <button className="cancel-btn" onClick={() => setEditMode(false)}>
+            <button className="cancel-btn-team" onClick={() => setEditMode(false)}>
               Cancel
             </button>
           </div>

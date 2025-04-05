@@ -12,6 +12,10 @@ function Navbar() {
   const location = useLocation(); 
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  useEffect(() => {
     const token = sessionStorage.getItem("token");
     const user = sessionStorage.getItem("username");
     const admin = sessionStorage.getItem("admin");

@@ -182,8 +182,10 @@ const HomePage = () => {
       )}
       <div className="team-container">
         <TeamCard {...teamA} onUpdate={fetchTeams} />
-        {isAdmin && (
-        <div className="center-controls">
+        <TeamCard {...teamB} onUpdate={fetchTeams} />
+      </div>
+      {isAdmin && (
+        <div className="admin-controls">
           {!showWinButtons ? (
             <button
               className="update-score-btn"
@@ -208,8 +210,6 @@ const HomePage = () => {
         //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
         // ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)
         }
-        <TeamCard {...teamB} onUpdate={fetchTeams} />
-      </div>
       <div className="match-coverage-container">
         {loading && <p>Loading series history...</p>}
         {seriesHistory.length === 0 ? (
