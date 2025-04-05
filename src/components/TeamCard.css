@@ -1,71 +1,84 @@
-/* Container for Team Cards */
 .team-container {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 15px;
-  flex-wrap: nowrap; /* Prevents wrapping */
-  overflow-x: auto; /* Enables horizontal scrolling if needed */
-  white-space: nowrap; /* Prevents text wrapping */
+  justify-content: center;
+  align-items: stretch;
+  gap: 13px;
+  flex-wrap: nowrap;
   padding: 10px;
+  width: 100%;
 }
 
-/* Team Card with Glow */
 .team-card {
-  border-radius: 12px;
-  padding: 20px;
-  width: 280px; /* Fixed width to fit multiple cards side by side */
-  background: linear-gradient(145deg, #1f1f1f, #292929);
+  flex: 1 1 45%;
+  min-width: 0;
+  background: linear-gradient(135deg, #243b55, #141e30);
+  border-radius: 20px;
+  padding: 16px;
+  text-align: center;
   color: #fff;
-  box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
-  transition: transform 0.3s ease-in-out;
-  flex-shrink: 0; /* Prevents shrinking */
-  display: inline-block; /* Keeps them inline */
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
 }
 
 .team-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.10);
 }
 
-/* Ensure Side-by-Side Even on Mobile */
 @media (max-width: 768px) {
+  .team-card {
+    flex: 1 1 50%;
+    padding: 13px;
+  }
+
+  .team-card:hover {
+    transform: scale(1.10);
+  }
+}
+
+@media (max-width: 480px) {
   .team-container {
-    flex-wrap: nowrap; /* Ensures no wrapping */
-    overflow-x: auto; /* Allows scrolling on small screens */
-    padding: 10px 5px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    font-size: 11px;
   }
 
   .team-card {
-    width: 260px; /* Slightly smaller on mobile for better fit */
-    min-width: 250px;
+    flex: 1 1 48%;
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .team-card:hover {
+    transform: scale(1.10);
+  }
+  .team-card h2{
+    font-size: 16px;
   }
 }
 
-/* Title and Icon */
 h2 {
   display: flex;
-  flex-direction: column; /* Stack team name on multiple lines */
-  align-items: center; /* Center align */
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   text-align: center;
   font-size: 24px;
   margin-bottom: 15px;
   position: relative;
-  word-break: break-word; /* Ensure long words break properly */
-  white-space: pre-line; /* Allow natural line breaks */
+  word-break: break-word;
+  white-space: pre-line;
   max-width: 100%;
 }
 
-/* Neon Edit Icon */
 .edit-icon {
+  position: absolute;
+  top: 01px;
+  right: 01px;
   cursor: pointer;
   font-size: 20px;
   color: #00f7ff;
   transition: color 0.3s ease, transform 0.3s ease;
-  position: absolute;
-  right: 10px; /* Adjust position */
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 .edit-icon:hover {
@@ -73,18 +86,16 @@ h2 {
   transform: rotate(360deg);
 }
 
-/* Score Section */
 .score {
   font-size: 22px;
   font-weight: bold;
-  margin-bottom: 20px; /* Increased spacing */
+  margin-bottom: 20px;
   text-align: center;
 }
 
-/* Results Box with Neon Glow */
 .results {
-  margin-top: 20px; /* More spacing */
-  margin-bottom: 20px; /* More spacing */
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   gap: 6px;
@@ -103,7 +114,6 @@ h2 {
   box-shadow: 0 0 12px #00f7ff;
 }
 
-/* Neon Glow Effect */
 .win {
   background: #00ff00;
   color: #0d0;
@@ -125,27 +135,24 @@ h2 {
   box-shadow: 0 0 15px #3f3a3a;
 }
 
-/* Core Team List */
 ul {
   list-style: none;
   padding: 0;
-  margin-top: 20px; /* More spacing before core team */
+  margin-top: 10px;
 }
 
 li {
-  padding: 8px 0; /* Increased padding for better spacing */
+  padding: 8px 0;
 }
 
-/* Edit Mode Wrapper */
 .edit-mode {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  margin-top: 20px; /* More spacing */
+  margin-top: 20px;
 }
 
-/* Input Fields */
 .edit-mode input,
 .edit-mode textarea {
   width: 90%;
@@ -155,10 +162,9 @@ li {
   border-radius: 6px;
   background-color: #222;
   color: #fff;
-  text-align: center; /* Center the text inside inputs */
+  text-align: center;
 }
 
-/* Edit Buttons */
 .edit-buttons {
   margin-top: 12px;
   display: flex;
@@ -167,7 +173,6 @@ li {
   width: 100%;
 }
 
-/* Save Button */
 .save-btn {
   padding: 10px 15px;
   background: linear-gradient(135deg, #4caf50, #2e8b57);
@@ -183,8 +188,7 @@ li {
   box-shadow: 0 0 15px #4caf50;
 }
 
-/* Cancel Button */
-.cancel-btn {
+.cancel-btn-team {
   padding: 10px 15px;
   background: linear-gradient(135deg, #ff4d4d, #ff0000);
   color: #fff;
@@ -199,7 +203,6 @@ li {
   box-shadow: 0 0 15px #ff4d4d;
 }
 
-/* Labels */
 label {
   font-size: 14px;
   color: #00f7ff;

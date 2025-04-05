@@ -182,8 +182,10 @@ const HomePage = () => {
       )}
       <div className="team-container">
         <TeamCard {...teamA} onUpdate={fetchTeams} />
-        {isAdmin && (
-        <div className="center-controls">
+        <TeamCard {...teamB} onUpdate={fetchTeams} />
+      </div>
+      {isAdmin && (
+        <div className="admin-controls">
           {!showWinButtons ? (
             <button
               className="update-score-btn"
@@ -208,8 +210,6 @@ const HomePage = () => {
         //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
         // ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)
         }
-        <TeamCard {...teamB} onUpdate={fetchTeams} />
-      </div>
       <div className="match-coverage-container">
         {loading && <p>Loading series history...</p>}
         {seriesHistory.length === 0 ? (
@@ -234,7 +234,7 @@ const HomePage = () => {
                   <p><strong>Captain:</strong> {series?.captain?.teamA || "Unknown"} 🆚 {series?.captain?.teamB || "Unknown"}</p>
                   <p><strong>🏆 Winner:</strong> {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}</p>
                   <p><strong>📅 Period:</strong> {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}</p>
-            <p><strong>📊 Score:</strong> {series?.score?.teamA?.slice(-4).join(", ") || "No Data"} 🆚 {series?.score?.teamB?.slice(-4).join(", ") || "No Data"}</p>
+                  <p><strong>📊 Score:</strong> {series?.score?.teamA?.slice(-4).join(", ") || "No Data"} 🆚 {series?.score?.teamB?.slice(-4).join(", ") || "No Data"}</p>
                 </div>
               ))}
             </div>
