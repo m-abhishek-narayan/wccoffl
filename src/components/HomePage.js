@@ -234,7 +234,7 @@ const HomePage = () => {
                   <p><strong>Captain:</strong> {series?.captain?.teamA || "Unknown"} 🆚 {series?.captain?.teamB || "Unknown"}</p>
                   <p><strong>🏆 Winner:</strong> {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}</p>
                   <p><strong>📅 Period:</strong> {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}</p>
-            <p><strong>📊 Score:</strong> {series?.score?.teamA?.slice(-4).join(", ") || "No Data"} 🆚 {series?.score?.teamB?.slice(-4).join(", ") || "No Data"}</p>
+                  <p><strong>📊 Score:</strong> {series?.score?.teamA?.slice(-4).join(", ") || "No Data"} 🆚 {series?.score?.teamB?.slice(-4).join(", ") || "No Data"}</p>
                 </div>
               ))}
             </div>
