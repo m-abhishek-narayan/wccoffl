@@ -27,9 +27,10 @@ function Navbar() {
   }, []);
 
   const handleLogout = () => {
+    window.scrollTo(0, 0);
     sessionStorage.clear();
     setIsAuthenticated(false);
-    navigate("/");
+    // navigate("/");
     window.location.reload();
   };
 
