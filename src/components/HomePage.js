@@ -36,6 +36,7 @@ const HomePage = () => {
   const [winner, setWinner] = useState(null);
   const [showWinButtons, setShowWinButtons] = useState(false);
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
   const [alert, setAlert] = useState({
     message: "",
     type: "",
@@ -87,7 +88,7 @@ const HomePage = () => {
       setLoading(true);
       const response = await axios.get(`${API_BASE_URL}/api/teams`);
       const { team1, team2 } = response.data || {};
-      
+
       setTeamA({ ...teamA, ...team1 });
       setTeamB({ ...teamB, ...team2 });
       showAlert("Teams updated!");
@@ -117,13 +118,13 @@ const HomePage = () => {
 
   const handleResetLatestScore = async () => {
     if (!isAdmin || !lastWinner) return;
-  
+
     try {
       setLoading(true);
       const response = await axios.put(`${API_BASE_URL}/api/team/revert`, {
         lastWinnerId: lastWinner,
       });
-  
+
       if (response.status === 200) {
         setLastWinner(null);
         fetchTeams();
@@ -144,19 +145,19 @@ const HomePage = () => {
     try {
       setLoading(true);
       const response = await axios.post(`${API_BASE_URL}/api/team/end-series`);
-  
+
       if (response.status === 200) {
         const { winningTeam } = response.data; // Get winning team details
-  
+
         setWinner({
           captain: winningTeam?.captain || "No winner",
           team: winningTeam?.teamName || "Draw",
         });
-  
+
         showAlert(
           `Series Ended! Winning Team: ${winningTeam?.teamName || "Draw"}, Captain: ${winningTeam?.captain || "None"}`
         );
-  
+
         fetchTeams();
         fetchAllSeriesHistory();
       } else {
@@ -169,6 +170,9 @@ const HomePage = () => {
       setLoading(false);
     }
   };
+
+
+  const toggleCollapse = () => setIsOpen(!isOpen);
 
   return (
     <div className="homepage">
@@ -206,9 +210,9 @@ const HomePage = () => {
           )}
         </div>
         )
-        // : isLoggedIn ? (
-        //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
-        // ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)
+          // : isLoggedIn ? (
+          //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
+          // ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)
         }
       <div className="match-coverage-container">
         {loading && <p>Loading series history...</p>}
@@ -216,28 +220,59 @@ const HomePage = () => {
           <p>No series history found.</p>
         ) : (
           <>
-            <div className="match-coverage-top10">
-              {seriesHistory.slice(0, 10).map((series, index) => (
-                <div key={index} className="match-entry">
-                  <h3>{series.teamA} 🆚 {series.teamB}</h3>
-                  <p><strong>Captain:</strong> {series?.captain?.teamA || "Unknown"} 🆚 {series?.captain?.teamB || "Unknown"}</p>
-                  <p><strong>🏆 Winner:</strong> {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}</p>
-                  <p><strong>📅 Period:</strong> {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}</p>
-                  <p><strong>📊 Score:</strong> {series?.score?.teamA?.slice(-4).join(", ") || "No Data"} 🆚 {series?.score?.teamB?.slice(-4).join(", ") || "No Data"}</p>
-                </div>
-              ))}
-            </div>
-            <div className="match-coverage-scroll">
-              {seriesHistory.slice(10).map((series, index) => (
-                <div key={index} className="match-entry">
-                  <h3>{series.teamA} 🆚 {series.teamB}</h3>
-                  <p><strong>Captain:</strong> {series?.captain?.teamA || "Unknown"} 🆚 {series?.captain?.teamB || "Unknown"}</p>
-                  <p><strong>🏆 Winner:</strong> {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}</p>
-                  <p><strong>📅 Period:</strong> {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}</p>
-                  <p><strong>📊 Score:</strong> {series?.score?.teamA?.slice(-4).join(", ") || "No Data"} 🆚 {series?.score?.teamB?.slice(-4).join(", ") || "No Data"}</p>
-                </div>
-              ))}
-            </div>
+    <div className="past-series-container">
+      <button onClick={toggleCollapse} className="collapsible-header">
+        Past series Scorelines: {isOpen ? "▲" : "▼"}
+      </button>
+
+      <div className={`collapsible-content ${isOpen ? "open" : ""}`}>
+        <table className="series-table">
+          <thead>
+            <tr>
+              <th>Series Name</th>
+              <th>Captains</th>
+              <th>Winning team</th>
+              <th>Date Period</th>
+              <th>The Finish</th>
+            </tr>
+          </thead>
+          <tbody>
+            {seriesHistory.map((series, index) => (
+              <tr key={index}>
+  <td>
+    <span className="team team-a">{series.teamA}</span> vs <span className="team team-b">{series.teamB}</span>
+  </td>
+  <td>
+    <span className="team team-a">{series?.captain?.teamA || "Unknown"}</span> vs <span className="team team-b">{series?.captain?.teamB || "Unknown"}</span>
+  </td>
+  <td>
+    <span className="winner">
+      {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}
+    </span>
+  </td>
+  <td>
+    {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}
+  </td>
+  <td>
+    <span className="team-score">
+      {series?.score?.teamA?.slice(-4).map((r, i) => (
+        <span key={`a-${i}`} className={`score-badge ${r.toLowerCase()}`}>{r}</span>
+      )) || "No Data"}
+    </span>
+    <span className="vs-separator">vs</span>
+    <span className="team-score">
+      {series?.score?.teamB?.slice(-4).map((r, i) => (
+        <span key={`b-${i}`} className={`score-badge ${r.toLowerCase()}`}>{r}</span>
+      )) || "No Data"}
+    </span>
+  </td>
+</tr>
+
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
           </>
         )}
       </div>
