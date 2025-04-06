@@ -5,7 +5,7 @@ import "./filter.css"
 
 const FILTER_API = "https://wccbackend.onrender.com/api/image";
 
-const Filter = ({ initialData }) => {
+const FilterAwards = ({ initialData }) => {
     const [filteredData, setFilteredData] = useState(initialData);
     const [dropdownOptions, setDropdownOptions] = useState({});
     const [filters, setFilters] = useState({});
@@ -193,4 +193,4 @@ const Filter = ({ initialData }) => {
     );
 };
 
-export default Filter;
+export default FilterAwards;

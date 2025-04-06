@@ -3,6 +3,7 @@ import axios from "axios";
 import TeamCard from "./TeamCard";
 import CustomAlert from "./CustomAlert";
 import { Link, useNavigate } from "react-router-dom";
+import FilterSeries from "./FilterSeries";
 import "./HomePage.css";
 
 const API_BASE_URL = "https://wccbackend.onrender.com";
@@ -224,8 +225,8 @@ const HomePage = () => {
       <button onClick={toggleCollapse} className="collapsible-header">
         Past series Scorelines: {isOpen ? "▲" : "▼"}
       </button>
-
-      <div className={`collapsible-content ${isOpen ? "open" : ""}`}>
+      {isOpen && <FilterSeries initialData={seriesHistory} />}
+      {/* <div className={`collapsible-content ${isOpen ? "open" : ""}`}>
         <table className="series-table">
           <thead>
             <tr>
@@ -271,7 +272,7 @@ const HomePage = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </div>
           </>
         )}
