@@ -198,10 +198,10 @@ const HomePage = () => {
             >
               Update Score
             </button>
-          ) :(<div className="win-btns-container">
-          <button className="match-btn win-btn" onClick={() => handleWin("A")} disabled={loading}>Team A Wins</button>
-          <button className="match-btn loss-btn" onClick={() => handleWin("B")} disabled={loading}>Team B Wins</button>
-          <div className="cancel-cross" onClick={() => setShowWinButtons(false)}>❌</div></div>)}
+          ) : (<div className="win-btns-container">
+            <button className="match-btn win-btn" onClick={() => handleWin("A")} disabled={loading}>Team A Wins</button>
+            <button className="match-btn loss-btn" onClick={() => handleWin("B")} disabled={loading}>Team B Wins</button>
+            <div className="cancel-cross" onClick={() => setShowWinButtons(false)}>❌</div></div>)}
           {!showWinButtons && (
             <>
               <button className="reset-btn" onClick={handleResetLatestScore} disabled={!lastWinner || loading}>Revert Last Result</button>
@@ -209,70 +209,70 @@ const HomePage = () => {
             </>
           )}
         </div>
-        )
-          // : isLoggedIn ? (
-          //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
-          // ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)
-        }
+      )
+        // : isLoggedIn ? (
+        //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
+        // ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)
+      }
       <div className="match-coverage-container">
         {loading && <p>Loading series history...</p>}
         {seriesHistory.length === 0 ? (
           <p>No series history found.</p>
         ) : (
           <>
-    <div className="past-series-container">
-      <button onClick={toggleCollapse} className="collapsible-header">
-        Past series Scorelines: {isOpen ? "▲" : "▼"}
-      </button>
+            <div className="past-series-container">
+              <button onClick={toggleCollapse} className="collapsible-header">
+                Past series Scorelines: {isOpen ? "▲" : "▼"}
+              </button>
 
-      <div className={`collapsible-content ${isOpen ? "open" : ""}`}>
-        <table className="series-table">
-          <thead>
-            <tr>
-              <th>Series Name</th>
-              <th>Captains</th>
-              <th>Winning team</th>
-              <th>Date Period</th>
-              <th>The Finish</th>
-            </tr>
-          </thead>
-          <tbody>
-            {seriesHistory.map((series, index) => (
-              <tr key={index}>
-  <td>
-    <span className="team team-a">{series.teamA}</span> vs <span className="team team-b">{series.teamB}</span>
-  </td>
-  <td>
-    <span className="team team-a">{series?.captain?.teamA || "Unknown"}</span> vs <span className="team team-b">{series?.captain?.teamB || "Unknown"}</span>
-  </td>
-  <td>
-    <span className="winner">
-      {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}
-    </span>
-  </td>
-  <td>
-    {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}
-  </td>
-  <td>
-    <span className="team-score">
-      {series?.score?.teamA?.slice(-4).map((r, i) => (
-        <span key={`a-${i}`} className={`score-badge ${r.toLowerCase()}`}>{r}</span>
-      )) || "No Data"}
-    </span>
-    <span className="vs-separator">vs</span>
-    <span className="team-score">
-      {series?.score?.teamB?.slice(-4).map((r, i) => (
-        <span key={`b-${i}`} className={`score-badge ${r.toLowerCase()}`}>{r}</span>
-      )) || "No Data"}
-    </span>
-  </td>
-</tr>
+              <div className={`collapsible-content ${isOpen ? "open" : ""}`}>
+                <table className="series-table">
+                  <thead>
+                    <tr>
+                      <th>Series Name</th>
+                      <th>Captains</th>
+                      <th>Winning team</th>
+                      <th>Date Period</th>
+                      <th>The Finish</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {seriesHistory.map((series, index) => (
+                      <tr key={index}>
+                        <td>
+                          <span className="team team-a">{series.teamA}</span> vs <span className="team team-b">{series.teamB}</span>
+                        </td>
+                        <td>
+                          <span className="team team-a">{series?.captain?.teamA || "Unknown"}</span> vs <span className="team team-b">{series?.captain?.teamB || "Unknown"}</span>
+                        </td>
+                        <td>
+                          <span className="winner">
+                            {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}
+                          </span>
+                        </td>
+                        <td>
+                          {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}
+                        </td>
+                        <td>
+                          <span className="team-score">
+                            {series?.score?.teamA?.slice(-4).map((r, i) => (
+                              <span key={`a-${i}`} className={`score-badge ${r.toLowerCase()}`}>{r}</span>
+                            )) || "No Data"}
+                          </span>
+                          <span className="vs-separator">vs</span>
+                          <span className="team-score">
+                            {series?.score?.teamB?.slice(-4).map((r, i) => (
+                              <span key={`b-${i}`} className={`score-badge ${r.toLowerCase()}`}>{r}</span>
+                            )) || "No Data"}
+                          </span>
+                        </td>
+                      </tr>
 
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </>
         )}
       </div>
