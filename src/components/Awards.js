@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./award.css";
 import CustomAlert from "./CustomAlert";
+import Filter from "./Filter";
 import kavaHistoryData from "./data";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -34,6 +35,7 @@ const Awards = () => {
     const [latestEntry, setLatestEntry] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const fetchData = async () => {
@@ -115,12 +117,15 @@ const Awards = () => {
         formData.append("team", newData.team);
 
         try {
+            setLoading(true);
             await axios.post(`${PICTURE_API}/image/upload`, formData);
             setSuccessMessage("Award updated successfully!");
             setShowForm(false);
             fetchData();
         } catch (error) {
             setMessage("Error uploading data. Please try again.");
+        }finally {
+            setLoading(false);
         }
 
         setNewData({
@@ -237,7 +242,7 @@ const Awards = () => {
                                     className="form-control"
                                     required
                                 />
-                                <button type="submit" className="update-btn">
+                                <button disabled={loading} type="submit" className="update-btn">
                                     Update Award
                                 </button>
                                 <button
@@ -257,7 +262,8 @@ const Awards = () => {
                     <h3 onClick={toggleTable} className="collapsible-header">
                         📚 Kava Awards Current Series {showTable ? "▼" : "▶"}
                     </h3>
-                    {showTable && (
+                    {showTable && <Filter initialData={history} />}
+                    {/* {showTable && (
                         <div className="table-container responsive-table">
                             <table className="table">
                                 <thead>
@@ -288,7 +294,7 @@ const Awards = () => {
                                 </tbody>
                             </table>
                         </div>
-                    )}
+                    )} */}
                 </div>
     
                 {/* Stylish Separator */}

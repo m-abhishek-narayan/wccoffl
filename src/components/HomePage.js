@@ -37,6 +37,7 @@ const HomePage = () => {
   const [showWinButtons, setShowWinButtons] = useState(false);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [alert, setAlert] = useState({
     message: "",
     type: "",
@@ -89,6 +90,7 @@ const HomePage = () => {
       const response = await axios.get(`${API_BASE_URL}/api/teams`);
       const { team1, team2 } = response.data || {};
 
+
       setTeamA({ ...teamA, ...team1 });
       setTeamB({ ...teamB, ...team2 });
       showAlert("Teams updated!");
@@ -119,11 +121,13 @@ const HomePage = () => {
   const handleResetLatestScore = async () => {
     if (!isAdmin || !lastWinner) return;
 
+
     try {
       setLoading(true);
       const response = await axios.put(`${API_BASE_URL}/api/team/revert`, {
         lastWinnerId: lastWinner,
       });
+
 
       if (response.status === 200) {
         setLastWinner(null);
@@ -146,17 +150,21 @@ const HomePage = () => {
       setLoading(true);
       const response = await axios.post(`${API_BASE_URL}/api/team/end-series`);
 
+
       if (response.status === 200) {
         const { winningTeam } = response.data; // Get winning team details
+
 
         setWinner({
           captain: winningTeam?.captain || "No winner",
           team: winningTeam?.teamName || "Draw",
         });
 
+
         showAlert(
           `Series Ended! Winning Team: ${winningTeam?.teamName || "Draw"}, Captain: ${winningTeam?.captain || "None"}`
         );
+
 
         fetchTeams();
         fetchAllSeriesHistory();
@@ -170,6 +178,9 @@ const HomePage = () => {
       setLoading(false);
     }
   };
+
+
+  const toggleCollapse = () => setIsOpen(!isOpen);
 
 
   const toggleCollapse = () => setIsOpen(!isOpen);
@@ -209,6 +220,11 @@ const HomePage = () => {
             </>
           )}
         </div>
+      )
+        // : isLoggedIn ? (
+        //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
+        // ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)
+      }
       )
         // : isLoggedIn ? (
         //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>

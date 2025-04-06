@@ -92,6 +92,7 @@ const LoginRegister = ({ onClose }) => {
             setIsAuthenticated(true);
             onClose();
             window.location.reload();
+            window.scrollTo(0, 0);
         } catch (err) {
             alert(err.response?.data?.message || "Login failed");
         } finally {
