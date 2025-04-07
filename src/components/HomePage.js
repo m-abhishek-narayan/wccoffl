@@ -37,7 +37,6 @@ const HomePage = () => {
   const [showWinButtons, setShowWinButtons] = useState(false);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [alert, setAlert] = useState({
     message: "",
     type: "",
@@ -181,10 +180,6 @@ const HomePage = () => {
 
 
   const toggleCollapse = () => setIsOpen(!isOpen);
-
-
-  const toggleCollapse = () => setIsOpen(!isOpen);
-
   return (
     <div className="homepage">
       {alert.message && (
@@ -220,11 +215,6 @@ const HomePage = () => {
             </>
           )}
         </div>
-      )
-        // : isLoggedIn ? (
-        //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
-        // ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)
-      }
       )
         // : isLoggedIn ? (
         //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
