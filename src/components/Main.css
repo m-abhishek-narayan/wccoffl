@@ -1,0 +1,23 @@
+main {
+    background-color: transparent !important;
+    padding: 0;
+    margin: 0;
+  }
+
+
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #201e1e, #0d182b, #23262d, #000000);
+    background-size: 300% 300%;
+    animation: gradientAnimation 12s ease infinite;
+    color: aliceblue;
+  }
+  
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  

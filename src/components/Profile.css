@@ -4,14 +4,6 @@
   margin: 0;
   padding: 0;
 }
-
-/* Prevent Horizontal Scrolling */
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-  font-family: 'Roboto', sans-serif; /* Cricinfo-like font */
-}
-
 /* Background Style (Dark with Gradient) */
 .bg-gray-50 {
   min-height: 100vh;

@@ -4,13 +4,7 @@
     margin: 0;
     padding: 0;
   }
-  
-  /* Body and HTML - Prevent Horizontal Scrolling */
-  html, body {
-    width: 100%;
-    overflow-x: hidden;
-  }
-  
+ 
   /* Profile Page Background */
   .bg-gray-50 {
     min-height: 100vh;
@@ -144,6 +138,3 @@
     }
   }
 
-  .Profile_page{
-    padding-top: 20px;
-  }
