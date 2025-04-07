@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./award.css";
 import CustomAlert from "./CustomAlert";
-import Filter from "./Filter";
+import FilterAwards from "./FilterAwards";
 import kavaHistoryData from "./data";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -262,7 +262,7 @@ const Awards = () => {
                     <h3 onClick={toggleTable} className="collapsible-header">
                         📚 Kava Awards Current Series {showTable ? "▼" : "▶"}
                     </h3>
-                    {showTable && <Filter initialData={history} />}
+                    {showTable && <FilterAwards initialData={history} />}
                     {/* {showTable && (
                         <div className="table-container responsive-table">
                             <table className="table">

@@ -3,6 +3,7 @@ import axios from "axios";
 import TeamCard from "./TeamCard";
 import CustomAlert from "./CustomAlert";
 import { Link, useNavigate } from "react-router-dom";
+import FilterSeries from "./FilterSeries";
 import "./HomePage.css";
 
 const API_BASE_URL = "https://wccbackend.onrender.com";
@@ -226,59 +227,59 @@ const HomePage = () => {
           <p>No series history found.</p>
         ) : (
           <>
-            <div className="past-series-container">
-              <button onClick={toggleCollapse} className="collapsible-header">
-                Past series Scorelines: {isOpen ? "▲" : "▼"}
-              </button>
+    <div className="past-series-container">
+      <button onClick={toggleCollapse} className="collapsible-header">
+        Past series Scorelines: {isOpen ? "▲" : "▼"}
+      </button>
+      {isOpen && <FilterSeries initialData={seriesHistory} />}
+      {/* <div className={`collapsible-content ${isOpen ? "open" : ""}`}>
+        <table className="series-table">
+          <thead>
+            <tr>
+              <th>Series Name</th>
+              <th>Captains</th>
+              <th>Winning team</th>
+              <th>Date Period</th>
+              <th>The Finish</th>
+            </tr>
+          </thead>
+          <tbody>
+            {seriesHistory.map((series, index) => (
+              <tr key={index}>
+  <td>
+    <span className="team team-a">{series.teamA}</span> vs <span className="team team-b">{series.teamB}</span>
+  </td>
+  <td>
+    <span className="team team-a">{series?.captain?.teamA || "Unknown"}</span> vs <span className="team team-b">{series?.captain?.teamB || "Unknown"}</span>
+  </td>
+  <td>
+    <span className="winner">
+      {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}
+    </span>
+  </td>
+  <td>
+    {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}
+  </td>
+  <td>
+    <span className="team-score">
+      {series?.score?.teamA?.slice(-4).map((r, i) => (
+        <span key={`a-${i}`} className={`score-badge ${r.toLowerCase()}`}>{r}</span>
+      )) || "No Data"}
+    </span>
+    <span className="vs-separator">vs</span>
+    <span className="team-score">
+      {series?.score?.teamB?.slice(-4).map((r, i) => (
+        <span key={`b-${i}`} className={`score-badge ${r.toLowerCase()}`}>{r}</span>
+      )) || "No Data"}
+    </span>
+  </td>
+</tr>
 
-              <div className={`collapsible-content ${isOpen ? "open" : ""}`}>
-                <table className="series-table">
-                  <thead>
-                    <tr>
-                      <th>Series Name</th>
-                      <th>Captains</th>
-                      <th>Winning team</th>
-                      <th>Date Period</th>
-                      <th>The Finish</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {seriesHistory.map((series, index) => (
-                      <tr key={index}>
-                        <td>
-                          <span className="team team-a">{series.teamA}</span> vs <span className="team team-b">{series.teamB}</span>
-                        </td>
-                        <td>
-                          <span className="team team-a">{series?.captain?.teamA || "Unknown"}</span> vs <span className="team team-b">{series?.captain?.teamB || "Unknown"}</span>
-                        </td>
-                        <td>
-                          <span className="winner">
-                            {series.points.teamA > series.points.teamB ? series.teamA : series.teamB}
-                          </span>
-                        </td>
-                        <td>
-                          {new Date(series.startDate).toLocaleDateString()} - {new Date(series.endDate).toLocaleDateString()}
-                        </td>
-                        <td>
-                          <span className="team-score">
-                            {series?.score?.teamA?.slice(-4).map((r, i) => (
-                              <span key={`a-${i}`} className={`score-badge ${r.toLowerCase()}`}>{r}</span>
-                            )) || "No Data"}
-                          </span>
-                          <span className="vs-separator">vs</span>
-                          <span className="team-score">
-                            {series?.score?.teamB?.slice(-4).map((r, i) => (
-                              <span key={`b-${i}`} className={`score-badge ${r.toLowerCase()}`}>{r}</span>
-                            )) || "No Data"}
-                          </span>
-                        </td>
-                      </tr>
-
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            ))}
+          </tbody>
+        </table>
+      </div> */}
+    </div>
           </>
         )}
       </div>
