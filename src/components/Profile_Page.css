@@ -19,8 +19,8 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    /* background: linear-gradient(135deg, #1e3c72, #2a5298, #6dd5ed, #2193b0); */
-    background-color: #e0e0e0;
+    background: linear-gradient(135deg, #1e3c72, #0d182b, #000000, #e7faff);
+    /* background-color: #e0e0e0; */
     background-size: 300% 300%;
     animation: gradientAnimation 12s ease infinite;
     padding-top: 50px;
@@ -142,4 +142,8 @@
       padding: 8px 12px;
       font-size: 0.85rem;
     }
+  }
+
+  .Profile_page{
+    padding-top: 20px;
   }
