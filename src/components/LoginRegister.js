@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./loginregister.css"
+import "./loginregister1.css"
 
 const API_URL = "https://wccbackend.onrender.com/api/auth";
 
@@ -17,7 +17,25 @@ const LoginRegister = ({ onClose }) => {
     const [isCodeSent, setIsCodeSent] = useState(false);
     const [loading, setLoading] = useState(false);
     const [registrationStep, setRegistrationStep] = useState(1);
+    const [isExpanded, setIsExpanded] = useState(false);
     const navigate = useNavigate();
+    const boxRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (
+                boxRef.current &&
+                !boxRef.current.contains(e.target)
+            ) {
+                onClose();
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isExpanded, onClose]);
 
     useEffect(() => {
         const token = sessionStorage.getItem("token");
@@ -150,13 +168,30 @@ const LoginRegister = ({ onClose }) => {
 
     return (
         <div className="auth-wrapper">
-            <div className="auth-container">
-                <span className="close-button" onClick={onClose}>&times;</span>
-
+        <div className={`login-box ${isExpanded ? "expanded" : ""}`} ref={boxRef} onClick={(e) => {
+                if (!isExpanded) {
+                    setIsExpanded(true);
+                } else {
+                    if (e.target === e.currentTarget) {
+                        setIsExpanded(false); 
+                    }
+                }
+            }}
+            >
+            {!isExpanded ? (
+                <div className="login-label">Login</div>
+            ) : (
+                <div className="login-content">
+                    <span className="close-button" onClick={(e) => {
+                        e.stopPropagation();
+                        setIsExpanded(false);
+                        onClose();
+                    }}>&times;</span>
+    
                 {!showForgotPassword ? (
                     <>
-                        <h3 className="auth-title">{isLogin ? "Login" : "Signup"}</h3>
-
+                        <h3 className="login-heading">{isLogin ? "Login" : "Signup"}</h3>
+    
                         {!isLogin && registrationStep === 1 && (
                             <>
                                 <input
@@ -164,28 +199,28 @@ const LoginRegister = ({ onClose }) => {
                                     placeholder="Username"
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
-                                    className="auth-input"
+                                    className="login-input"
                                 />
                                 <input
                                     type="email"
                                     placeholder="Email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="auth-input"
+                                    className="login-input"
                                 />
                                 <input
                                     type="password"
                                     placeholder="Password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="auth-input"
+                                    className="login-input"
                                 />
-                                <button onClick={sendRegistrationCode} className="auth-button" disabled={loading}>
+                                <button onClick={sendRegistrationCode} className="login-button" disabled={loading}>
                                     Send Verification Code
                                 </button>
                             </>
                         )}
-
+    
                         {!isLogin && registrationStep === 2 && (
                             <>
                                 <input
@@ -193,14 +228,14 @@ const LoginRegister = ({ onClose }) => {
                                     placeholder="Enter verification code"
                                     value={verificationCode}
                                     onChange={(e) => setVerificationCode(e.target.value)}
-                                    className="auth-input"
+                                    className="login-input"
                                 />
-                                <button onClick={completeRegistration} className="auth-button" disabled={loading}>
+                                <button onClick={completeRegistration} className="login-button" disabled={loading}>
                                     Verify & Signup
                                 </button>
                             </>
                         )}
-
+    
                         {isLogin && (
                             <>
                                 <input
@@ -208,39 +243,40 @@ const LoginRegister = ({ onClose }) => {
                                     placeholder="Email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="auth-input"
+                                    className="login-input"
                                 />
                                 <input
                                     type="password"
                                     placeholder="Password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="auth-input"
+                                    className="login-input"
                                 />
-                                <button onClick={handleLogin} className="auth-button" disabled={loading}>
+                                <button onClick={handleLogin} className="login-button" disabled={loading}>
                                     Login
                                 </button>
                             </>
                         )}
-
-                        <p onClick={() => {
-                            setIsLogin(!isLogin);
-                            setRegistrationStep(1);
-                        }} className="auth-toggle">
-                            {isLogin ? "Don't have an account? Signup" : "Already have an account? Login"}
-                        </p>
-
-                        <p onClick={() => setShowForgotPassword(true)} className="auth-toggle">Forgot Password?</p>
+    
+                        <div className="login-links">
+                            <p onClick={() => {
+                                setIsLogin(!isLogin);
+                                setRegistrationStep(1);
+                            }}>
+                                {isLogin ? "Don't have an account? Signup" : "Already have an account? Login"}
+                            </p>
+                            <p onClick={() => setShowForgotPassword(true)}>Forgot Password?</p>
+                        </div>
                     </>
                 ) : (
                     <>
-                        <h3 className="auth-title">Reset Password</h3>
+                        <h3 className="login-heading">Reset Password</h3>
                         <input
                             type="email"
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="auth-input"
+                            className="login-input"
                         />
                         {isCodeSent && (
                             <>
@@ -249,25 +285,36 @@ const LoginRegister = ({ onClose }) => {
                                     placeholder="Enter verification code"
                                     value={verificationCode}
                                     onChange={(e) => setVerificationCode(e.target.value)}
-                                    className="auth-input"
+                                    className="login-input"
                                 />
                                 <input
                                     type="password"
                                     placeholder="Enter new password"
                                     value={newPassword}
                                     onChange={(e) => setNewPassword(e.target.value)}
-                                    className="auth-input"
+                                    className="login-input"
                                 />
-                                <button onClick={resetPassword} className="auth-button" disabled={loading}>Reset & Login</button>
+                                <button onClick={resetPassword} className="login-button" disabled={loading}>
+                                    Reset & Login
+                                </button>
                             </>
                         )}
-                        {!isCodeSent && <button onClick={requestPasswordReset} className="auth-button" disabled={loading}>Send Code</button>}
-                        <p onClick={handleBackToLogin} className="auth-toggle">Back to Login</p>
+                        {!isCodeSent && (
+                            <button onClick={requestPasswordReset} className="login-button" disabled={loading}>
+                                Send Code
+                            </button>
+                        )}
+                        <div className="login-links">
+                            <p onClick={handleBackToLogin}>Back to Login</p>
+                        </div>
                     </>
                 )}
             </div>
+            )}
         </div>
-    );
+        </div>
+    );    
+
 };
 
 export default LoginRegister;
