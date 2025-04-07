@@ -53,7 +53,7 @@
     transform: scale(1.10);
   }
   .team-card h2{
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
@@ -69,6 +69,7 @@ h2 {
   word-break: break-word;
   white-space: pre-line;
   max-width: 100%;
+  color: whitesmoke;
 }
 
 .edit-icon {
@@ -205,7 +206,7 @@ li {
 
 label {
   font-size: 14px;
-  color: #00f7ff;
+  color: #d1d4d4;
   margin-top: 8px;
   display: block;
   text-align: left;

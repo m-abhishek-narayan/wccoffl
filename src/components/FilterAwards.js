@@ -72,7 +72,7 @@ const FilterAwards = ({ initialData }) => {
             setShowDone(false);
         } catch (error) {
             console.error("Error applying filters:", error);
-        }finally {
+        } finally {
             setLoading(false);
         }
     };
@@ -96,11 +96,20 @@ const FilterAwards = ({ initialData }) => {
                 <table className="table">
                     <thead>
                         <tr>
-                            {["winner", "date", "position", "team"].map((col) => (
-                                <th key={col} onClick={() => handleHeaderClick(col)} style={{ cursor: "pointer" }}>
-                                    {col.charAt(0).toUpperCase() + col.slice(1)}
-                                </th>
-                            ))}
+                            {["winner", "date", "position", "team"].map((col) => {
+                                const isActive = filters[col] || (col === "date" && filters.date);
+                                return (
+                                    <th
+                                        key={col}
+                                        onClick={() => handleHeaderClick(col)}
+                                        className={isActive ? "active-filter" : ""}
+                                    >
+                                        {col.charAt(0).toUpperCase() + col.slice(1)}
+                                        <span className="filter-icon">🔍</span>
+                                    </th>
+                                );
+                            })}
+
                         </tr>
                         {activeColumn && (
                             <tr>

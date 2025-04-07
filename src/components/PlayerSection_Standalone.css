@@ -4,13 +4,7 @@
     margin: 0;
     padding: 0;
   }
-  
-  /* Body Settings */
-  body {
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-  }
-  
+
   /* Main Container */
   .player-section {
     display: flex;
@@ -141,12 +135,7 @@
       height: 120px;
     }
   }
-  
-  /* Prevent Horizontal Scrolling */
-  html, body {
-    width: 100%;
-    overflow-x: hidden;
-  }
+
   .player-details {
     display: block !important;
     opacity: 1 !important;

@@ -90,6 +90,7 @@ const HomePage = () => {
       const response = await axios.get(`${API_BASE_URL}/api/teams`);
       const { team1, team2 } = response.data || {};
 
+
       setTeamA({ ...teamA, ...team1 });
       setTeamB({ ...teamB, ...team2 });
       showAlert("Teams updated!");
@@ -120,11 +121,13 @@ const HomePage = () => {
   const handleResetLatestScore = async () => {
     if (!isAdmin || !lastWinner) return;
 
+
     try {
       setLoading(true);
       const response = await axios.put(`${API_BASE_URL}/api/team/revert`, {
         lastWinnerId: lastWinner,
       });
+
 
       if (response.status === 200) {
         setLastWinner(null);
@@ -147,17 +150,21 @@ const HomePage = () => {
       setLoading(true);
       const response = await axios.post(`${API_BASE_URL}/api/team/end-series`);
 
+
       if (response.status === 200) {
         const { winningTeam } = response.data; // Get winning team details
+
 
         setWinner({
           captain: winningTeam?.captain || "No winner",
           team: winningTeam?.teamName || "Draw",
         });
 
+
         showAlert(
           `Series Ended! Winning Team: ${winningTeam?.teamName || "Draw"}, Captain: ${winningTeam?.captain || "None"}`
         );
+
 
         fetchTeams();
         fetchAllSeriesHistory();
@@ -174,7 +181,6 @@ const HomePage = () => {
 
 
   const toggleCollapse = () => setIsOpen(!isOpen);
-
   return (
     <div className="homepage">
       {alert.message && (
@@ -199,10 +205,10 @@ const HomePage = () => {
             >
               Update Score
             </button>
-          ) :(<div className="win-btns-container">
-          <button className="match-btn win-btn" onClick={() => handleWin("A")} disabled={loading}>Team A Wins</button>
-          <button className="match-btn loss-btn" onClick={() => handleWin("B")} disabled={loading}>Team B Wins</button>
-          <div className="cancel-cross" onClick={() => setShowWinButtons(false)}>❌</div></div>)}
+          ) : (<div className="win-btns-container">
+            <button className="match-btn win-btn" onClick={() => handleWin("A")} disabled={loading}>Team A Wins</button>
+            <button className="match-btn loss-btn" onClick={() => handleWin("B")} disabled={loading}>Team B Wins</button>
+            <div className="cancel-cross" onClick={() => setShowWinButtons(false)}>❌</div></div>)}
           {!showWinButtons && (
             <>
               <button className="reset-btn" onClick={handleResetLatestScore} disabled={!lastWinner || loading}>Revert Last Result</button>
@@ -210,11 +216,11 @@ const HomePage = () => {
             </>
           )}
         </div>
-        )
-          // : isLoggedIn ? (
-          //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
-          // ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)
-        }
+      )
+        // : isLoggedIn ? (
+        //   <p className="not-admin-message">You are signed in but do not have admin privileges.</p>
+        // ) : (<button onClick={() => navigate("/login")}>Please Login as Admin to Update Score</button>)
+      }
       <div className="match-coverage-container">
         {loading && <p>Loading series history...</p>}
         {seriesHistory.length === 0 ? (

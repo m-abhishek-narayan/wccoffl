@@ -13,24 +13,26 @@ const Profile_Page = () => {
   );
 
   return (
-    <div className="bg-gray-50 min-h-screen p-4">
-      {/* Page Title */}
-      <h1 className="text-3xl font-bold text-center mb-6">Player Profiles</h1>
+    <div className="Profile_page pt-20 bg-gray-50 min-h-screen p-4">
+      <div className="bg-gray-50 min-h-screen p-4">
+        {/* Page Title */}
+        <h1 className="text-3xl font-bold text-center mb-6">Player Profiles</h1>
 
-      {/* Search Bar Section */}
-      <div className="search-container">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="Search for a player..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
+        {/* Search Bar Section */}
+        <div className="search-container">
+          <input
+            type="text"
+            className="search-bar"
+            placeholder="Search for a player..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
 
-      {/* Player Section with Filtered Players */}
-      <div className="player-section-wrapper">
-        <PlayerSection players={filteredPlayers} />
+        {/* Player Section with Filtered Players */}
+        <div className="player-section-wrapper">
+          <PlayerSection players={filteredPlayers} />
+        </div>
       </div>
     </div>
   );
