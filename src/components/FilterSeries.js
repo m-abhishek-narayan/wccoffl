@@ -5,7 +5,7 @@ import "./filterseries.css";
 
 const API_BASE_URL = "https://wccbackend.onrender.com";
 
-const FilterSeries = ({ initialData }) => {
+const FilterSeries = ({ initialData, isOpen }) => {
   const [filteredData, setFilteredData] = useState(initialData || []);
   const [dropdownOptions, setDropdownOptions] = useState({});
   const [filters, setFilters] = useState({});
@@ -92,7 +92,8 @@ const FilterSeries = ({ initialData }) => {
 
   return (
     <>
-      <div>
+      <div >
+      <div className={`collapsible-content ${isOpen ? "open" : ""}`}>
         <table className="series-table">
           <thead>
             <tr>
@@ -210,6 +211,7 @@ const FilterSeries = ({ initialData }) => {
             Clear
           </button>
         )}
+      </div>
       </div>
     </>
   );
