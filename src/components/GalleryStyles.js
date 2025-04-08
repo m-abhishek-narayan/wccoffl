@@ -1,40 +1,40 @@
 import styled from "styled-components";
 
-// Main container
 export const Container = styled.div`
   text-align: center;
   margin-bottom: 50px;
-  padding-top: 40px; /* Add space above the gallery */
+  padding-top: 40px;
 `;
 
-// Horizontal Tabs Container
 export const TabContainer = styled.div`
   display: flex;
+  justify-content: center; /* Center align the tabs */
   overflow-x: auto;
   padding: 10px;
   margin-bottom: 20px;
 `;
 
 export const TabButton = styled.button`
-  background: ${props => (props.isActive ? "#1e3d58" : "transparent")};
-  color: ${props => (props.isActive ? "#fff" : "#b0b0b0")};
-  border: 2px solid ${props => (props.isActive ? "#fff" : "#1e3d58")}; /* White border on active */
+  background: ${({ isActive }) =>
+    isActive ? "linear-gradient(135deg, #2c2c2c, #444)" : "transparent"};
+  color: ${({ isActive }) => (isActive ? "#fff" : "#ccc")};
+  border: 2px solid ${({ isActive }) => (isActive ? "#ffd700" : "#666")};
   padding: 10px 20px;
   margin-right: 10px;
   border-radius: 20px;
   cursor: pointer;
   font-weight: bold;
-  transition: background 0.3s, border 0.3s;
+  transition: background 0.3s, border 0.3s, color 0.3s;
 
   &:hover {
-    background: #1e3d58;
+    background: linear-gradient(135deg, #2c2c2c, #444);
     color: #fff;
-    border: 2px solid #fff; /* White border on hover */
+    border: 2px solid #ffd700;
   }
 `;
 
 
-// Albums grid container
+
 export const GalleryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;

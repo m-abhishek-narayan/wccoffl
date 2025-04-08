@@ -124,7 +124,7 @@ const Awards = () => {
             fetchData();
         } catch (error) {
             setMessage("Error uploading data. Please try again.");
-        }finally {
+        } finally {
             setLoading(false);
         }
 
@@ -152,8 +152,8 @@ const Awards = () => {
         <>
             {/* Main Title */}
             <div className="awards-container">
-                <h2>🏆 Kava Awards</h2>
-            
+                <h2>Kava Awards</h2>
+
                 {/* Award Section */}
                 <div className="award-container">
                     <div className="award-section">
@@ -165,7 +165,7 @@ const Awards = () => {
                             />
                             <h3 className="sub-title">Kava Award of the Week</h3>
                         </div>
-    
+
                         <div className="award-details">
                             {latestEntry ? (
                                 <>
@@ -185,7 +185,7 @@ const Awards = () => {
                         </div>
                     </div>
                 </div>
-    
+
                 {/* Form as a Pop-up Modal */}
                 {showForm && (
                     <div className="modal-overlay">
@@ -256,7 +256,7 @@ const Awards = () => {
                         </div>
                     </div>
                 )}
-    
+
                 {/* Collapsible Awards Table */}
                 <div className="history-section">
                     <h3 onClick={toggleTable} className="collapsible-header">
@@ -296,24 +296,41 @@ const Awards = () => {
                         </div>
                     )} */}
                 </div>
-    
+
                 {/* Stylish Separator */}
                 <div className="separator-line"></div>
-    
+
                 {/* History Section */}
                 <div className="kava-history-section">
-                    <h3>🏅 History of Kava Awards (2017-2024)</h3>
-                    <div className="history-container responsive-grid">
-                        {kavaHistoryData.map((item, index) => (
-                            <div key={index} className="history-card">
-                                <img src={item.img} alt={item.winner} className="player-img responsive-img" />
-                                <div className="history-info">
-                                    <p><strong>{item.year}</strong></p>
-                                    <p>{item.winner}</p>
-                                    <p>Matches: {item.matches} | Kavas: {item.kavas} | Win %: {item.percent}</p>
-                                </div>
-                            </div>
-                        ))}
+                    <h3>🏅 History of Kava Awards (2017–2024)</h3>
+
+                    <div className="kava-history-table-container">
+                        <table className="kava-history-table">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Winner</th>
+                                    <th>Image</th>
+                                    <th>Matches</th>
+                                    <th>Kavas</th>
+                                    <th>Win %</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {kavaHistoryData.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.year}</td>
+                                        <td>{item.winner}</td>
+                                        <td>
+                                            <img src={item.img} alt={item.winner} />
+                                        </td>
+                                        <td>{item.matches}</td>
+                                        <td>{item.kavas}</td>
+                                        <td>{item.percent}%</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

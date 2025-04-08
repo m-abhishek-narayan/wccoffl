@@ -1,16 +1,17 @@
-/* Player Section Styling */
+/* 🌌 Player Section Themed Styling */
 .player-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 2rem;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
+  z-index: 1;
 }
 
-/* Blur Background Effect */
+/* Frosted Glass Background */
 .player-section::before {
   content: '';
   position: absolute;
@@ -18,9 +19,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
-  backdrop-filter: blur(10px); /* Blurring effect */
-  z-index: -1; /* Behind the content */
+  background: rgba(15, 15, 15, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: -1;
+  border-radius: 1rem;
 }
 
 /* Player Container */
@@ -31,56 +34,55 @@
   width: 100%;
 }
 
+/* Player List */
 .player-list {
-  margin-top: 20px;
-  list-style-type: none;
+  margin-top: 1.5rem;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 1rem;
 }
 
 .player-item {
-  padding: 10px;
-  background-color: #333;
-  margin: 5px;
-  color: white;
-  border-radius: 5px;
+  background: rgba(30, 30, 30, 0.8);
+  color: #f0f0f0;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
   width: 200px;
   text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .player-item:hover,
 .player-item.active {
   background-color: #007bff;
+  color: white;
+  transform: scale(1.03);
 }
 
 /* Player Details */
 .player-details {
-  margin-top: 20px;
-  background-color: #0a2f6a;
-  border-radius: 10px;
-  padding: 20px;
+  margin-top: 2rem;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 2rem;
   width: 100%;
   max-width: 900px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
-  opacity: 1;
   animation: fadeIn 0.5s ease-out;
+  color: #e0e0e0;
 }
 
-/* Smooth Fade-in Effect for Player Details */
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .player-details-image {
@@ -88,28 +90,31 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
+  border: 3px solid #007bff;
 }
 
 .player-details h2 {
-  font-size: 1.6rem;
-  margin-bottom: 10px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .player-details p {
   font-size: 1rem;
-  color: #f8eeee;
+  color: #ccc;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 0.5rem;
+  line-height: 1.5;
 }
 
-/* Auto-Rotating Image Section */
+/* Image Carousel */
 .player-images {
   display: flex;
   overflow: hidden;
   width: 100%;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
 .player-carousel-image {
@@ -117,90 +122,60 @@
   height: auto;
   transition: transform 1s ease-in-out;
   object-fit: cover;
+  border-radius: 0.75rem;
 }
 
-/* Add a simple animation for the carousel effect */
-@keyframes slide {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-/* Responsiveness for different screen sizes */
-@media screen and (min-width: 768px) {
+/* Responsive Tweaks */
+@media (min-width: 768px) {
   .player-section {
-    padding: 30px;
+    padding: 2.5rem;
   }
 
   .player-container {
     flex-direction: row;
+    gap: 2rem;
   }
 
   .player-list {
-    display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     margin-top: 0;
+    width: 40%;
   }
 
   .player-details {
     width: 60%;
   }
-
-  .player-item {
-    width: 180px;
-    margin: 5px 10px;
-  }
 }
 
-@media screen and (min-width: 1024px) {
+@media (min-width: 1024px) {
   .player-section {
-    max-width: 1200px;
-    padding: 40px;
-  }
-
-  .player-container {
-    justify-content: flex-start;
+    padding: 3rem;
   }
 
   .player-list {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
-  }
-
-  .player-item {
-    width: 220px;
-    margin: 10px;
   }
 
   .player-details {
-    width: 50%;
+    width: 55%;
   }
 }
 
-@media screen and (min-width: 1440px) {
+@media (min-width: 1440px) {
   .player-section {
-    padding: 50px;
+    padding: 4rem;
   }
 
   .player-container {
     max-width: 1400px;
   }
 
-  .player-list {
-    justify-content: flex-start;
-  }
-
   .player-item {
     width: 240px;
-    margin: 15px;
   }
 
   .player-details {
-    width: 45%;
+    width: 50%;
   }
 }

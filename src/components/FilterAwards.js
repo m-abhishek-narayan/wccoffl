@@ -93,6 +93,7 @@ const FilterAwards = ({ initialData }) => {
         <>
             {/* Table with clickable headers */}
             <div className="table-container responsive-table">
+            <h5>Please do click on the table header for filtering</h5>
                 <table className="table">
                     <thead>
                         <tr>
@@ -166,6 +167,7 @@ const FilterAwards = ({ initialData }) => {
                         )}
                     </tbody>
                 </table>
+                
             </div>
 
             {/* Selected filters as tags */}
