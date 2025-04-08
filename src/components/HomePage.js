@@ -227,11 +227,11 @@ const HomePage = () => {
           <p>No series history found.</p>
         ) : (
           <>
-    <div className="past-series-container">
+    <div >
       <button onClick={toggleCollapse} className="collapsible-header">
         Past series Scorelines: {isOpen ? "▲" : "▼"}
       </button>
-      {isOpen && <FilterSeries initialData={seriesHistory} />}
+      <FilterSeries initialData={seriesHistory} isOpen={isOpen} />
       {/* <div className={`collapsible-content ${isOpen ? "open" : ""}`}>
         <table className="series-table">
           <thead>
