@@ -21,7 +21,7 @@ const albums = [
   { year: "2023", albums: [{ title: "WCC 2023", imgSrc: "/img/wcc2023.jpg", link: "https://photos.app.goo.gl/PxygRZ8VuGkyAPtYA" }] },
   { year: "2024", albums: [{ title: "WCC 2024 Party", imgSrc: "/img/wcc2024party.jpg", link: "https://photos.app.goo.gl/T9KArYTZAfNZeUCW8" }] },
 ];
-
+ 
 function Gallery() {
   const [activeYear, setActiveYear] = useState("2017");
 

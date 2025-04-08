@@ -11,27 +11,25 @@
 .team-card {
   flex: 1 1 45%;
   min-width: 0;
-  background: linear-gradient(135deg, #243b55, #141e30);
+  background: linear-gradient(135deg, #2a2a2a, #1b1b1b);
   border-radius: 20px;
   padding: 16px;
   text-align: center;
-  color: #fff;
+  color: #f5f5f5;
   box-sizing: border-box;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.1);
 }
 
 .team-card:hover {
   transform: scale(1.10);
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.3);
 }
 
 @media (max-width: 768px) {
   .team-card {
     flex: 1 1 50%;
     padding: 13px;
-  }
-
-  .team-card:hover {
-    transform: scale(1.10);
   }
 }
 
@@ -49,10 +47,7 @@
     padding: 10px;
   }
 
-  .team-card:hover {
-    transform: scale(1.10);
-  }
-  .team-card h2{
+  .team-card h2 {
     font-size: 14px;
   }
 }
@@ -65,25 +60,25 @@ h2 {
   text-align: center;
   font-size: 24px;
   margin-bottom: 15px;
+  color: #FFD700;
   position: relative;
   word-break: break-word;
   white-space: pre-line;
   max-width: 100%;
-  color: whitesmoke;
 }
 
 .edit-icon {
   position: absolute;
-  top: 01px;
-  right: 01px;
+  top: 1px;
+  right: 1px;
   cursor: pointer;
   font-size: 20px;
-  color: #00f7ff;
+  color: #FFD700;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .edit-icon:hover {
-  color: #00ff99;
+  color: #C9A634;
   transform: rotate(360deg);
 }
 
@@ -92,6 +87,7 @@ h2 {
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
+  color: #FFD700;
 }
 
 .results {
@@ -112,28 +108,28 @@ h2 {
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
-  box-shadow: 0 0 12px #00f7ff;
+  box-shadow: 0 0 12px #FFD700;
 }
 
 .win {
-  background: #00ff00;
-  color: #0d0;
-  text-shadow: 0 0 12px #00ff00;
-  box-shadow: 0 0 15px #00ff00;
+  background: #1f3d1f;
+  color: #a1eaa1;
+  text-shadow: 0 0 8px #a1eaa1;
+  box-shadow: 0 0 10px #00c800;
 }
 
 .loss {
-  background: #ff4d4d;
-  color: #ff0000;
-  text-shadow: 0 0 12px #ff4d4d;
-  box-shadow: 0 0 15px #ff4d4d;
+  background: #3d1f1f;
+  color: #ff6666;
+  text-shadow: 0 0 8px #ff6666;
+  box-shadow: 0 0 10px #ff1a1a;
 }
 
 .neutral {
-  background: #312e2e;
-  color: #ffffff;
-  text-shadow: 0 0 12px #fffcfc;
-  box-shadow: 0 0 15px #3f3a3a;
+  background: #2e2e2e;
+  color: #dcdcdc;
+  text-shadow: 0 0 8px #aaa;
+  box-shadow: 0 0 10px #555;
 }
 
 ul {
@@ -159,9 +155,9 @@ li {
   width: 90%;
   padding: 10px;
   margin-top: 8px;
-  border: 1px solid #555;
+  border: 1px solid #777;
   border-radius: 6px;
-  background-color: #222;
+  background-color: #1e1e1e;
   color: #fff;
   text-align: center;
 }
@@ -176,8 +172,9 @@ li {
 
 .save-btn {
   padding: 10px 15px;
-  background: linear-gradient(135deg, #4caf50, #2e8b57);
-  color: #fff;
+  background: linear-gradient(135deg, #C9A634, #FFD700);
+  color: #000;
+  font-weight: bold;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -185,13 +182,13 @@ li {
 }
 
 .save-btn:hover {
-  background: linear-gradient(135deg, #2e8b57, #4caf50);
-  box-shadow: 0 0 15px #4caf50;
+  background: linear-gradient(135deg, #FFD700, #C9A634);
+  box-shadow: 0 0 15px #FFD700;
 }
 
 .cancel-btn-team {
   padding: 10px 15px;
-  background: linear-gradient(135deg, #ff4d4d, #ff0000);
+  background: linear-gradient(135deg, #5a2a2a, #ff0000);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -199,8 +196,8 @@ li {
   transition: all 0.3s ease;
 }
 
-.cancel-btn:hover {
-  background: linear-gradient(135deg, #ff0000, #ff4d4d);
+.cancel-btn-team:hover {
+  background: linear-gradient(135deg, #ff0000, #5a2a2a);
   box-shadow: 0 0 15px #ff4d4d;
 }
 

@@ -5,7 +5,6 @@
     padding: 0;
   }
  
-  /* Profile Page Background */
   .bg-gray-50 {
     min-height: 100vh;
     display: flex;
@@ -13,12 +12,12 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background: linear-gradient(135deg, #1e3c72, #0d182b, #000000, #e7faff);
-    /* background-color: #e0e0e0; */
+    background: linear-gradient(135deg, #2C3E50, #1C1C1C, #0F0F0F);
     background-size: 300% 300%;
     animation: gradientAnimation 12s ease infinite;
     padding-top: 50px;
   }
+  
   
   /* Gradient Animation */
   @keyframes gradientAnimation {

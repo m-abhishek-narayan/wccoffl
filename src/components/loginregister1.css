@@ -42,11 +42,11 @@
   height: 150px;
   background: repeating-conic-gradient(
     from var(--login-a),
-    #ff2770 0%,
-    #ff2770 5%,
+    #0d0d4e 0%,
+    #004261 5%,
     transparent 5%,
     transparent 40%,
-    #ff2770 50%
+    #041e67 50%
   );
   filter: drop-shadow(0 15px 50px #000);
   border-radius: 20px;
@@ -66,11 +66,11 @@
   height: 100%;
   background: repeating-conic-gradient(
     from var(--login-a),
-    #45f3ff 0%,
-    #45f3ff 5%,
+    #dfe604 0%,
+    #bad209 5%,
     transparent 5%,
     transparent 40%,
-    #45f3ff 50%
+    #eaee10 50%
   );
   filter: drop-shadow(0 15px 50px #000);
   border-radius: 20px;
@@ -163,8 +163,8 @@
 }
 
 .login-heading i {
-  color: #ff2770;
-  text-shadow: 0 0 5px #ff2770, 0 0 20px #ff2770;
+  color: #cbcf0f;
+  text-shadow: 0 0 5px #d0ff27, 0 0 20px #f4e219;
 }
 
 /* Inputs */
@@ -194,7 +194,7 @@
 .login-button {
     width: 100%; /* Same width as inputs */
     padding: 0.85rem 1rem; /* Matching vertical padding */
-    background: linear-gradient(135deg, #45f3ff, #ff2770);
+    background: linear-gradient(135deg, #042e64, #d3d70a);
     color: #fff;
     font-weight: 600;
     font-size: 1rem;
@@ -208,7 +208,7 @@
   }
   
   .login-button:hover {
-    background: linear-gradient(135deg, #ff2770, #45f3ff);
+    background: linear-gradient(135deg, #e2da05, #032350);
     box-shadow: 0 0 15px #45f3ff, 0 0 30px #ff2770;
     transform: scale(1.05);
   }

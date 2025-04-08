@@ -77,7 +77,6 @@ const Home2 = () => {
     };
 
     return (
-        <div className="home2-wrapper">
             <div className="home2-scorecard">
                 {/* Make home2-teams clickable */}
                 <div className="home2-teams" onClick={handleTeamClick} style={{ cursor: "pointer" }}>
@@ -122,7 +121,6 @@ const Home2 = () => {
                     </div>
                 </div>
             </div>
-        </div>
     );
 };
 

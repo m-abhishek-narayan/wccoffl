@@ -196,3 +196,12 @@ h2 {
   text-transform: uppercase; /* Adds emphasis */
   letter-spacing: 2px; /* Small letter spacing for a clean look */
 }
+@media (min-width: 768px) {
+  .bg-gray-50 {
+    justify-content: flex-start;
+    padding-top: 60px; /* Optional: add space at top */
+  }
+}
+.player-scroll-wrapper {
+  max-width: 600px;
+}
