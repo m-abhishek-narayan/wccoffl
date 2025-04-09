@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Profile.css"; // Profile Styles
-import players from "../players"; // Player Data
+import players from "./players"; // Player Data
 
 const Profile = () => {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
@@ -13,9 +13,10 @@ const Profile = () => {
     if (!autoScrollRef.current) {
       autoScrollRef.current = setInterval(() => {
         if (scrollRef.current && !isScrollingRef.current) {
-          scrollRef.current.scrollBy({ left: 100, behavior: "smooth" });
+          scrollRef.current.scrollBy({ left: 50, behavior: "smooth" });
         }
-      }, 2000);
+      }, 1500);
+      
     }
   };
 

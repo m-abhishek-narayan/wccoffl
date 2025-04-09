@@ -44,6 +44,8 @@ export const GalleryContainer = styled.div`
 
 export const AlbumCard = styled.a`
   position: relative;
+  width: 250px;         // Fixed width
+  height: 180px;        // Fixed height
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -58,9 +60,11 @@ export const AlbumCard = styled.a`
 
 export const AlbumImg = styled.img`
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;  // This ensures the image fills the box nicely
   display: block;
 `;
+
 
 export const AlbumOverlay = styled.div`
   position: absolute;
