@@ -80,6 +80,13 @@ button:hover {
 .end-btn {
   background-color: #1e1e1e;
 }
+.admin-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 16px;
+}
 
 .win-btn {
   background-color: var(--gold);
@@ -132,8 +139,11 @@ button:hover {
   letter-spacing: 0.5px;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
 }
 
 .collapsible-header:hover {
@@ -275,6 +285,11 @@ button:hover {
   .series-table td {
   padding: 10px 8px;
   font-size: 0.85rem;
+  }
+
+  .admin-controls {
+    flex-direction: column;
+    align-items: center;
   }
   
   .past-series-heading {

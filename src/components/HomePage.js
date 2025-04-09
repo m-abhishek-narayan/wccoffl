@@ -38,6 +38,7 @@ const HomePage = () => {
   const [showWinButtons, setShowWinButtons] = useState(false);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [filterTableRefreshKey, setFilterTableRefreshKey] = useState(0);
   const [alert, setAlert] = useState({
     message: "",
     type: "",
@@ -168,6 +169,7 @@ const HomePage = () => {
 
         fetchTeams();
         fetchAllSeriesHistory();
+        setFilterTableRefreshKey(prev => prev + 1);
       } else {
         showAlert("Error ending series.", "error");
       }
@@ -231,7 +233,7 @@ const HomePage = () => {
       <button onClick={toggleCollapse} className="collapsible-header">
         Past series Scorelines: {isOpen ? "▲" : "▼"}
       </button>
-      <FilterSeries initialData={seriesHistory} isOpen={isOpen} />
+      <FilterSeries initialData={seriesHistory} isOpen={isOpen} key={filterTableRefreshKey}/>
       {/* <div className={`collapsible-content ${isOpen ? "open" : ""}`}>
         <table className="series-table">
           <thead>
