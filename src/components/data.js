@@ -2,22 +2,6 @@
 
 const kavaHistoryData = [
     {
-        year: 2017,
-        winner: "Amit Sharma",
-        matches: 50,
-        kavas: 30,
-        percent: "60%",
-        img: "/img/amit-sharma.png",
-    },
-    {
-        year: 2018,
-        winner: "Rohan Verma",
-        matches: 48,
-        kavas: 28,
-        percent: "58%",
-        img: "/img/rohan-verma.png",
-    },
-    {
         year: 2019,
         winner: "Siddharth Rao",
         matches: 52,

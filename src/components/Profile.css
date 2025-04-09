@@ -55,7 +55,7 @@ h1 {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(-230%);
   }
 }
 
@@ -203,5 +203,16 @@ h2 {
   }
 }
 .player-scroll-wrapper {
-  max-width: 600px;
+  max-width: 100%;
+}
+.player-photo {
+  width: 22vw;              /* Scales nicely on all screen sizes */
+  max-width: 120px;         /* Prevents it from being too large on desktops */
+  aspect-ratio: 1 / 1;      /* Maintains perfect square = perfect circle with border-radius */
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, border 0.3s;
 }

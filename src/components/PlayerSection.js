@@ -6,7 +6,7 @@ function PlayerSection({ players }) {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [isLocked, setIsLocked] = useState(false); // Prevent hover change after click
   const [isModalActive, setIsModalActive] = useState(false); // Track modal visibility
-
+ 
   useEffect(() => {
     if (!selectedPlayer && players.length > 0) {
       setSelectedPlayer(players[0]);

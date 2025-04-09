@@ -39,7 +39,6 @@ function PlayerSection({ players }) {
                 src={selectedPlayer.image}
                 alt={selectedPlayer.name}
                 className="player-image"
-                onError={(e) => (e.target.style.display = "none")} // Hide broken images
               />
               <h2>{selectedPlayer.name || "Unknown Player"}</h2>
               <p>{selectedPlayer.details || "No details available."}</p>
