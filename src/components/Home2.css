@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 60%;
+    max-width: 100%;
 }
 
 .home2-team {
@@ -29,6 +29,21 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.home2-team-top {
+    background-color: #252525; /* Deepened card */
+    border-radius: 8px;
+    padding: 9px 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    margin-top: 70px;
+}
+
+.home2-team-bottom {
+    background-color: #252525; /* Deepened card */
+    border-radius: 8px;
+    padding: 9px 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .home2-team-header {
@@ -43,10 +58,14 @@
     font-size: 0.95rem;
     color: gold; /* Cool green accent */
     padding-bottom: 10px;
+    word-break: break-word;
+    white-space: pre-line;
 }
 
 .home2-team-points {
     font-size: 0.85rem;
+    top: 1px;
+    right: 1px;
     color: gold; /* Yellow-orange accent */
 }
 
@@ -56,6 +75,7 @@
 }
 
 .home2-score-history span {
+    gap: 5px;
     font-size: 0.85rem;
     padding: 5px 7px;
     border-radius: 5px;
@@ -80,8 +100,13 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
+.home2-team-head{
+    margin-top: 30px;
+    font-size: 1.25rem;
+}
+
 .home2-award {
-    width: 35%;
+    width: 65%;
     background-color: #252525;
     border-radius: 8px;
     padding: 14px;
@@ -107,11 +132,13 @@
     font-size: 0.75rem;
     margin: 5px 0;
     color: #cccccc;
+    text-align: center;
 }
 
 .home2-detail-header {
     font-weight: bold;
     color: #dddddd;
+    font-size: 0.75rem;
 }
 
 /* Mobile Responsiveness */
@@ -127,11 +154,11 @@
     }
 
     .home2-teams {
-        width: 50%;
+        width: 30%;
     }
 
     .home2-award {
-        width: 45%;
+        width: 65%;
     }
 
     .home2-team {
@@ -178,13 +205,25 @@
     .home2-team-name {
         font-size: 0.85rem;
     }
+    .home2-team-top {
+        margin-top: 05px;
+    }
+    .home2-team-bottom{
+        margin-bottom: 05px;
+    }
 
     .home2-team-points {
         font-size: 0.75rem;
     }
 
+    .home2-team-head{
+        font-size: 0.55rem;
+    }
+
     .home2-score-history span {
         font-size: 0.75rem;
+        width: 16px;
+        gap: 5px;
         padding: 4px 5px;
     }
 
@@ -194,6 +233,16 @@
 
     .home2-award-details p {
         font-size: 0.55rem;
+    }
+    .home2-detail-header {
+        font-size: 0.55rem;
+    }
+    .home2-teams {
+        width: 30%;
+    }
+
+    .home2-award {
+        width: 65%;
     }
 }
 .home2-scorecard {

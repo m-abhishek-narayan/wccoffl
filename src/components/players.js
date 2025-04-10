@@ -311,7 +311,14 @@ const players = [
     "name": "Aadhavan",
     "details": "Aadhavan’s thoughtfulness and loyalty are unmatched.",
     "image": "/img/players/Aadhavan.png"
-  }
+  },
+  {
+    "id": 43, 
+    "name": "Rajesh", 
+"nickname": "Roller",
+    "details": "Rajesh is a good left hand batsman ", 
+    "image": "/img/players/Rajesh.png" 
+  } 
 ];
 
 

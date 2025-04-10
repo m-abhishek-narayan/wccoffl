@@ -80,10 +80,16 @@ const Home2 = () => {
             <div className="home2-scorecard">
                 {/* Make home2-teams clickable */}
                 <div className="home2-teams" onClick={handleTeamClick} style={{ cursor: "pointer" }}>
-                    <div>CURRENT SERIES SCORE</div>
-                    <div className="home2-team">
+                    <div className="home2-team-head">CURRENT SERIES SCORE</div>
+                    <div className="home2-team-top">
                         <div className="home2-team-header">
-                            <span className="home2-team-name">{teams?.team1?.teamName || "N/A"}</span>
+                            <span className="home2-team-name">{teams?.team1?.teamName.split(" ").length > 1 ? (
+                                <>
+                                    {teams?.team1?.teamName.split(" ")[0]} <br /> {teams?.team1?.teamName.split(" ").slice(1).join(" ")}
+                                </>
+                                ) : (
+                                    teams?.team1?.teamName
+                                )}</span>
                             <span className="home2-team-points">{teams?.team1?.points || 0}</span>
                         </div>
                         <div className="home2-score-history">
@@ -95,9 +101,15 @@ const Home2 = () => {
                         </div>
                     </div>
 
-                    <div className="home2-team">
+                    <div className="home2-team-bottom">
                         <div className="home2-team-header">
-                            <span className="home2-team-name">{teams?.team2?.teamName || "N/A"}</span>
+                            <span className="home2-team-name">{teams?.team2?.teamName.split(" ").length > 1 ? (
+                                <>
+                                    {teams?.team2?.teamName.split(" ")[0]} <br /> {teams?.team2?.teamName.split(" ").slice(1).join(" ")}
+                                </>
+                                ) : (
+                                    teams?.team2?.teamName
+                                )}</span>
                             <span className="home2-team-points">{teams?.team2?.points || 0}</span>
                         </div>
                         <div className="home2-score-history">
@@ -117,7 +129,7 @@ const Home2 = () => {
                     <div className="home2-award-details">
                         <p><span className="home2-detail-header">Winner:</span> {awardData.winner}</p>
                         <p><span className="home2-detail-header">Date:</span> {awardData.date}</p>
-                        <p><span className="home2-detail-header">Team:</span> {awardData.team}</p>
+                        {/* <p><span className="home2-detail-header">Team:</span> {awardData.team}</p> */}
                     </div>
                 </div>
             </div>

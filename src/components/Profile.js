@@ -1,85 +1,106 @@
-import React, { useState, useEffect, useRef } from "react";
-import "./Profile.css"; // Profile Styles
-import players from "./players"; // Player Data
+import React, { useRef, useState, useEffect } from "react";
+import "./Profile.css";
+import players from "./players";
 
 const Profile = () => {
-  const [selectedPlayer, setSelectedPlayer] = useState(null);
   const scrollRef = useRef(null);
-  const autoScrollRef = useRef(null); // Track auto-scroll interval
-  const isScrollingRef = useRef(false); // Track manual scrolling
+  const animationRef = useRef(null);
+  const isUserInteracting = useRef(false);
+  const resumeTimeoutRef = useRef(null);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
 
-  // Function to start auto-scroll
+  const scrollSpeed = 1.2; // Adjust scroll speed
+
   const startAutoScroll = () => {
-    if (!autoScrollRef.current) {
-      autoScrollRef.current = setInterval(() => {
-        if (scrollRef.current && !isScrollingRef.current) {
-          scrollRef.current.scrollBy({ left: 50, behavior: "smooth" });
+    if (animationRef.current || selectedPlayer) return;
+
+    const scroll = () => {
+      if (scrollRef.current && !isUserInteracting.current) {
+        const container = scrollRef.current;
+        container.scrollLeft += scrollSpeed;
+
+        const half = container.scrollWidth / 2;
+        if (container.scrollLeft >= half) {
+          container.scrollLeft = 0;
         }
-      }, 1500);
-      
-    }
+      }
+      animationRef.current = requestAnimationFrame(scroll);
+    };
+
+    animationRef.current = requestAnimationFrame(scroll);
   };
 
-  // Function to stop auto-scroll
   const stopAutoScroll = () => {
-    if (autoScrollRef.current) {
-      clearInterval(autoScrollRef.current);
-      autoScrollRef.current = null;
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+      animationRef.current = null;
     }
   };
 
-  // Effect to start auto-scroll on mount
   useEffect(() => {
     startAutoScroll();
-
-    return () => stopAutoScroll(); // Cleanup on unmount
+    return () => stopAutoScroll();
   }, []);
 
-  // Handle player selection (stop scrolling)
+  useEffect(() => {
+    if (!selectedPlayer && !isUserInteracting.current) {
+      startAutoScroll();
+    }
+  }, [selectedPlayer]);
+
   const handlePlayerClick = (player) => {
-    stopAutoScroll();
-    setSelectedPlayer(player);
-  };
-
-  // Handle closing player details (resume scrolling)
-  const closeDetails = () => {
-    setSelectedPlayer(null);
-    startAutoScroll(); // Restart scrolling
-  };
-
-  // Detect manual scrolling and pause auto-scroll
-  const handleScroll = () => {
-    const scrollElement = scrollRef.current;
-    isScrollingRef.current = true;
-    stopAutoScroll();
-  
-    // Check if the user has reached the ends
-    if (scrollElement) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollElement;
-      const atStart = scrollLeft === 0;
-      const atEnd = scrollLeft + clientWidth >= scrollWidth;
-  
-      if (!atStart && !atEnd) {
-        setTimeout(() => {
-          isScrollingRef.current = false;
-          if (!selectedPlayer) startAutoScroll(); // Resume only if no player is selected
-        }, 5000); // Resume auto-scroll after 5 sec
-      }
+    if (selectedPlayer?.id === player.id) {
+      closeDetails();
+      startAutoScroll();
+    } else {
+      setSelectedPlayer(player);
+      stopAutoScroll();
     }
   };
-  
+
+  const closeDetails = () => {
+    setSelectedPlayer(null);
+    isUserInteracting.current = false;
+  };
+
+  const handleInteractionStart = () => {
+    isUserInteracting.current = true;
+    stopAutoScroll();
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+  };
+
+  const handleInteractionEnd = () => {
+    if (!selectedPlayer) {
+      resumeTimeoutRef.current = setTimeout(() => {
+        isUserInteracting.current = false;
+        startAutoScroll();
+      }, 3000);
+    }
+  };
+
+  const repeatedPlayers = [...players, ...players];
 
   return (
     <div className="profile-container">
       <h2>Player Profiles</h2>
-
-      {/* Player Scrolling List */}
-      <div className="player-scroll-wrapper" onScroll={handleScroll}>
-        <div
-          className={`player-scroll-container ${selectedPlayer ? "paused" : ""}`} // Add paused class
-          ref={scrollRef}
-        >
-          {[...players, ...players].map((player, index) => (
+      <div
+        className="player-scroll-wrapper"
+        ref={scrollRef}
+        onTouchStart={handleInteractionStart}
+        onTouchMove={handleInteractionStart}
+        onTouchEnd={handleInteractionEnd}
+        onMouseDown={handleInteractionStart}
+        onMouseUp={handleInteractionEnd}
+        onScroll={() => {
+          const scroll = scrollRef.current;
+          const half = scroll.scrollWidth / 2;
+          if (scroll.scrollLeft >= half) {
+            scroll.scrollLeft = 0;
+          }
+        }}
+      >
+        <div className="player-scroll-container">
+          {repeatedPlayers.map((player, index) => (
             <img
               key={index}
               src={player.image}
@@ -88,23 +109,23 @@ const Profile = () => {
                 selectedPlayer?.id === player.id ? "active" : ""
               }`}
               onClick={() => handlePlayerClick(player)}
+              draggable={false}
             />
           ))}
         </div>
       </div>
 
-      {/* Player Details Section */}
       {selectedPlayer && (
         <div className="player-details active">
           <h2>{selectedPlayer.name}</h2>
-          <p>{selectedPlayer.details}</p> 
+          <p>{selectedPlayer.details}</p>
           <button className="close-btn" onClick={closeDetails}>
             Close
           </button>
         </div>
       )}
-    </div> 
+    </div>
   );
 };
 
-export default Profile; 
+export default Profile;
