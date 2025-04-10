@@ -190,6 +190,53 @@
 .login-input::placeholder {
   color: #999;
 }
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper .login-input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* SVG Container */
+.eye-svg .eye-open {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.eye-svg.closed .eye-open {
+  opacity: 0;
+}
+
+.eye-svg .eye-closed {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.eye-svg.closed .eye-closed {
+  opacity: 1;
+}
+
+/* Animate pupil in/out */
+.eye-svg .eye-pupil {
+  transition: r 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.eye-svg.closed .eye-pupil {
+  r: 0;
+  opacity: 0;
+}
 
 .login-button {
     width: 100%; /* Same width as inputs */
