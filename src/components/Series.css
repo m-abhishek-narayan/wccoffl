@@ -271,7 +271,7 @@ button:hover {
   color: #ef9a9a;
   }
   
-  .score-badge.- {
+  .score-badge {
   background-color: #f9a825; /* Amber */
   color: #fff59d;
   }
@@ -320,4 +320,9 @@ button:hover {
 /* Continue the rest of your CSS here... */
 .cancel-cross{
   background-color:transparent
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }

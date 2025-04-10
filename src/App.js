@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import Main from "./components/Main"; // Now contains Home2, Profile, and Gallery
 import Awards from "./components/Awards";
 import Chat from "./components/Chat";
-import Teams from "./components/HomePage"
+import Teams from "./components/Series"
 import Profile_Page from "./components/Profile_Page";
 import LoginRegister from "./components/LoginRegister";
 

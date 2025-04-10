@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./HomePage.css";
+import "./Series.css";
 import "./filterseries.css";
 
 const API_BASE_URL = "https://wccbackend.onrender.com";
