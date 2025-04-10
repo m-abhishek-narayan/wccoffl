@@ -286,7 +286,7 @@ const players = [
     "name": "Abhishek",
     "dob": "08-Dec",
     "details": "Abhishek is the mastermind who always has a plan.",
-    "image": "/img/players/Abhishek.png"
+    "image": "/img/players/Abhishek.jpg"
   },
   {
     "id": 39,
