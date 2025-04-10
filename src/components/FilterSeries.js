@@ -111,109 +111,111 @@ const FilterSeries = ({ initialData, isOpen, filterTableRefreshKey }) => {
     <>
       <div>
         <div className={`collapsible-content ${isOpen ? "open" : ""}`}>
-          <table className="series-table">
-            <thead>
-              <tr>
-                {["Series Date", "Captains", "Winning captain", "Points"].map((col) => (
-                  <th
-                    key={col}
-                    onClick={() => handleHeaderClick(col)}
-                    style={{ cursor: col === "Points" ? "default" : "pointer" }}
-                  >
-                    {col.charAt(0).toUpperCase() + col.slice(1)}
-                  </th>
-                ))}
-              </tr>
-              {activeColumn && (
+          <div className="series-table-wrapper">
+            <table className="series-table">
+              <thead>
                 <tr>
-                  <td colSpan="5">
-                    {activeColumn === "Series Date" ? (
-                      <div className="date-dropdowns">
-                        <select value={dateFilter.startDate} onChange={(e) => handleDateDropdownChange("startDate", e.target.value)}>
-                          <option value="">Start Date</option>
-                          {dropdownOptions.SeriesDate?.startDates?.map((d, idx) => (
-                            <option key={idx} value={d}>{d}</option>
-                          ))}
-                        </select>
-                        <select value={dateFilter.endDate} onChange={(e) => handleDateDropdownChange("endDate", e.target.value)}>
-                          <option value="">End Date</option>
-                          {dropdownOptions.SeriesDate?.endDates?.map((d, idx) => (
-                            <option key={idx} value={d}>{d}</option>
-                          ))}
-                        </select>
-                      </div>
-                    ) : (
-                      <select onChange={(e) => handleFilterChange(activeColumn, e.target.value)} defaultValue="">
-                        <option value="" disabled>Select {activeColumn}</option>
-                        {dropdownOptions[activeColumn]?.map((option, idx) => (
-                          <option key={idx} value={option}>{option}</option>
-                        ))}
-                      </select>
-                    )}
-                  </td>
+                  {["Series Date", "Captains", "Winning captain", "Points"].map((col) => (
+                    <th
+                      key={col}
+                      onClick={() => handleHeaderClick(col)}
+                      style={{ cursor: col === "Points" ? "default" : "pointer" }}
+                    >
+                      {col.charAt(0).toUpperCase() + col.slice(1)}
+                    </th>
+                  ))}
                 </tr>
-              )}
-            </thead>
-            <tbody>
-              {filteredData.length > 0 ? (
-                filteredData.map((series, index) => (
-                  <tr key={index}>
-                    <td>
-                      {formatSeriesDate(series.startDate, series.endDate)}
-                    </td>
-                    <td>
-                      <span className="team team-a">{series?.captain?.teamA || "Unknown"}</span> vs{" "}
-                      <span className="team team-b">{series?.captain?.teamB || "Unknown"}</span>
-                    </td>
-                    <td>
-                      <span className="winner">
-                        {series.points.teamA === series.points.teamB ? `${series?.captain?.teamA} and ${series?.captain?.teamB}` : series.points.teamA > series.points.teamB ? series?.captain?.teamA : series?.captain?.teamB}
-                      </span>
-                    </td>
-                    <td>
-                      <span className="team team-a">{series?.points?.teamA}</span>-{" "}
-                      <span className="team team-b">{series?.points?.teamB}</span>
+                {activeColumn && (
+                  <tr>
+                    <td colSpan="5">
+                      {activeColumn === "Series Date" ? (
+                        <div className="date-dropdowns">
+                          <select value={dateFilter.startDate} onChange={(e) => handleDateDropdownChange("startDate", e.target.value)}>
+                            <option value="">Start Date</option>
+                            {dropdownOptions.SeriesDate?.startDates?.map((d, idx) => (
+                              <option key={idx} value={d}>{d}</option>
+                            ))}
+                          </select>
+                          <select value={dateFilter.endDate} onChange={(e) => handleDateDropdownChange("endDate", e.target.value)}>
+                            <option value="">End Date</option>
+                            {dropdownOptions.SeriesDate?.endDates?.map((d, idx) => (
+                              <option key={idx} value={d}>{d}</option>
+                            ))}
+                          </select>
+                        </div>
+                      ) : (
+                        <select onChange={(e) => handleFilterChange(activeColumn, e.target.value)} defaultValue="">
+                          <option value="" disabled>Select {activeColumn}</option>
+                          {dropdownOptions[activeColumn]?.map((option, idx) => (
+                            <option key={idx} value={option}>{option}</option>
+                          ))}
+                        </select>
+                      )}
                     </td>
                   </tr>
-                ))
+                )}
+              </thead>
+              <tbody>
+                {filteredData.length > 0 ? (
+                  filteredData.map((series, index) => (
+                    <tr key={index}>
+                      <td>
+                        {formatSeriesDate(series.startDate, series.endDate)}
+                      </td>
+                      <td>
+                        <span className="team team-a">{series?.captain?.teamA || "Unknown"}</span> vs{" "}
+                        <span className="team team-b">{series?.captain?.teamB || "Unknown"}</span>
+                      </td>
+                      <td>
+                        <span className="winner">
+                          {series.points.teamA === series.points.teamB ? `${series?.captain?.teamA} and ${series?.captain?.teamB}` : series.points.teamA > series.points.teamB ? series?.captain?.teamA : series?.captain?.teamB}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="team team-a">{series?.points?.teamA}</span>-{" "}
+                        <span className="team team-b">{series?.points?.teamB}</span>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: "center" }}>No data available.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="selected-filters">
+            {Object.entries(filters).map(([key, value]) => (
+              key === "date" ? (
+                <span key={key} className="filter-tag">
+                  {value.startDate && <>Start: <strong>{value.startDate}</strong></>}
+                  {" "}
+                  {value.endDate && <>End: <strong>{value.endDate}</strong></>}
+                  <button className="remove-tag-btn" onClick={() => removeFilter(key)}>❌</button>
+                </span>
               ) : (
-                <tr>
-                  <td colSpan="5" style={{ textAlign: "center" }}>No data available.</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+                <span key={key} className="filter-tag">
+                  {key}: <strong>{value}</strong>
+                  <button className="remove-tag-btn" onClick={() => removeFilter(key)}>❌</button>
+                </span>
+              )
+            ))}
+          </div>
 
-        <div className="selected-filters">
-          {Object.entries(filters).map(([key, value]) => (
-            key === "date" ? (
-              <span key={key} className="filter-tag">
-                {value.startDate && <>Start: <strong>{value.startDate}</strong></>}
-                {" "}
-                {value.endDate && <>End: <strong>{value.endDate}</strong></>}
-                <button className="remove-tag-btn" onClick={() => removeFilter(key)}>❌</button>
-              </span>
-            ) : (
-              <span key={key} className="filter-tag">
-                {key}: <strong>{value}</strong>
-                <button className="remove-tag-btn" onClick={() => removeFilter(key)}>❌</button>
-              </span>
-            )
-          ))}
-        </div>
-
-        <div className="filter-buttons">
-          {showDone && (
-            <button className="filter-done-btn" onClick={applyFilters} disabled={loading}>
-              {loading ? "Loading..." : "Done"}
-            </button>
-          )}
-          {Object.keys(filters).length > 0 && (
-            <button className="filter-clear-btn" onClick={clearFilters}>
-              Clear
-            </button>
-          )}
+          <div className="filter-buttons">
+            {showDone && (
+              <button className="filter-done-btn" onClick={applyFilters} disabled={loading}>
+                {loading ? "Loading..." : "Done"}
+              </button>
+            )}
+            {Object.keys(filters).length > 0 && (
+              <button className="filter-clear-btn" onClick={clearFilters}>
+                Clear
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </>

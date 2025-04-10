@@ -217,6 +217,22 @@ button:hover {
   border-radius: 8px;
   overflow-x: auto;
   }
+  .series-table-wrapper {
+    max-height: 300px; /* Adjust as needed */
+    overflow-y: auto;
+    margin-top: 1rem;
+    border-radius: 8px;
+    border: 1px solid #333;
+  }
+  
+  /* Optional - add scrollbars styling for webkit browsers */
+  .series-table-wrapper::-webkit-scrollbar {
+    width: 8px;
+  }
+  .series-table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 4px;
+  }
   
   .series-table thead {
   background-color: #242424;
