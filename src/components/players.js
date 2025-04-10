@@ -4,7 +4,7 @@ const players = [
     "name": "Julie",
     "dob": "09-Jan",
     "details": "Julie is known for her calm nature and creative ideas.",
-    "image": "/img/players/Julie.png"
+    "image": "/img/players/Julie.jpg"
   },
   {
     "id": 2,
@@ -20,7 +20,7 @@ const players = [
     "dob": "15-Jan",
     "nickname": "Bull Mama",
     "details": "Rahul is the powerhouse of the group with unmatched energy.",
-    "image": "/img/players/Rahul.png"
+    "image": "/img/players/Rahul.jpg"
   },
   {
     "id": 4,
@@ -190,7 +190,7 @@ const players = [
     "dob": "29-Sep",
     "nickname": "Vulture",
     "details": "Venkat watches everything and never misses a beat.",
-    "image": "/img/players/Venkat.png"
+    "image": "/img/players/Venkat.jpg"
   },
   {
     "id": 26,
@@ -227,7 +227,7 @@ const players = [
     "name": "Sriram N",
     "dob": "03-Nov",
     "details": "Sriram N is the creative genius of the group.",
-    "image": "/img/players/Sriram N.png"
+    "image": "/img/players/Sriram N.jpg"
   },
   {
     "id": 31,
@@ -279,14 +279,14 @@ const players = [
     "id": 37,
     "name": "Danny",
     "details": "Danny is mysterious and always full of surprises.",
-    "image": "/img/players/Danny.png"
+    "image": "/img/players/Danny.jpg"
   },
   {
     "id": 38,
     "name": "Abhishek",
     "dob": "08-Dec",
     "details": "Abhishek is the mastermind who always has a plan.",
-    "image": "/img/players/Abhishek.png"
+    "image": "/img/players/Abhishek.jpg"
   },
   {
     "id": 39,
@@ -311,7 +311,14 @@ const players = [
     "name": "Aadhavan",
     "details": "Aadhavan’s thoughtfulness and loyalty are unmatched.",
     "image": "/img/players/Aadhavan.png"
-  }
+  },
+  {
+    "id": 43, 
+    "name": "Rajesh", 
+"nickname": "Roller",
+    "details": "Rajesh is a good left hand batsman ", 
+    "image": "/img/players/Rajesh.png" 
+  } 
 ];
 
 
