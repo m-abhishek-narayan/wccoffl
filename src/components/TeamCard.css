@@ -48,7 +48,7 @@
   }
 
   .team-card h2 {
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 
@@ -58,7 +58,7 @@ h2 {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 15px;
   color: #FFD700;
   position: relative;

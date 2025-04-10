@@ -3,6 +3,7 @@ import PlayerSection from "./PlayerSection_Standalone";
 import "./Profile_Page.css"; // Profile Styles with Gradient
 import players from "./players"; // Player Data
 import "./Search.css"; // Search Styles
+import { color } from "framer-motion";
 
 const Profile_Page = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,7 +17,8 @@ const Profile_Page = () => {
     <div className="Profile_page pt-30 bg-gray-50 min-h-screen p-4">
       <div className="bg-gray-50 min-h-screen p-4">
         {/* Page Title */}
-        <h1 className="text-3xl font-bold text-center mb-6">Player Profiles</h1>
+        <h2 style={{ color: "white" }}>Player Profiles</h2>
+
  
         {/* Search Bar Section */}
         <div className="search-container">

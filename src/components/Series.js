@@ -184,7 +184,8 @@ const Series = () => {
           persistent={alert.persistent}
         />
       )}
-      <h1 className="text-3xl font-bold text-center mb-6">Series Information</h1>
+      <h2 style={{ color: "white" }}>Series Information</h2>
+
       <div className="team-container">
         <TeamCard {...teamA} onUpdate={fetchTeams} />
         <TeamCard {...teamB} onUpdate={fetchTeams} />
