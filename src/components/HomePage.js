@@ -185,6 +185,7 @@ const HomePage = () => {
   const toggleCollapse = () => setIsOpen(!isOpen);
   return (
     <div className="homepage">
+      
       {alert.message && (
         <CustomAlert
           message={alert.message}
@@ -193,6 +194,7 @@ const HomePage = () => {
           persistent={alert.persistent}
         />
       )}
+      <h1 className="text-3xl font-bold text-center mb-6">Series Information</h1>
       <div className="team-container">
         <TeamCard {...teamA} onUpdate={fetchTeams} />
         <TeamCard {...teamB} onUpdate={fetchTeams} />
@@ -210,7 +212,7 @@ const HomePage = () => {
           ) : (<div className="win-btns-container">
             <button className="match-btn win-btn" onClick={() => handleWin("A")} disabled={loading}>Team A Wins</button>
             <button className="match-btn loss-btn" onClick={() => handleWin("B")} disabled={loading}>Team B Wins</button>
-            <div className="cancel-cross" onClick={() => setShowWinButtons(false)}>❌</div></div>)}
+            <button className="cancel-cross" onClick={() => setShowWinButtons(false)}>❌</button></div>)}
           {!showWinButtons && (
             <>
               <button className="reset-btn" onClick={handleResetLatestScore} disabled={!lastWinner || loading}>Revert Last Result</button>
