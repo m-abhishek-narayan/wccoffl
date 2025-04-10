@@ -13,7 +13,7 @@
   align-items: center;
   padding: 20px;
   background-size: 300% 300%;
-  color: #f7f7f7; /* Light font color for contrast */
+  color: #f7f7f7;
 }
 
 /* Page Title */
@@ -29,44 +29,47 @@ h1 {
 /* Player Scroll Wrapper */
 .player-scroll-wrapper {
   width: 100%;
-  max-width: 600px;
-  overflow: hidden;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
   position: relative;
+  height: 150px;
+  margin: 20px 0;
+  scroll-behavior: smooth;
+  touch-action: pan-x;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto !important;
+  scrollbar-width: none; 
 }
 
-/* Player Scroll Container (Infinite Loop) */
+/* Hide horizontal scrollbar */
+.player-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Player Scroll Container */
 .player-scroll-container {
   display: flex;
-  gap: 12px;
-  padding: 10px;
-  white-space: nowrap;
-  scroll-behavior: smooth;
-  animation: infiniteScroll 12s linear infinite;
-}
-
-/* Pause Animation when Player is Selected */
-.player-scroll-container.paused {
-  animation-play-state: paused !important;
-}
-
-/* Infinite Scrolling Effect */
-@keyframes infiniteScroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-230%);
-  }
+  width: max-content;
 }
 
 /* Player Photo */
 .player-photo {
-  width: 120px;
-  height: 120px;
+  width: 22vw;
+  max-width: 120px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin: 0 10px;
   border-radius: 50%;
-  cursor: pointer;
   transition: transform 0.3s ease-in-out, border 0.3s;
   border: 3px solid transparent;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.player-photo:hover {
+  transform: scale(1.1);
 }
 
 /* Active Player */
@@ -75,51 +78,25 @@ h1 {
   border: 3px solid #b27606;
 }
 
-/* Player Details Section (Initially Hidden) */
+/* Player Details Section */
 .player-details {
-  display: none;
-  position: relative;  /* Positioned below the rotating images */
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
-  margin-top: 20px; /* Push it below the list */
+  margin-top: 20px;
   border-radius: 10px;
   text-align: center;
   color: #fff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   width: 100%;
   max-width: 600px;
-  animation: fadeIn 0.5s ease-out;
+  display: inline-block;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Show Details when Active */
-.player-details.active {
-  display: block;
-}
-
-/* Fade-in animation for player details */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Player Image */
-.player-details-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-/* Player Info */
 .player-details h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  color: #c49d02; /* Accent color */
+  color: #c49d02;
 }
 
 .player-details p {
@@ -152,7 +129,29 @@ h1 {
   transition: filter 0.3s ease-in-out;
 }
 
-/* Mobile Optimization */
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive Heading */
+h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 20px;
+  color: #061c59;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   h1 {
     font-size: 2rem;
@@ -183,6 +182,9 @@ h1 {
   padding-top: 40px; /* Adjust as needed */
   width: 100%;
   margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  overflow: hidden;
 }
 
 /* Heading Styles for Player Profiles */
@@ -199,20 +201,6 @@ h2 {
 @media (min-width: 768px) {
   .bg-gray-50 {
     justify-content: flex-start;
-    padding-top: 60px; /* Optional: add space at top */
+    padding-top: 60px;
   }
-}
-.player-scroll-wrapper {
-  max-width: 100%;
-}
-.player-photo {
-  width: 22vw;              /* Scales nicely on all screen sizes */
-  max-width: 120px;         /* Prevents it from being too large on desktops */
-  aspect-ratio: 1 / 1;      /* Maintains perfect square = perfect circle with border-radius */
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-  border: 3px solid transparent;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out, border 0.3s;
 }

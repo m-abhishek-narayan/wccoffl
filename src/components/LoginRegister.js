@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./loginregister1.css"
+import PasswordEye from "./PasswordEye";
 
 const API_URL = "https://wccbackend.onrender.com/api/auth";
 
@@ -208,7 +209,7 @@ const LoginRegister = ({ onClose }) => {
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="login-input"
                                 />
-                                <input
+                                <PasswordEye
                                     type="password"
                                     placeholder="Password"
                                     value={password}
@@ -245,7 +246,7 @@ const LoginRegister = ({ onClose }) => {
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="login-input"
                                 />
-                                <input
+                                <PasswordEye
                                     type="password"
                                     placeholder="Password"
                                     value={password}
@@ -287,7 +288,7 @@ const LoginRegister = ({ onClose }) => {
                                     onChange={(e) => setVerificationCode(e.target.value)}
                                     className="login-input"
                                 />
-                                <input
+                                <PasswordEye
                                     type="password"
                                     placeholder="Enter new password"
                                     value={newPassword}
