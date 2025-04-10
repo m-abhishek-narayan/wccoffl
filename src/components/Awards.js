@@ -12,11 +12,11 @@ const Awards = () => {
     const [showForm, setShowForm] = useState(false);
     const [showTable, setShowTable] = useState(false); // State to toggle table visibility
     const [awardData, setAwardData] = useState({
-        img: "/img/kava-award.png",
-        winner: "John Doe",
-        date: "2025-03-30",
-        position: "1st",
-        team: "Team Alpha",
+        img: "/img/loading.jpg",
+        winner: "--",
+        date: "2025-04-01",
+        position: "--",
+        team: "--"
     });
 
     const [newData, setNewData] = useState({
@@ -43,8 +43,8 @@ const Awards = () => {
             const response = await axios.get(`${PICTURE_API}/image/get-image`);
             if (response.data.image) {
                 setAwardData({
-                    img: response.data.image,
-                    ...response.data.history?.[0],
+                    img: response.data.image || "/img/loading.jpg",
+                    ...response.data.history?.[0] || "--",
                 });
                 setHistory(response.data.history || []);
                 setLatestEntry(response.data.history?.[0] || null);
@@ -159,7 +159,7 @@ const Awards = () => {
                     <div className="award-section">
                         <div className="award-content">
                             <img
-                                src={awardData.img || "/img/kava-award.png"}
+                                src={awardData.img || "/img/loading.jpg"}
                                 alt="Kava Award"
                                 className="award-img responsive-img"
                             />
