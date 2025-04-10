@@ -5,6 +5,7 @@ import CustomAlert from "./CustomAlert";
 import { Link, useNavigate } from "react-router-dom";
 import FilterSeries from "./FilterSeries";
 import "./Series.css";
+import ConfirmModal from "./ConfirmModal";
 
 const API_BASE_URL = "https://wccbackend.onrender.com";
 
@@ -45,7 +46,12 @@ const Series = () => {
     type: "",
     persistent: false,
   });
-
+  const [confirmModal, setConfirmModal] = useState({
+    show: false,
+    action: null,
+    message: "",
+  });
+  
   useEffect(() => {
     fetchAllSeriesHistory();
     fetchTeams();
@@ -116,60 +122,69 @@ const Series = () => {
       setActionLoading(false);
     }
   };
-
+  const confirmAction = (actionFn, message) => {
+    setConfirmModal({ show: true, action: actionFn, message });
+  };
+  
   const handleResetLatestScore = async () => {
     if (!isAdmin || !lastWinner) return;
-    setActionLoading(true);
-    try {
-      const response = await axios.put(`${API_BASE_URL}/api/team/revert`, {
-        lastWinnerId: lastWinner,
-      });
-
-      if (response.status === 200) {
-        setLastWinner(null);
-        fetchTeams();
-        showAlert("Last result reverted successfully!");
-      } else {
+    confirmAction(async () => {
+      setActionLoading(true);
+      try {
+        const response = await axios.put(`${API_BASE_URL}/api/team/revert`, {
+          lastWinnerId: lastWinner,
+        });
+  
+        if (response.status === 200) {
+          setLastWinner(null);
+          fetchTeams();
+          showAlert("Last result reverted successfully!");
+        } else {
+          showAlert("Error reverting latest result.", "error");
+        }
+      } catch (error) {
+        console.error("Error reverting score:", error);
         showAlert("Error reverting latest result.", "error");
+      } finally {
+        setActionLoading(false);
+        setConfirmModal({ show: false, action: null, message: "" });
       }
-    } catch (error) {
-      console.error("Error reverting score:", error);
-      showAlert("Error reverting latest result.", "error");
-    } finally {
-      setActionLoading(false);
-    }
+    }, "Are you sure you want to revert the last result?");
   };
-
+  
   const handleEndSeries = async () => {
     if (!isAdmin) return;
-    setActionLoading(true);
-    try {
-      const response = await axios.post(`${API_BASE_URL}/api/team/end-series`);
-
-      if (response.status === 200) {
-        const { winningTeam } = response.data;
-
-        setWinner({
-          captain: winningTeam?.captain || "No winner",
-          team: winningTeam?.teamName || "Draw",
-        });
-
-        showAlert(
-          `Series Ended! Winning Team: ${winningTeam?.teamName || "Draw"}, Captain: ${winningTeam?.captain || "None"}`
-        );
-
-        fetchTeams();
-        fetchAllSeriesHistory();
-        setFilterTableRefreshKey(prev => prev + 1);
-      } else {
+    confirmAction(async () => {
+      setActionLoading(true);
+      try {
+        const response = await axios.post(`${API_BASE_URL}/api/team/end-series`);
+  
+        if (response.status === 200) {
+          const { winningTeam } = response.data;
+  
+          setWinner({
+            captain: winningTeam?.captain || "No winner",
+            team: winningTeam?.teamName || "Draw",
+          });
+  
+          showAlert(
+            `Series Ended! Winning Team: ${winningTeam?.teamName || "Draw"}, Captain: ${winningTeam?.captain || "None"}`
+          );
+  
+          fetchTeams();
+          fetchAllSeriesHistory();
+          setFilterTableRefreshKey((prev) => prev + 1);
+        } else {
+          showAlert("Error ending series.", "error");
+        }
+      } catch (error) {
+        console.error("Error ending series:", error);
         showAlert("Error ending series.", "error");
+      } finally {
+        setActionLoading(false);
+        setConfirmModal({ show: false, action: null, message: "" });
       }
-    } catch (error) {
-      console.error("Error ending series:", error);
-      showAlert("Error ending series.", "error");
-    } finally {
-      setActionLoading(false);
-    }
+    }, "Are you sure you want to end the series?");
   };
 
   const toggleCollapse = () => setIsOpen(!isOpen);
@@ -260,6 +275,14 @@ const Series = () => {
           </>
         )}
       </div>
+      {confirmModal.show && (
+  <ConfirmModal
+    message={confirmModal.message}
+    onConfirm={confirmModal.action}
+    onCancel={() => setConfirmModal({ show: false, action: null, message: "" })}
+  />
+)}
+
     </div>
   );
 };
