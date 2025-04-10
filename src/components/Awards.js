@@ -314,21 +314,55 @@ const Awards = () => {
                                     <th>Matches</th>
                                     <th>Kavas</th>
                                     <th>Win %</th>
+                                    <th>More Stats</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {kavaHistoryData.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{item.year}</td>
-                                        <td>{item.winner}</td>
-                                        <td>
-                                            <img src={item.img} alt={item.winner} />
-                                        </td>
-                                        <td>{item.matches}</td>
-                                        <td>{item.kavas}</td>
-                                        <td>{item.percent}%</td>
-                                    </tr>
-                                ))}
+                                {[...kavaHistoryData]
+                                    .sort((a, b) => b.year - a.year)
+                                    .map((item, index) => (
+                                        <tr key={index}>
+                                            <td>{item.year}</td>
+                                            <td>{item.winner}</td>
+                                            <td>
+                                                <img
+                                                    src={item.img}
+                                                    alt={item.winner}
+                                                    style={{
+                                                        width: '80px',
+                                                        height: '80px',
+                                                        objectFit: 'cover',
+                                                        borderRadius: '10px',
+                                                        boxShadow: '0 2px 6px rgba(0,0,0,0.2)'
+                                                    }}
+                                                />
+                                            </td>
+
+                                            <td>{item.matches}</td>
+                                            <td>{item.kavas}</td>
+                                            <td>{item.percent}%</td>
+                                            <td>
+                                                {item.excel && (
+                                                    <a href={item.excel} download title="Download Excel" style={{ marginRight: "10px" }}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="#217346">
+                                                            <path d="M19 2H8c-1.1 0-2 .9-2 2v3H3v10h3v3c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-3.5 14h-1.6l-1-1.9-1 1.9H10l1.5-2.6L10 11h1.6l.9 1.7.9-1.7h1.6l-1.4 2.4L15.5 16z" />
+                                                        </svg>
+                                                    </a>
+
+                                                )}
+                                                {item.ppt && (
+                                                    <a
+                                                        href={item.ppt}
+                                                        download
+                                                        title="Download PPT"
+                                                        style={{ marginLeft: "10px" }}
+                                                    >
+                                                        📽️
+                                                    </a>
+                                                )}
+                                            </td>
+                                        </tr>
+                                    ))}
                             </tbody>
                         </table>
                     </div>
