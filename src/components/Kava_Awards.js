@@ -4,11 +4,11 @@ import "./Awards.css";
 function Awards() {
     const [showForm, setShowForm] = useState(false);
     const [awardData, setAwardData] = useState({
-        img: "/img/kava-award.png",
-        winner: "John Doe",
-        date: "2025-03-30",
-        position: "1st",
-        team: "Team Alpha",
+        img: "/img/loading.jpg",
+        winner: "--",
+        date: "2025-04-01",
+        position: "--",
+        team: "--"
     });
 
     const [history, setHistory] = useState([
