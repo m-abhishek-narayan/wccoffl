@@ -15,7 +15,7 @@
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--dark-gradient);
+  background-color: #121212;
   background-size: 400% 400%;
   animation: gradientAnimation 12s ease infinite;
   padding-top: 100px;
@@ -65,12 +65,12 @@ button:hover {
 }
 
 .update-score-btn {
-  background-color: var(--gold);
-  color: #000;
+  background-color:#0fad0d;
+  color: #ffffff;
   box-shadow: 0 0 10px var(--gold-glow);
 }
 .update-score-btn:hover {
-  background-color: #e6c200;
+  background-color: #0fad0d;
 }
 
 .reset-btn {
@@ -89,13 +89,14 @@ button:hover {
 }
 
 .win-btn {
-  background-color: var(--gold);
+  background-color:#ddebf0;
   color: #000;
-  box-shadow: 0 0 10px var(--gold-glow);
+  margin-right: 10px;
 }
 .loss-btn {
   background-color: #052e1f;
   color: white;
+  margin-right: 10px;
 }
 
 /* Alert Box */
@@ -129,21 +130,23 @@ button:hover {
   border: 1px solid #444;
   /* width: 100%; */
   text-align: center;
-  padding: 16px 24px;
+  /* padding: 16px 24px; */
   font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 10px;
-  position: relative;
+  /* position: relative; */
   letter-spacing: 0.5px;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);
-  display: flex;
+  /* display: flex; */
   /* justify-content: space-between; */
   align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+  /* flex-wrap: wrap; */
+  /* gap: 10px; */
+  /* justify-content: center; */
+  margin-top: 20px;
+  width: 100%;
 }
 
 .collapsible-header:hover {
@@ -205,7 +208,7 @@ button:hover {
   }
   
   .series-table {
-  width: 200%;
+  /* width: 100%; */
   border-collapse: collapse;
   font-size: 0.95rem;
   background-color: #181818;
@@ -268,7 +271,7 @@ button:hover {
   color: #ef9a9a;
   }
   
-  .score-badge.- {
+  .score-badge {
   background-color: #f9a825; /* Amber */
   color: #fff59d;
   }
@@ -315,3 +318,11 @@ button:hover {
   }
 
 /* Continue the rest of your CSS here... */
+.cancel-cross{
+  background-color:transparent
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}

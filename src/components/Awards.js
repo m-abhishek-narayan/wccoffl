@@ -302,7 +302,7 @@ const Awards = () => {
 
                 {/* History Section */}
                 <div className="kava-history-section">
-                    <h3>🏅 History of Kava Awards (2017–2024)</h3>
+                    <h3>🏅 History of Kava Awards</h3>
 
                     <div className="kava-history-table-container">
                         <table className="kava-history-table">
@@ -340,7 +340,7 @@ const Awards = () => {
 
                                             <td>{item.matches}</td>
                                             <td>{item.kavas}</td>
-                                            <td>{item.percent}%</td>
+                                            <td>{item.percent}</td>
                                             <td>
                                                 {item.excel && (
                                                     <a href={item.excel} download title="Download Excel" style={{ marginRight: "10px" }}>

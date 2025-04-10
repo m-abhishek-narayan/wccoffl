@@ -1,5 +1,5 @@
 import React from "react";
-import "./HomePage.css";
+import "./Series.css";
 
 const CustomAlert = ({ message, type, onClose, persistent }) => {
   return (
