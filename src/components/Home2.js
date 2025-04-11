@@ -56,13 +56,23 @@ const Home2 = () => {
                 setAwardData({
                     img: response.data.image || "/img/loading.jpg",
                     winner: response.data.history?.[0]?.winner || "--",
-                    date: response.data.history?.[0]?.date || "2025-04-01",
+                    date: response.data.history?.[0]?.date || formatDate("2025-04-01"),
                     team: response.data.history?.[0]?.team || "--"
                 });
             }
         } catch (error) {
             console.error("Error fetching award data:", error);
         }
+    };
+
+    const formatDate = (dateStr) => {
+        const [year, month, day] = dateStr.split("-");
+        const monthNames = {
+            "01": "January", "02": "February", "03": "March", "04": "April",
+            "05": "May", "06": "June", "07": "July", "08": "August",
+            "09": "September", "10": "October", "11": "November", "12": "December"
+        };
+        return `${day} ${monthNames[month]} ${year}`;
     };
 
     const trimScores = (scores) => scores?.slice(-4) || [];
@@ -128,7 +138,7 @@ const Home2 = () => {
                     <img src={awardData.img} alt="Award" className="home2-award-img" />
                     <div className="home2-award-details">
                         <p><span className="home2-detail-header">Winner:</span> {awardData.winner}</p>
-                        <p><span className="home2-detail-header">Date:</span> {awardData.date}</p>
+                        <p><span className="home2-detail-header">Date:</span> {formatDate(awardData.date)}</p>
                         {/* <p><span className="home2-detail-header">Team:</span> {awardData.team}</p> */}
                     </div>
                 </div>
