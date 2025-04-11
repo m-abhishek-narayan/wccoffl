@@ -172,7 +172,7 @@ const FilterSeries = ({ initialData, isOpen, filterTableRefreshKey }) => {
                         </span>
                       </td>
                       <td>
-                        <span className="team team-a">{series?.points?.teamA}</span>-{" "}
+                        <span className="team team-a">{series?.points?.teamA}</span>{" "}-{" "}
                         <span className="team team-b">{series?.points?.teamB}</span>
                       </td>
                     </tr>

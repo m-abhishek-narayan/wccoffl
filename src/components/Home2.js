@@ -5,8 +5,8 @@ import "./Home2.css"; // Import CSS
 
 const Home2 = () => {
     const [teams, setTeams] = useState({
-        team1: { teamName: "Team A", points: 0, score: ["W", "L", "-", "W", "W"] },
-        team2: { teamName: "Team B", points: 0, score: ["L", "W", "-", "L", "L"] }
+        team1: { teamName: "Team A", points: 0, score: ["-", "-", "-", "-", "-"] },
+        team2: { teamName: "Team B", points: 0, score: ["-", "-", "-", "-", "-"] }
     });
 
     const [awardData, setAwardData] = useState({

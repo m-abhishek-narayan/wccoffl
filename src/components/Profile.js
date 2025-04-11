@@ -7,6 +7,7 @@ const Profile = () => {
   const animationRef = useRef(null);
   const isUserInteracting = useRef(false);
   const resumeTimeoutRef = useRef(null);
+  const selectedPlayerRef = useRef(null);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 
   const scrollSpeed = 1.2; // Adjust scroll speed
@@ -43,6 +44,7 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
+    selectedPlayerRef.current = selectedPlayer;
     if (!selectedPlayer && !isUserInteracting.current) {
       startAutoScroll();
     }
@@ -50,17 +52,37 @@ const Profile = () => {
 
   const handlePlayerClick = (player) => {
     if (selectedPlayer?.id === player.id) {
-      closeDetails();
-      startAutoScroll();
+      // Clicking the same player again to close
+      setSelectedPlayer(null);
+      selectedPlayerRef.current = null;
+  
+      // Simulate interaction end so auto-scroll can restart
+      isUserInteracting.current = false;
+      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+      resumeTimeoutRef.current = setTimeout(() => {
+        if (!selectedPlayerRef.current && !isUserInteracting.current) {
+          startAutoScroll();
+        }
+      }, 2000);
     } else {
-      setSelectedPlayer(player);
       stopAutoScroll();
+      setSelectedPlayer(player);
+      selectedPlayerRef.current = player;
     }
   };
-
   const closeDetails = () => {
     setSelectedPlayer(null);
+    selectedPlayerRef.current = null;
     isUserInteracting.current = false;
+  
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+  
+    // Slight delay to ensure state is fully updated before checking
+    resumeTimeoutRef.current = setTimeout(() => {
+      if (!selectedPlayerRef.current && !isUserInteracting.current) {
+        startAutoScroll();
+      }
+    }, 100); // ← reduced delay to avoid race without a long pause
   };
 
   const handleInteractionStart = () => {
@@ -70,12 +92,12 @@ const Profile = () => {
   };
 
   const handleInteractionEnd = () => {
-    if (!selectedPlayer) {
-      resumeTimeoutRef.current = setTimeout(() => {
+    resumeTimeoutRef.current = setTimeout(() => {
+      if (!selectedPlayerRef.current) {
         isUserInteracting.current = false;
         startAutoScroll();
-      }, 3000);
-    }
+      }
+    }, 2000);
   };
 
   const repeatedPlayers = [...players, ...players];
