@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./award.css";
 import "./filter.css"
+import { downloadExcel } from "./Excel";
 
 const FILTER_API = "https://wccbackend.onrender.com/api/image";
 
-const FilterAwards = ({ initialData }) => {
+const FilterAwards = ({ initialData, isAdmin,fetchData }) => {
     const [filteredData, setFilteredData] = useState(initialData);
     const [dropdownOptions, setDropdownOptions] = useState({});
     const [filters, setFilters] = useState({});
@@ -13,6 +14,11 @@ const FilterAwards = ({ initialData }) => {
     const [activeColumn, setActiveColumn] = useState(null);
     const [dateFilter, setDateFilter] = useState({ day: "", month: "", year: "" });
     const [loading, setLoading] = useState(false);
+    const [hasDownloaded, setHasDownloaded] = useState(false);
+    const [downloading, setDownloading] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [deleting, setDeleting] = useState(false);
+    const [downloadBeforeDelete, setDownloadBeforeDelete] = useState(false);
 
     useEffect(() => {
         const dates = initialData.map((entry) => entry.date);
@@ -32,6 +38,29 @@ const FilterAwards = ({ initialData }) => {
 
     const handleHeaderClick = (column) => {
         setActiveColumn(activeColumn === column ? null : column);
+    };
+
+    const handleDeleteAll = async () => {
+        try {
+            setDeleting(true);
+            if (downloadBeforeDelete) {
+                try {
+                    downloadExcel(filteredData);
+                } catch (error) {
+                    console.error("Failed to download before deletion:", error);
+                }
+            }
+            await axios.delete(`${FILTER_API}/deleteall`);
+            setFilteredData([]);
+            fetchData();
+        } catch (error) {
+            console.error("Delete failed:", error);
+            alert("Failed to delete data.");
+        } finally {
+            setDeleting(false);
+            setShowDeleteModal(false);
+            setDownloadBeforeDelete(false); // reset checkbox
+        }
     };
 
     const handleFilterChange = (column, value) => {
@@ -82,6 +111,30 @@ const FilterAwards = ({ initialData }) => {
         setDateFilter({ day: "", month: "", year: "" });
         setFilteredData(initialData);
         setShowDone(false);
+    };
+
+    const handleDownloadClick = () => {
+        if (downloading) return;
+    
+        if (hasDownloaded) {
+            const confirmRedownload = window.confirm(
+                "The file has already been downloaded. Do you want to download it again?"
+            );
+            if (!confirmRedownload) return;
+        }
+    
+        setDownloading(true);
+        
+        try {
+            downloadExcel(filteredData);
+            setHasDownloaded(true);
+        } catch (error) {
+            console.error("Download failed:", error);
+        } finally {
+            setTimeout(() => {
+                setDownloading(false);
+            }, 500); // short delay to allow download to trigger safely
+        }
     };
 
     const monthNames = {
@@ -169,6 +222,38 @@ const FilterAwards = ({ initialData }) => {
                 </table>
                 
             </div>
+            {showDeleteModal && (
+                <div className="filter-modal-overlay">
+                    <div className="filter-modal">
+                        <h3>Confirm Delete</h3>
+                        <p>Are you sure you want to delete <strong>all data</strong>?</p>
+
+                        <div style={{ margin: "10px 0" }}>
+                            <label style={{ fontSize: "0.9rem" }}>
+                                <input
+                                    type="checkbox"
+                                    checked={downloadBeforeDelete}
+                                    onChange={() => setDownloadBeforeDelete(prev => !prev)}
+                                    style={{ marginRight: "8px" }}
+                                />
+                                Download Excel sheet before deletion
+                            </label>
+                        </div>
+
+                        <div className="filter-modal-buttons">
+                            <button onClick={handleDeleteAll} disabled={deleting}>
+                                {deleting ? "Deleting..." : "Yes, Delete"}
+                            </button>
+                            <button onClick={() => {
+                                setShowDeleteModal(false);
+                                setDownloadBeforeDelete(false); // reset checkbox if cancel
+                            }}>
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Selected filters as tags */}
             <div className="selected-filters">
@@ -199,6 +284,27 @@ const FilterAwards = ({ initialData }) => {
                         Clear
                     </button>
                 )}
+                <div className={`filter-download-container ${isAdmin ? "admin-mode" : ""}`}>
+                    {filteredData.length > 0 && (
+                    <button
+                        className="filter-download-btn"
+                        onClick={handleDownloadClick}
+                        disabled={downloading}
+                    >
+                        {downloading ? "Downloading..." : "Download Excel"}
+                    </button>
+                    )}
+
+                    {isAdmin && filteredData.length > 0 && (
+                        <button
+                            className="filter-delete-btn"
+                            onClick={() => setShowDeleteModal(true)}
+                            disabled={deleting}
+                        >
+                            Delete All Data
+                        </button>
+                    )}
+                </div>
             </div>
         </>
     );

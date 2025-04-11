@@ -7,10 +7,30 @@ export const Container = styled.div`
 
 export const TabContainer = styled.div`
   display: flex;
-  justify-content: center; /* Center align the tabs */
+  justify-content: flex-start;
   overflow-x: auto;
-  padding: 10px;
+  padding: 10px 20px;
   margin-bottom: 20px;
+  scroll-padding-left: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #999 transparent;
+
+  @media (min-width: 768px) {
+    justify-content: center;
+  }
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
 `;
 
 export const TabButton = styled.button`

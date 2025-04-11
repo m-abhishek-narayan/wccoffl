@@ -262,7 +262,7 @@ const Awards = () => {
                     <h3 onClick={toggleTable} className="collapsible-header">
                         📚 Kava Awards Current Series {showTable ? "▼" : "▶"}
                     </h3>
-                    {showTable && <FilterAwards initialData={history} />}
+                    {showTable && <FilterAwards initialData={history} isAdmin={isAdmin} fetchData={fetchData} />}
                     {/* {showTable && (
                         <div className="table-container responsive-table">
                             <table className="table">
