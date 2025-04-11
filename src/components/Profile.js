@@ -55,7 +55,7 @@ const Profile = () => {
       // Clicking the same player again to close
       setSelectedPlayer(null);
       selectedPlayerRef.current = null;
-  
+
       // Simulate interaction end so auto-scroll can restart
       isUserInteracting.current = false;
       if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
@@ -74,9 +74,9 @@ const Profile = () => {
     setSelectedPlayer(null);
     selectedPlayerRef.current = null;
     isUserInteracting.current = false;
-  
+
     if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
-  
+
     // Slight delay to ensure state is fully updated before checking
     resumeTimeoutRef.current = setTimeout(() => {
       if (!selectedPlayerRef.current && !isUserInteracting.current) {
@@ -125,14 +125,18 @@ const Profile = () => {
           {repeatedPlayers.map((player, index) => (
             <img
               key={index}
-              src={player.image}
+              src={player.image || "/img/no-dp.jpg"}
               alt={player.name}
-              className={`player-photo ${
-                selectedPlayer?.id === player.id ? "active" : ""
-              }`}
+              className={`player-photo ${selectedPlayer?.id === player.id ? "active" : ""
+                }`}
               onClick={() => handlePlayerClick(player)}
               draggable={false}
+              onError={(e) => {
+                e.target.onerror = null; // Prevent infinite loop
+                e.target.src = "/img/no-dp.jpg";
+              }}
             />
+
           ))}
         </div>
       </div>
@@ -140,7 +144,11 @@ const Profile = () => {
       {selectedPlayer && (
         <div className="player-details active">
           <h2>{selectedPlayer.name}</h2>
-          <p>{selectedPlayer.details}</p>
+          <div className="player-meta">
+            <p><strong>DOB:</strong> {selectedPlayer.dob || "--"}</p>
+            <p><strong>Feared For:</strong> {selectedPlayer.fearedFor || "--"}</p>
+            <p className="player-description">{selectedPlayer.details || "No details available."}</p>
+          </div>
           <button className="close-btn" onClick={closeDetails}>
             Close
           </button>

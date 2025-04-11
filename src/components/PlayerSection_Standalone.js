@@ -36,17 +36,30 @@ function PlayerSection({ players }) {
           {selectedPlayer ? (
             <>
               <img
-                src={selectedPlayer.image}
+                src={selectedPlayer.image || "/img/no-dp.jpg"}
                 alt={selectedPlayer.name}
                 className="player-image"
+                onError={(e) => {
+                  e.target.onerror = null; // prevent looping
+                  e.target.src = "/img/no-dp.jpg";
+                }}
               />
+
               <h2>{selectedPlayer.name || "Unknown Player"}</h2>
-              <p>{selectedPlayer.details || "No details available."}</p>
+
+              <div className="player-meta">
+                <p><strong>DOB:</strong> {selectedPlayer.dob || "--"}</p>
+                <p><strong>Feared For:</strong> {selectedPlayer.fearedFor || "--"}</p>
+                <p className="player-description">{selectedPlayer.details || "No details available."}</p>
+              </div>
+ 
+              
             </>
           ) : (
             <p className="text-white">No player selected.</p>
           )}
         </div>
+
       </div>
     </div>
   );
