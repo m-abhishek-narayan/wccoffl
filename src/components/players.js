@@ -377,7 +377,7 @@ const players = [
     "id": 44, 
     "name": "Ved", 
     "details": "Ever stylish, great bat speed southpaw. A lovely bowling arm and action. Closely coached by an endlessly theoretical father. ", 
-    "image": "/img/players/Rajesh.png" ,
+    // "image": "/img/players/Rajesh.png" ,
     "fearedFor": "Chinaman"
   },
   //   {
