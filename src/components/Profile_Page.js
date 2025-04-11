@@ -17,7 +17,7 @@ const Profile_Page = () => {
     <div className="Profile_page pt-30 bg-gray-50 min-h-screen p-4">
       <div className="bg-gray-50 min-h-screen p-4">
         {/* Page Title */}
-        <h2 style={{ color: "white" }}>Player Profiles</h2>
+        <h2>Player Profiles</h2>
 
  
         {/* Search Bar Section */}
