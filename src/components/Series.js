@@ -199,7 +199,7 @@ const Series = () => {
           persistent={alert.persistent}
         />
       )}
-      <h2 style={{ color: "white" }}>Series Information</h2>
+      <h2>Series Information</h2>
 
       <div className="team-container">
         <TeamCard {...teamA} onUpdate={fetchTeams} />

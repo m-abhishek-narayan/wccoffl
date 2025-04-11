@@ -50,7 +50,7 @@ const players = [
     "dob": "11-Apr",
     "wccName": "Data Mama",
     "details": "A top notch all rounder, can bludgeon the ball for huge sixes straight down the wicket. An asset at the death overs, other than an occasional long hop, doesn’t give away easily to the batsmen. A silently agile fielder. ",
-    "image": "/img/players/Mahen.png",
+    "image": "/img/players/Mahen.jpg",
   "fearedFor": "Towering sixers",
   "adjective": "Feisty"
 },

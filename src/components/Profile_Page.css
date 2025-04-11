@@ -12,10 +12,9 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background: linear-gradient(135deg, #2C3E50, #1C1C1C, #0F0F0F);
+    background: linear-gradient(-45deg, #070708, #0e0e0f, #0d0d0d, #212124, #37373b);
     background-size: 300% 300%;
     animation: gradientAnimation 12s ease infinite;
-    padding-top: 50px;
   }
   
   
