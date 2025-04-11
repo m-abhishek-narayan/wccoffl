@@ -75,7 +75,6 @@ p {
     box-shadow: 0 0 20px rgba(255, 65, 108, 0.8);
 }
 
-/* Messages Container */
 .messages-container {
     height: 350px;
     overflow-y: auto;
@@ -84,6 +83,8 @@ p {
     padding: 10px;
     background-color: #2c2c2c;
     scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Message Styling */
@@ -95,6 +96,7 @@ p {
     word-wrap: break-word;
     font-size: 15px;
     color: #fff;
+    position: relative;
 }
 
 /* Sent Messages */
@@ -102,12 +104,14 @@ p {
     background-color: #f1c40f;
     color: #121212;
     align-self: flex-end;
+    text-align: right;
 }
 
 /* Received Messages */
 .received {
     background-color: #3a3a3a;
     align-self: flex-start;
+    text-align: left;
 }
 
 /* Input Container */
