@@ -113,6 +113,16 @@ const FilterAwards = ({ initialData, isAdmin,fetchData }) => {
         setShowDone(false);
     };
 
+    const formatDate = (dateStr) => {
+        const [year, month, day] = dateStr.split("-");
+        const monthNames = {
+            "01": "January", "02": "February", "03": "March", "04": "April",
+            "05": "May", "06": "June", "07": "July", "08": "August",
+            "09": "September", "10": "October", "11": "November", "12": "December"
+        };
+        return `${day} ${monthNames[month]} ${year}`;
+    };
+
     const handleDownloadClick = () => {
         if (downloading) return;
     
@@ -170,10 +180,10 @@ const FilterAwards = ({ initialData, isAdmin,fetchData }) => {
                                 <td colSpan="4">
                                     {activeColumn === "date" ? (
                                         <div className="date-dropdowns">
-                                            <select value={dateFilter.year} onChange={(e) => handleDateChange("year", e.target.value)}>
-                                                <option value="">Year</option>
-                                                {dropdownOptions.date?.years.map((y, idx) => (
-                                                    <option key={idx} value={y}>{y}</option>
+                                            <select value={dateFilter.day} onChange={(e) => handleDateChange("day", e.target.value)}>
+                                                <option value="">Day</option>
+                                                {dropdownOptions.date?.days.map((d, idx) => (
+                                                    <option key={idx} value={d}>{d}</option>
                                                 ))}
                                             </select>
                                             <select value={dateFilter.month} onChange={(e) => handleDateChange("month", e.target.value)}>
@@ -182,10 +192,10 @@ const FilterAwards = ({ initialData, isAdmin,fetchData }) => {
                                                     <option key={idx} value={m}>{monthNames[m]}</option>
                                                 ))}
                                             </select>
-                                            <select value={dateFilter.day} onChange={(e) => handleDateChange("day", e.target.value)}>
-                                                <option value="">Day</option>
-                                                {dropdownOptions.date?.days.map((d, idx) => (
-                                                    <option key={idx} value={d}>{d}</option>
+                                            <select value={dateFilter.year} onChange={(e) => handleDateChange("year", e.target.value)}>
+                                                <option value="">Year</option>
+                                                {dropdownOptions.date?.years.map((y, idx) => (
+                                                    <option key={idx} value={y}>{y}</option>
                                                 ))}
                                             </select>
                                         </div>
@@ -206,7 +216,7 @@ const FilterAwards = ({ initialData, isAdmin,fetchData }) => {
                             filteredData.map((entry, idx) => (
                                 <tr key={idx}>
                                     <td>{entry.winner}</td>
-                                    <td>{entry.date}</td>
+                                    <td>{formatDate(entry.date)}</td>
                                     <td>{entry.position}</td>
                                     <td>{entry.team}</td>
                                 </tr>
