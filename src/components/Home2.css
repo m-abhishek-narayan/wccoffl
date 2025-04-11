@@ -4,13 +4,12 @@
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #f1f1f1;
+    color: gold;
 }
 
 .home2-scorecard {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
     flex-wrap: wrap;
 }
 
@@ -56,7 +55,7 @@
 
 .home2-team-name {
     font-size: 0.95rem;
-    color: gold; /* Cool green accent */
+    color: rgb(243, 242, 240); /* Cool green accent */
     padding-bottom: 10px;
     word-break: break-word;
     white-space: pre-line;
@@ -66,7 +65,7 @@
     font-size: 0.85rem;
     top: 1px;
     right: 1px;
-    color: gold; /* Yellow-orange accent */
+    color: rgb(244, 243, 239); /* Yellow-orange accent */
 }
 
 .home2-score-history {
@@ -134,7 +133,7 @@
     font-size: 0.95rem;
     font-weight: bold;
     margin-bottom: 14px;
-    color: gold;
+    color: rgb(236, 234, 226);
 }
 
 .home2-award-img {
@@ -280,9 +279,9 @@
 .home2-scorecard {
     font-family: 'Arial', sans-serif;
     max-width: 1000px;
-    margin: 60px auto 0 auto;
+    margin: 0px auto 0 auto;
     padding: 20px;
     background-color: #2b2d2f;
     border-radius: 10px;
-    color: rgb(255, 255, 255);
+    color: gold;
 }
