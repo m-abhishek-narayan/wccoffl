@@ -77,7 +77,7 @@ function Navbar() {
       {showLoginModal && (
         <div className="login-modal-overlay">
           <div className="login-modal">
-            <span className="close-btn" onClick={() => setShowLoginModal(false)}>❌</span>
+            <span className="close-nav-btn" onClick={() => setShowLoginModal(false)}>❌</span>
             <LoginRegister onClose={() => setShowLoginModal(false)} />
           </div>
         </div>

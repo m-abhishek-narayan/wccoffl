@@ -97,23 +97,51 @@
 }
 
 .win {
-    background-color: #00ff5e15;
-    color: white;
-    box-shadow: 0 0 10px 4px rgba(0, 255, 94, 0.7);
+  background: rgba(0, 255, 94, 0.08);
+  color: #00ff5e;
+  border: 1px solid rgba(0, 255, 94, 0.4);
+  box-shadow: 0 0 15px 5px rgba(0, 255, 94, 0.3);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 1rem;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(0, 255, 94, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .loss {
-    background-color: #ff003c15;
-    color: white;
-    box-shadow: 0 0 10px 4px rgba(255, 0, 60, 0.7);
+  background: rgba(255, 0, 60, 0.08);
+  color: #ff003c;
+  border: 1px solid rgba(255, 0, 60, 0.4);
+  box-shadow: 0 0 15px 5px rgba(255, 0, 60, 0.3);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 1rem;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(255, 0, 60, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.neutral {
-    background-color: #a67c00; /* Replacing golden gradient with solid muted gold */
+.win {
+    background: linear-gradient(135deg, #00ff5e33, #00ff5e22);
     color: white;
-    border: 1px solid #7f7200;
+    box-shadow: 0 0 15px 5px rgba(0, 255, 94, 0.6);
+  }
+  
+  .loss {
+    background: linear-gradient(135deg, #ff003c33, #ff003c22);
+    color: white;
+    box-shadow: 0 0 15px 5px rgba(255, 0, 60, 0.6);
+  }
+  
+  .neutral {
+    background: linear-gradient(135deg, #b89400, #7f7200);
+    color: white;
+    box-shadow: 0 0 10px 3px rgba(255, 215, 0, 0.4);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-}
+  }
+  
 
 .home2-team-head{
     margin-top: 30px;
