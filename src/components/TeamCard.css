@@ -1,6 +1,5 @@
 .team-container {
   display: flex;
-  justify-content: center;
   align-items: stretch;
   gap: 13px;
   flex-wrap: nowrap;
