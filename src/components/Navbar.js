@@ -43,8 +43,7 @@ function Navbar() {
           <div className="row">
             <h1 className="logo">
               <Link to="/" style={{ cursor: "pointer" }}>
-                <img src="/img/wcc.png" alt="WCC Logo" className="logo-img" />
-                <span>The Kavaliers Den</span>
+                <img src="/img/wcc.png" alt="WCC The Kavaliers Den" className="logo-img" />
               </Link>
             </h1>
 
