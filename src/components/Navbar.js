@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import LoginRegister from "./LoginRegister";
+import "./Navbar.css";
 
 function Navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false); 
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const [username, setUsername] = useState("");
   const [admin, setAdmin] = useState("");
   const navigate = useNavigate();
-  const location = useLocation(); 
+  const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -30,27 +31,30 @@ function Navbar() {
     window.scrollTo(0, 0);
     sessionStorage.clear();
     setIsAuthenticated(false);
-    // navigate("/");
     window.location.reload();
   };
 
+  const isActive = (path) => (location.pathname === path ? "active" : "");
+
   return (
     <>
-    <nav className={`navbar ${isNavOpen ? "navopened" : ""}`}>
-      <div className="container">
-        <div className="row">
-          <h1 className="logo">
-            <Link to="/" style={{ cursor: "pointer" }}>WCC-The Kavaliers Den</Link>
-          </h1>
+      <nav className={`navbar ${isNavOpen ? "navopened" : ""}`}>
+        <div className="container">
+          <div className="row">
+            <h1 className="logo">
+              <Link to="/" style={{ cursor: "pointer" }}>
+                <img src="/img/wcc.png" alt="WCC The Kavaliers Den" className="logo-img" />
+              </Link>
+            </h1>
 
-          <ul className={`bar ${isNavOpen ? "opened" : ""}`}>
-            <li><Link onClick={() => setIsNavOpen(false)} to="/">Home</Link></li>
-            <li><Link onClick={() => setIsNavOpen(false)} to="/teams">Series</Link></li>
-            <li><Link onClick={() => setIsNavOpen(false)} to="/profile_page">Profile Search</Link></li>
-            <li><Link onClick={() => setIsNavOpen(false)} to="/awards">Kava Awards</Link></li>
-            {isAuthenticated ? (
+            <ul className={`bar ${isNavOpen ? "opened" : ""}`}>
+              <li><Link className={isActive("/")} to="/" onClick={() => setIsNavOpen(false)}>Home</Link></li>
+              <li><Link className={isActive("/teams")} to="/teams" onClick={() => setIsNavOpen(false)}>Series</Link></li>
+              <li><Link className={isActive("/profile_page")} to="/profile_page" onClick={() => setIsNavOpen(false)}>Profile Search</Link></li>
+              <li><Link className={isActive("/awards")} to="/awards" onClick={() => setIsNavOpen(false)}>Kava Awards</Link></li>
+              {isAuthenticated ? (
                 <>
-                  <li><Link onClick={() => setIsNavOpen(false)} to="/chat">Discussions</Link></li>
+                  <li><Link className={isActive("/chat")} to="/chat" onClick={() => setIsNavOpen(false)}>Discussions</Link></li>
                   <li><button onClick={handleLogout} className="logout-button">Logout ({username})</button></li>
                 </>
               ) : (
@@ -58,20 +62,21 @@ function Navbar() {
                   <button onClick={() => setShowLoginModal(true)} className="login-btn">Login</button>
                 </li>
               )}
-          </ul>
+            </ul>
 
-          <div className="button" onClick={() => setIsNavOpen((prev) => !prev)}>
-            <div className="burger"></div>
-            <div className="burger"></div>
-            <div className="burger"></div>
+            <div className="button" onClick={() => setIsNavOpen((prev) => !prev)}>
+              <div className="burger"></div>
+              <div className="burger"></div>
+              <div className="burger"></div>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
-    {showLoginModal && (
+      </nav>
+
+      {showLoginModal && (
         <div className="login-modal-overlay">
           <div className="login-modal">
-            <span className="close-btn" onClick={() => setShowLoginModal(false)}>❌</span>
+            <span className="close-nav-btn" onClick={() => setShowLoginModal(false)}>❌</span>
             <LoginRegister onClose={() => setShowLoginModal(false)} />
           </div>
         </div>
