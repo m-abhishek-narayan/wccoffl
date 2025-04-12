@@ -70,26 +70,32 @@
 
 .home2-score-history {
     display: flex;
-    gap: 8px;
+    flex-wrap: wrap;              /* Allows items to wrap on smaller screens */
+    justify-content: center;      /* Centers the items horizontally */
+    gap: 8px;                     /* Space between spans */
+    width: 100%;                  /* Full width of the parent */
+    padding: 10px 0;              /* Optional: vertical padding */
+    box-sizing: border-box;       /* Ensures padding doesn't overflow */
 }
 
 .home2-score-history span {
-    /* gap: 2px; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 32px;
-    height: 32px;
+    flex: 1 0 32px;               /* Allows span to shrink or grow, base width 32px */
+    max-width: 40px;             /* Prevents span from growing too much */
+    min-width: 24px;             /* Prevents span from shrinking too small */
+    aspect-ratio: 1 / 1;         /* Keeps square shape */
     font-size: 0.9rem;
     font-weight: bold;
     font-family: monospace;
     border-radius: 8px;
     color: #fff;
-    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     text-align: center;
     line-height: 1;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     transition: transform 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 .home2-score-history span:hover {
@@ -263,18 +269,20 @@
         font-size: 0.55rem;
     }
     .home2-score-history {
-        gap: 10px; /* slight increase for better spacing */
-        margin-top: 6px;
-    }
-
-    .home2-score-history span {
-        width: 14px;
-        height: 14px;
-        border-radius: 3px;
-        font-size: 0.75rem;
-        border-radius: 6px;
-        box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
-    }
+        flex-wrap: nowrap;               /* Prevent wrapping */
+        overflow-x: hidden;              /* Hide horizontal scroll */
+        justify-content: space-between; /* Spread spans evenly */
+        gap: 2px;                        /* Smaller gap */
+      }
+    
+      .home2-score-history span {
+        flex: 1 1 auto;
+        min-width: 16px;
+        max-width: 24px;
+        font-size: 0.65rem;
+        aspect-ratio: 1 / 1;             /* Maintain square shape */
+        padding: 2px;
+      }
 
     /* .home2-score-history .win {
         background-color: #00ff5e15;
