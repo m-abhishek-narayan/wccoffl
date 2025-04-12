@@ -14,7 +14,7 @@ const Profile_Page = () => {
   );
 
   return (
-    <div className="Profile_page pt-30 bg-gray-50 min-h-screen p-4">
+    <div className="Profile_page pt-20 bg-gray-50 min-h-screen p-4">
       <div className="bg-gray-50 min-h-screen p-4">
         {/* Page Title */}
         <h2>Player Profiles</h2>
