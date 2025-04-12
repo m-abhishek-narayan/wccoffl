@@ -21,12 +21,16 @@ const FilterSeries = ({ initialData, isOpen, filterTableRefreshKey }) => {
 
     const options = {
       "Captains": [...new Set(initialData.flatMap(entry => [entry?.captain?.teamA, entry?.captain?.teamB]))],
-      "Winning captain": [...new Set(initialData.map(entry => {
-        if (entry.points?.teamA === entry.points?.teamB) {
-          return `${entry?.captain?.teamA}, ${entry?.captain?.teamB}`;
-        }
-        return entry.points?.teamA > entry.points?.teamB ? entry?.captain?.teamA : entry?.captain?.teamB;
-      }))],
+      "Winning captain": [
+          ...new Set(initialData
+            .filter(entry => entry.points?.teamA !== entry.points?.teamB)
+            .map(entry =>
+              entry.points?.teamA > entry.points?.teamB
+                ? entry?.captain?.teamA
+                : entry?.captain?.teamB
+            )),
+          "Draw"
+        ],
       "SeriesDate": {
         startDates,
         endDates
@@ -73,6 +77,16 @@ const FilterSeries = ({ initialData, isOpen, filterTableRefreshKey }) => {
   };
 
   const applyFilters = async () => {
+    const isEmpty = Object.values(filters).every(val =>
+      val === "" || (Array.isArray(val) && val.length === 0) || (typeof val === "object" && Object.keys(val).length === 0)
+    );
+  
+    if (isEmpty) {
+      setFilteredData(initialData);
+      setShowDone(false);
+      return;
+    }
+  
     try {
       setLoading(true);
       const response = await axios.post(`${API_BASE_URL}/api/team/filter-series`, filters);
@@ -167,9 +181,13 @@ const FilterSeries = ({ initialData, isOpen, filterTableRefreshKey }) => {
                         <span className="team team-b">{series?.captain?.teamB || "Unknown"}</span>
                       </td>
                       <td>
-                        <span className="winner">
-                          {series.points.teamA === series.points.teamB ? `${series?.captain?.teamA} and ${series?.captain?.teamB}` : series.points.teamA > series.points.teamB ? series?.captain?.teamA : series?.captain?.teamB}
-                        </span>
+                      <span className="winner">
+                        {series.points.teamA === series.points.teamB
+                          ? "Draw"
+                          : series.points.teamA > series.points.teamB
+                            ? series?.captain?.teamA
+                            : series?.captain?.teamB}
+                      </span>
                       </td>
                       <td>
                         <span className="team team-a">{series?.points?.teamA}</span>{" "}-{" "}
