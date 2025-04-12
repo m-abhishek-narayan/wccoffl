@@ -233,7 +233,6 @@
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
   }
-  
   * {
     -webkit-tap-highlight-color: transparent;
   }

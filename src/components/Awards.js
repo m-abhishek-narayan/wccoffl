@@ -94,6 +94,16 @@ const Awards = () => {
         }
     };
 
+    const formatDate = (dateStr) => {
+        const [year, month, day] = dateStr.split("-");
+        const monthNames = {
+            "01": "January", "02": "February", "03": "March", "04": "April",
+            "05": "May", "06": "June", "07": "July", "08": "August",
+            "09": "September", "10": "October", "11": "November", "12": "December"
+        };
+        return `${day} ${monthNames[month]} ${year}`;
+    };
+
     const updateAward = async (e) => {
         if (!isAdmin) return;
         e.preventDefault();
@@ -170,7 +180,7 @@ const Awards = () => {
                             {latestEntry ? (
                                 <>
                                     <p><strong>Winner:</strong> {latestEntry.winner}</p>
-                                    <p><strong>Date:</strong> {latestEntry.date}</p>
+                                    <p><strong>Date:</strong> {formatDate(latestEntry.date)}</p>
                                     <p><strong>Position:</strong> {latestEntry.position}</p>
                                     <p><strong>Team:</strong> {latestEntry.team}</p>
                                 </>
