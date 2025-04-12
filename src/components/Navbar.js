@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import LoginRegister from "./LoginRegister";
 import "./Navbar.css";
@@ -11,6 +11,7 @@ function Navbar() {
   const [admin, setAdmin] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const navRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,6 +28,29 @@ function Navbar() {
     }
   }, []);
 
+  // Lock scroll when nav is open
+  useEffect(() => {
+    if (isNavOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isNavOpen]);
+
+  // Detect clicks outside the nav to close it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isNavOpen && navRef.current && !navRef.current.contains(event.target)) {
+        setIsNavOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isNavOpen]);
+
   const handleLogout = () => {
     window.scrollTo(0, 0);
     sessionStorage.clear();
@@ -40,7 +64,7 @@ function Navbar() {
     <>
       <nav className={`navbar ${isNavOpen ? "navopened" : ""}`}>
         <div className="container">
-          <div className="row">
+          <div className="row" ref={navRef}>
             <h1 className="logo">
               <Link to="/" style={{ cursor: "pointer" }}>
                 <img src="/img/wcc.png" alt="WCC The Kavaliers Den" className="logo-img" />
@@ -72,7 +96,15 @@ function Navbar() {
           </div>
         </div>
       </nav>
-
+      {isNavOpen && (
+        <div
+          className="nav-backdrop"
+          onClick={(e) => {
+            e.stopPropagation(); // Prevents underlying link activation
+            setIsNavOpen(false); // Closes the navbar
+          }}
+        ></div>
+      )}
       {showLoginModal && (
         <div className="login-modal-overlay">
           <div className="login-modal">
