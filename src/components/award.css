@@ -191,7 +191,7 @@ h2, h3 {
     margin: 5px 0;
     font-weight: bold;
     color: #ffffff;
-}
+}input
 
 .form-title {
     font-size: 24px;
@@ -211,7 +211,17 @@ h2, h3 {
     background: black;
     color: white;
 }
-
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-internal-autofill-selected {
+    background-color: black !important;
+    -webkit-box-shadow: 0 0 0 1000px black inset !important;
+    -webkit-text-fill-color: white !important;
+    color: white !important;
+    border: 1px solid #444 !important;
+    transition: background-color 9999s ease-out, color 9999s ease-out;
+}
 .form-control:focus {
     border-color: #007bff;
     outline: none;

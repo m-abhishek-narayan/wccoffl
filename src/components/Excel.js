@@ -16,22 +16,39 @@ export const downloadExcel = (data) => {
 
   const exportData = data.map(entry => ({
     "Kava Winner": entry.winner,
+    "Date": formatDate(entry.date),
     "Position": entry.position,
-    "Team Name": entry.team,
-    "Date": formatDate(entry.date)
+    "Team Name": entry.team
   }));
+
+  // Count how many times each person has won
+  const winnerCount = {};
+  data.forEach(entry => {
+    winnerCount[entry.winner] = (winnerCount[entry.winner] || 0) + 1;
+  });
+
+  // Determine the highest count and all winners who match it
+  const maxCount = Math.max(...Object.values(winnerCount));
+  const topWinners = Object.entries(winnerCount)
+    .filter(([_, count]) => count === maxCount)
+    .map(([name]) => name);
+
+  const trophyMessage = `🏆 Best Kava Winner${topWinners.length > 1 ? 's' : ''}: ${topWinners.join(", ")} (${maxCount} wins)`;
+
+  // Add a blank row then the trophy row
+  exportData.push({}, { "Kava Winner": trophyMessage });
 
   const worksheet = XLSX.utils.json_to_sheet(exportData);
 
-  const headers = Object.keys(exportData[0]);
+  const headers = Object.keys(exportData[0]).filter(Boolean);
 
-  // Apply styles to headers
+  // Style headers
   headers.forEach((header, index) => {
     const cellRef = XLSX.utils.encode_cell({ r: 0, c: index });
     worksheet[cellRef].s = {
       font: { bold: true },
       alignment: { horizontal: "center", vertical: "center" },
-      fill: { fgColor: { rgb: "D9E1F2" } }, // Light blue header
+      fill: { fgColor: { rgb: "D9E1F2" } },
       border: {
         top: { style: "thin", color: { auto: 1 } },
         bottom: { style: "thin", color: { auto: 1 } },
@@ -41,7 +58,7 @@ export const downloadExcel = (data) => {
     };
   });
 
-  // Apply styles to all data rows
+  // Style data cells
   for (let r = 1; r < exportData.length + 1; r++) {
     for (let c = 0; c < headers.length; c++) {
       const cellRef = XLSX.utils.encode_cell({ r, c });
@@ -59,11 +76,27 @@ export const downloadExcel = (data) => {
     }
   }
 
-  // Auto column width
+  // Center the final "Best Kava Winner" row across all columns and add gold styling
+  const finalRow = exportData.length + 1;
+  const mergeRange = {
+    s: { r: finalRow - 1, c: 0 },
+    e: { r: finalRow - 1, c: headers.length - 1 }
+  };
+  worksheet["!merges"] = worksheet["!merges"] || [];
+  worksheet["!merges"].push(mergeRange);
+
+  const trophyCellRef = XLSX.utils.encode_cell({ r: finalRow - 1, c: 0 });
+  worksheet[trophyCellRef].s = {
+    font: { bold: true, color: { rgb: "FFD700" }, sz: 12 }, // gold font color
+    alignment: { horizontal: "center", vertical: "center" }
+  };
+
+  const dataOnly = exportData.slice(0, data.length); 
+
   worksheet["!cols"] = headers.map(key => ({
     wch: Math.max(
       key.length,
-      ...exportData.map(row => (row[key] ? row[key].toString().length : 10))
+      ...dataOnly.map(row => (row[key] ? row[key].toString().length : 10))
     ) + 4
   }));
 
