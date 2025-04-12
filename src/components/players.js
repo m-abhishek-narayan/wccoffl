@@ -62,14 +62,15 @@ const players = [
     "image": "/img/players/Ravi.png",
   "fearedFor": "Bowling action"
 },
-//   {
-//     "id": 8,
-//     "name": "Jegan",
-//     "dob": "11-May",
-//     "details": "Jegan brings laughter with his natural comedic timing.",
-//     "image": "/img/players/Jegan.png"
-//   "fearedFor": ""
-// },
+  {
+    "id": 8,
+    "name": "Jegan",
+    "dob": "11-May",
+    "wccName": "Jaga",
+    "details": "God of the offside and the cover drive. Hardly requires time to settle down and get going. Someone resembling a Shahid Afridi in bowling and getting in his overs fast. You give him width on the off and you are decimated.",
+    "image": "/img/players/Jegan.png",
+  "fearedFor": "Cover Drives"
+},
   {
     "id": 9,
     "name": "Shiva N",
@@ -106,15 +107,14 @@ const players = [
     "image": "/img/players/Maddy.png",
   "fearedFor": "Lofted Drives"
 },
-//   {
-//     "id": 13,
-//     "name": "Karthik",
-//     "dob": "09-Jun",
-//     "wccName": "LBK",
-//     "details": "Karthik is the smooth talker who can charm his way through anything.",
-//     "image": "/img/players/Lbk.jpg",
-//   "fearedFor": ""
-// },
+  {
+    "id": 13,
+    "name": "Karthik",
+    "dob": "09-Jun",
+    "wccName": "LBK",
+    "details": "A truly solid bowler who can kick up quite a pace and a storm. He has the best yorker in WCC and is easily a 100 kmph+ bowler. The grape ice cream lover is a very capable batsman who prefers playing straight down. Has potent straight drives. Added to his charm is his ulaganayagan like looks. The most photographed and photo bombed gent of WCC. Somehow oddly satisfying to play the paparazzi with him.",
+    "image": "/img/players/Lbk.jpg"
+},
   {
     "id": 14,
     "name": "Anand",
@@ -142,14 +142,14 @@ const players = [
     "image": "/img/players/Johnny.png",
     "fearedFor": "Destructive batting"
 },
-//   {
-//     "id": 17,
-//     "name": "Aravind",
-//     "dob": "03-Aug",
-//     "details": "Arvind keeps the group grounded with practical wisdom.",
-//     "image": "/img/players/Aravind.png"
-//   "fearedFor": ""
-// },
+  {
+    "id": 17,
+    "name": "Arvind",
+    "dob": "03-Aug",
+    "details": "The often unsung, most stylish southpaw of WCC. Scathing bowling and equally surefire batting. Not many pack such an elegance to the sport of cricket as Arvind does. The slog over midwicket is a treat to the eyes as his sharp deliveries are. He has a lethal weapon which cuts away from the right hander. A way above average fielder.",
+    "image": "/img/players/Aravind.png",
+  "fearedFor": "Midwicket Slogs"
+},
   {
     "id": 18,
     "name": "Rajesh Ramadoss",
@@ -177,15 +177,14 @@ const players = [
     "image": "/img/players/Siva.png",
   "fearedFor": "All round batting"
 },
-//   {
-//     "id": 21,
-//     "name": "Dinesh",
-//     "dob": "04-Sep",
-//     "wccName": "Big D",
-//     "details": "Dinesh has the loudest laugh and the biggest heart.",
-//     "image": "/img/players/big d.jpg"
-//   "fearedFor": ""
-// },
+  {
+    "id": 21,
+    "name": "Dinesh",
+    "dob": "04-Sep",
+    "wccName": "Big D",
+    "details": "He can be a constant nag to his opposition by chipping away his singles and an occasionally brilliant swat to the off. He is a noisy player with lots of vocal prompts. He somehow brings in a calming influence to his team. A reliable workhorse. He talks louder than he plays, sometimes he hogs deliveries and 3 overs go past.",
+    "image": "/img/players/big d.jpg"
+},
   {
     "id": 22,
     "name": "Sridhar",
@@ -196,14 +195,15 @@ const players = [
     "fearedFor": "Powerful Sweep",
     "adjective": "Aggressive"
 },
-//   {
-//     "id": 23,
-//     "name": "Badri",
-//     "dob": "25-Sep",
-//     "details": "Badri is the quiet fixer — solves things without drama.",
-//     "image": "/img/players/Badri.png"
-//   "fearedFor": ""
-// },
+  {
+    "id": 23,
+    "name": "Badri",
+    "dob": "25-Sep",
+    "wccName": "Lucifer",
+    "details": "A nagging accumulator of runs. A quick scurrier between the wickets for his singles. Plays more on the onside, rather old fashioned and agricultural but effective though. A very functional fielder. Talks more cricket than play it. His love for Pinacolada keeps him away from the WCC arena. Marriage hall building is more attractive to him as a hobby",
+    "image": "/img/players/Badri.png",
+  "fearedFor": ""
+},
 //   {
 //     "id": 24,
 //     "name": "Vivek",
@@ -294,14 +294,15 @@ const players = [
     "image": "/img/players/Jeyanth.jpg",
   "fearedFor": "Straight Hits "
 },
-//   {
-//     "id": 34,
-//     "name": "Naresh",
-//     "dob": "21-Nov",
-//     "details": "Naresh is the all-rounder — dependable and cool.",
-//     "image": "/img/players/Naresh.png",
-//   "fearedFor": ""
-// },
+  {
+    "id": 34,
+    "name": "Naresh",
+    "dob": "21-Nov",
+    "wccName": "machan, Rasukutty",
+    "details": "Rubbing shoulder to shoulder with the top 3, one of the best players overall to grace the WCC. An innings builder who can up the ante at will if required, the KL Rahul of batting. His popular bowling ‘swagger’ is legendary, and the delivered ball literally screams. Do not chance a 2 if he has fielded the ball, he throws like a bullet.",
+    "image": "/img/players/Naresh.png",
+  "fearedFor": "Express Bowling"
+},
   {
     "id": 35,
     "name": "Prashanth",
@@ -311,15 +312,15 @@ const players = [
     "image": "/img/players/Prashanth.png",
   "fearedFor": "Disguised slower ones"
 },
-//   {
-//     "id": 36,
-//     "name": "Karthik G",
-//     "dob": "30-Nov",
-//     "wccName": "Karthik Ponting",
-//     "details": "Karthik G is all about energy and fast thinking.",
-//     "image": "/img/players/Karthik.jpg",
-//   "fearedFor": ""
-// },
+  {
+    "id": 36,
+    "name": "Karthik G",
+    "dob": "30-Nov",
+    "wccName": "Ponting",
+    "details": "A very sharp right hander who gets away off the mark quickly. His drives and pull shots are a sheer treat to the eyes. He is a very regular contributor and can be a very high-class opener who can give a head start. He gets his purchase at square leg and a bad short ball will be duly despatched.",
+    "image": "/img/players/Karthik.jpg",
+  "fearedFor": "Off Drives"
+},
   {
     "id": 37,
     "name": "Danny",
@@ -344,13 +345,13 @@ const players = [
     "image": "/img/players/Aaji.png",
   "fearedFor": "Brutal hitting"
 },
-//   {
-//     "id": 40,
-//     "name": "Vishal",
-//     "details": "Vishal’s energy is contagious and unforgettable.",
-//     "image": "/img/players/Vishal.jpg"
-//   "fearedFor": ""
-// },
+  {
+    "id": 40,
+    "name": "Vishal",
+    "details": "This young lad is the nerdy kid of WCC. Plays cricket like a nerd and a young professor in the making. A methodical, reliable workhorse with quite a few strokes in his repertoire. A handy spin bowler too who can be very effective on his day and perplex the batsman.",
+    "image": "/img/players/Vishal.jpg",
+  "fearedFor": "Wides"
+},
   {
     "id": 41,
     "name": "Vishwajit",
@@ -380,14 +381,14 @@ const players = [
     // "image": "/img/players/Rajesh.png" ,
     "fearedFor": "Chinaman"
   },
-  //   {
-//     "id": 45,
-//     "name": "Karthik",
-//     "wccName": "Silk",
-//     "details": "",
-//     "image": "/img/players/Karthik.jpg",
-//   "fearedFor": "Big Hitting"
-// }, 
+    {
+    "id": 45,
+    "name": "Karthik",
+    "wccName": "Silk",
+    "details": "Plays straight as an arrow and has hit many a six straight over the bowlers head. A solid throwing arm and some rare bowling. Wants his runs in boundaries only, singles and doubles don’t provoke him to perform, thank his jiggly wiggly silk like frontals",
+    "image": "/img/players/Silk.jpg",
+  "fearedFor": "Big Hitting"
+}, 
 ];
 
 
